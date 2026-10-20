@@ -1,5 +1,7 @@
 .about {
 	background: var(--color-bg-alt);
+	position: relative;
+	margin-top: -2px; /* elimina cualquier separación o línea de subpíxel con el hero */
 }
 
 /* Fuerza a que el título 'sobre mí' / 'about me' quede en 2 líneas en móvil */

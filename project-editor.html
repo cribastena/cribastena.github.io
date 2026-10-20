@@ -334,9 +334,39 @@
   <script>
     // Read ?project=slug and set title
     const params = new URLSearchParams(location.search);
-  const project = params.get('project') || 'project';
-  // show the project slug as a lowercase, site-styled section title
-  document.getElementById('project-title').textContent = project.replace(/[-]/g, ' ').toLowerCase();
+    const project = params.get('project') || 'project';
+
+    // If UX/UI or Branding root is requested, redirect to their options screen
+    if(project === 'ux-ui'){
+      window.location.replace('ux-ui.html');
+    }
+    if(project === 'branding'){
+      window.location.replace('branding.html');
+    }
+
+    // Set page title (custom formatted for sub-projects)
+    if(project.startsWith('ux-ui-')){
+      const subNum = project.replace('ux-ui-', '');
+      document.getElementById('project-title').textContent = 'ux ui ' + subNum;
+    } else if(project.startsWith('branding-')){
+      const subNum = project.replace('branding-', '');
+      document.getElementById('project-title').textContent = 'branding ' + subNum;
+    } else {
+      document.getElementById('project-title').textContent = project.replace(/[-]/g, ' ').toLowerCase();
+    }
+
+    // If inside a sub-project, Back button returns to the respective options screen
+    if(project.startsWith('ux-ui-')){
+      const backLink = document.querySelector('.editor > a.btn.btn-primary');
+      if(backLink){
+        backLink.setAttribute('href', 'ux-ui.html');
+      }
+    } else if(project.startsWith('branding-')){
+      const backLink = document.querySelector('.editor > a.btn.btn-primary');
+      if(backLink){
+        backLink.setAttribute('href', 'branding.html');
+      }
+    }
 
     // Add a project-specific class to the editor container so we can target
     // per-project layout tweaks (for example: make the 3d grid a 2x2).
@@ -415,14 +445,14 @@
     // Determine prefill URLs for the current project (if any)
     const prefillUrls = PREFILL[project] || null;
 
-    // Maximum slot counts per project (we'll create slots on-demand for ux-ui
-    // and videos-animations so we don't show empty placeholders). 3d stays at 4; ux-ui limited to 9; videos-animations limited to 5.
-    const MAX_SLOTS = (project === '3d') ? 4 : (project === 'ux-ui') ? 9 : (project === 'videos-animations') ? 5 : 20;
+    // Maximum slot counts per project (we'll create slots on-demand for ux-ui, branding
+    // and videos-animations so we don't show empty placeholders). 3d stays at 4; ux-ui/branding limited to 9; videos-animations limited to 5.
+    const MAX_SLOTS = (project === '3d') ? 4 : (project.startsWith('ux-ui') || project.startsWith('branding')) ? 9 : (project === 'videos-animations') ? 5 : 20;
 
-    // Create placeholder slots for most projects. For ux-ui and videos-animations we avoid creating
+    // Create placeholder slots for most projects. For ux-ui, branding and videos-animations we avoid creating
     // empty placeholder slots up-front so the grid only shows actual media.
     (function createSlots(){
-      if(project === 'ux-ui' || project === 'videos-animations') return; // create slots on-demand for ux-ui and videos-animations
+      if(project.startsWith('ux-ui') || project.startsWith('branding') || project === 'videos-animations') return; // create slots on-demand for ux-ui and videos-animations
       const slotCount = MAX_SLOTS;
       for(let i=0;i<slotCount;i++){
         const slot = document.createElement('div');
@@ -594,14 +624,25 @@
       ]);
     }
 
-    // if this editor is opened for ux-ui, prefill with UX/UI images (edit the array to add your URLs)
-    if(project === 'ux-ui'){
+    // if this editor is opened for ux-ui sub-projects, prefill with their respective images
+    if(project === 'ux-ui-1'){
       addFromUrls([
-        'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2015.29.47.png',
         'https://ik.imagekit.io/7zyxg26dj/Frame%201%20(1).png',
+        'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2015.29.47.png',
+        'https://ik.imagekit.io/7zyxg26dj/Frame%201.png'
+      ]);
+    }
+
+    if(project === 'ux-ui-2'){
+      addFromUrls([
         'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2013.24.20.png',
         'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2013.34.48.png',
-        'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2013.33.09.png',
+        'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2013.33.09.png'
+      ]);
+    }
+
+    if(project === 'ux-ui-3'){
+      addFromUrls([
         'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2013.26.39.png',
         'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2014.03.29.png',
         'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2014.01.49.png',
@@ -658,30 +699,44 @@
       ]);
     }
 
-    // if this editor is opened for branding, prefill with the user's branding images
-    if(project === 'branding'){
+    // if this editor is opened for branding sub-projects, prefill with respective images
+    if(project === 'branding-1'){
       addFromUrls([
         'https://ik.imagekit.io/7zyxg26dj/Shot%20(4).png',
         'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2019.02.18.png',
         'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2019.01.15.png',
-        'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.38.40.png',
         'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2019.28.50.png',
+        'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2019.29.25.png'
+      ]);
+    }
+
+    if(project === 'branding-2'){
+      addFromUrls([
+        'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.38.40.png',
         'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.36.53.png',
         'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.37.11.png',
         'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.40.14.png',
-        'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.41.05.png',
+        'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.41.05.png'
+      ]);
+    }
+
+    if(project === 'branding-3'){
+      addFromUrls([
         'https://ik.imagekit.io/7zyxg26dj/IMG_4172.jpg?updatedAt=1767868980669',
         'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.31.39.png',
         'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.31.27.png',
-        'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.32.09.png',
+        'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.32.09.png'
+      ]);
+    }
+
+    if(project === 'branding-4'){
+      addFromUrls([
         'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2015.29.30.png',
         'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2015.29.47.png',
         'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-08%20a%20las%2012.57.29.png?updatedAt=1767873498172',
-        'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2019.29.25.png',
         'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.35.09.png',
         'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.34.57.png',
         'https://ik.imagekit.io/7zyxg26dj/Frame%201%20(1).png'
-
       ]);
     }
 

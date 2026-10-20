@@ -85,7 +85,7 @@ const TRANSLATIONS = {
     'footer.backToTop': 'Back to top',
 
     // Project Editor / Gallery page
-    'editor.back': '← Back to projects',
+    'editor.back': '← Back',
     'editor.close': 'Close',
     'editor.unmute': 'Unmute video'
   },
@@ -167,7 +167,7 @@ const TRANSLATIONS = {
     'footer.backToTop': 'Volver arriba',
 
     // Visor de proyectos / Galería
-    'editor.back': '← Volver a proyectos',
+    'editor.back': '← Atrás',
     'editor.close': 'Cerrar',
     'editor.unmute': 'Activar sonido'
   }

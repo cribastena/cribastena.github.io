@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>UX/UI - Candela Ribas</title>
+  <link rel="stylesheet" href="./assets/css/main.css">
+  <script src="./assets/js/translations.js" defer></script>
+  <script src="./assets/js/main.js" defer></script>
+  <style>
+    html, body {
+      background: #f3f3f0;
+      min-height: 100vh;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .editor {
+      padding: 1rem 0.5rem;
+      max-width: 1050px;
+      margin: 0 auto;
+      width: 100%;
+      box-sizing: border-box;
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .editor .section-title {
+      text-align: center;
+      margin-bottom: 3.5rem;
+      line-height: 1;
+    }
+
+    /* Fixed Back button matching project-editor page */
+    .editor > a.btn.btn-primary {
+      position: fixed;
+      top: 3rem;
+      left: 3rem;
+      z-index: 1200;
+    }
+
+    @media (max-width: 640px) {
+      .editor > a.btn.btn-primary {
+        top: 1.5rem;
+        left: 1.5rem;
+      }
+      .editor .section-title {
+        font-size: 5rem;
+        margin-top: 4.5rem;
+        margin-bottom: 2.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .editor > a.btn.btn-primary {
+        top: 1rem;
+        left: 1.25rem;
+      }
+      .editor .section-title {
+        font-size: 3.8rem;
+        margin-top: 3.5rem;
+        margin-bottom: 2rem;
+      }
+    }
+
+    /* 3 Horizontal square image buttons container */
+    .ux-options-container {
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(0.75rem, 2.5vw, 2.5rem);
+      padding: 0 1rem;
+      box-sizing: border-box;
+    }
+
+    .ux-option-card {
+      position: relative;
+      display: block;
+      aspect-ratio: 1 / 1;
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #eaeaea;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      text-decoration: none;
+      transition: transform 0.25s var(--ease-out), box-shadow 0.25s ease, border-color 0.25s ease;
+      cursor: pointer;
+    }
+
+    .ux-option-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s var(--ease-out);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .ux-option-card:hover {
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.16);
+        border-color: rgba(0, 0, 0, 0.15);
+      }
+      .ux-option-card:hover img {
+        transform: scale(1.06);
+      }
+    }
+
+    .ux-option-card:active {
+      transform: translateY(-2px) scale(0.99);
+    }
+
+    .ux-option-card:focus-visible {
+      outline: 3px solid var(--color-accent);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 640px) {
+      .ux-options-container {
+        gap: 0.75rem;
+        padding: 0 0.5rem;
+      }
+      .ux-option-card {
+        border-radius: 8px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .ux-options-container {
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="editor">
+    <a class="btn btn-primary" href="index.html#projects" aria-label="Volver a Proyectos" data-i18n="editor.back">← Back</a>
+    
+    <h1 class="section-title">ux ui</h1>
+
+    <!-- 3 square options placed horizontally side by side -->
+    <div class="ux-options-container">
+      <a href="project-editor.html?project=ux-ui-1" class="ux-option-card" aria-label="Abrir subapartado 1 de UX/UI">
+        <img src="https://ik.imagekit.io/7zyxg26dj/Frame%201%20(1).png" alt="UX/UI Opción 1" loading="eager" />
+      </a>
+      <a href="project-editor.html?project=ux-ui-2" class="ux-option-card" aria-label="Abrir subapartado 2 de UX/UI">
+        <img src="https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2015.29.47.png" alt="UX/UI Opción 2" loading="eager" />
+      </a>
+      <a href="project-editor.html?project=ux-ui-3" class="ux-option-card" aria-label="Abrir subapartado 3 de UX/UI">
+        <img src="https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2013.24.20.png" alt="UX/UI Opción 3" loading="eager" />
+      </a>
+    </div>
+  </main>
+</body>
+</html>
+
