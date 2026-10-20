@@ -42,6 +42,10 @@
     width: 100%;
 }
 
+.contact .section-title {
+	margin-bottom: 0.5rem; /* reduce space between title and phrase */
+}
+
 .contact-content p {
 	font-size: var(--text-lg);
 	color: var(--color-text);
@@ -51,26 +55,19 @@
 /* Nudge the content slightly upward on wider screens so it reads centered but a bit higher */
 @media (min-width: 768px) {
 	.contact .contact-content {
-		transform: translateY(-22%); /* increased upward nudge (user requested higher) */
+		transform: translateY(-18%);
+	}
+	.contact .section-title {
+		transform: translateY(-18%);
 	}
 }
 
 @media (min-width: 1200px) {
 	.contact .contact-content {
-		transform: translateY(-22%); /* very large screens: raise further */
+		transform: translateY(-22%);
 	}
-}
-
-/* Move the section title up to match the content position */
-@media (min-width: 768px) {
 	.contact .section-title {
-		transform: translateY(-12%);
-	}
-}
-
-@media (min-width: 1200px) {
-	.contact .section-title {
-		transform: translateY(-32%);
+		transform: translateY(-22%);
 	}
 }
 
@@ -82,12 +79,14 @@
 		width: 100%;
 		margin-left: auto;
 		margin-right: auto;
+		margin-bottom: 0.4rem; /* espacio reducido entre título y frase en móvil */
 	}
 }
 
 @media (max-width: 480px) {
 	.contact .section-title {
 		font-size: 5rem; /* aún más pequeño en pantallas muy pequeñas */
+		margin-bottom: 0.3rem;
 	}
 }
 

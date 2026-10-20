@@ -7,12 +7,13 @@
 
 	<link rel="stylesheet" href="https://use.typekit.net/axp1htj.css">
 	<link rel="stylesheet" href="./assets/css/main.css">
+  <script src="./assets/js/translations.js" defer></script>
   <script src="./assets/js/main.js" defer></script>
 </head>
 
 <body>
 
-  <a href="#main" class="skip-link">Skip to main content</a>
+  <a href="#main" class="skip-link" data-i18n="nav.skip">Skip to main content</a>
 
   <!-- NAV -->
   <nav class="nav">
@@ -20,11 +21,18 @@
 			<a href="#" class="nav-logo" aria-label="Candela Ribas logo">
 				<img class="nav-logo-img" src="https://ik.imagekit.io/7zyxg26dj/IMG_4680.PNG" alt="Candela Ribas logo" loading="eager" />
 			</a>
-      <ul class="nav-links">
-        <li><a href="#about">ABOUT ME</a></li>
-        <li><a href="#projects">WORK</a></li>
-        <li><a href="#contact">CONTACT</a></li>
-      </ul>
+      <div class="nav-actions">
+        <ul class="nav-links">
+          <li><a href="#about" data-i18n="nav.about">ABOUT ME</a></li>
+          <li><a href="#projects" data-i18n="nav.work">WORK</a></li>
+          <li><a href="#contact" data-i18n="nav.contact">CONTACT</a></li>
+        </ul>
+        <button type="button" class="lang-switch-btn" id="lang-toggle" aria-label="Switch language to Spanish" title="Cambiar idioma a Español">
+          <span class="lang-option lang-en active">EN</span>
+          <span class="lang-divider" aria-hidden="true">/</span>
+          <span class="lang-option lang-es">ES</span>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -49,24 +57,24 @@
     <section id="about" class="section about">
       <div class="container">
 
-        <h1 class="section-title animate-on-scroll">about me</h1>
+        <h1 class="section-title animate-on-scroll" data-i18n="about.title">about me</h1>
 
         <div class="about-grid">
 
           <div class="about-text animate-on-scroll">
-            <p>
+            <p data-i18n="about.p1">
           Hi! I’m Candela Ribas, a graphic and UX/UI designer with a multidisciplinary  
           curious mind, always eager to create projects where aesthetics and experience go hand in hand. 
           I believe great design comes from questioning everything, experimenting without fear, and playing with new ideas.
             </p>
 
-            <p>
+            <p data-i18n="about.p2">
           I'm versatile and curious: I move freely between visual aesthetics and UX logic. 
           I’m always looking to give each project its own personality and make an impact.
 
             </p>
 
-            <p>
+            <p data-i18n="about.p3">
           Thanks for checking out, feel free to explore!
 
             </p>
@@ -120,40 +128,40 @@
   	<!-- Projects Section -->
 		<section id="projects" class="section projects">
 			<div class="container">
-				<h1 class="section-title animate-on-scroll">work</h1>
+				<h1 class="section-title animate-on-scroll" data-i18n="work.title">work</h1>
 				<div class="projects-grid" data-reveal-stagger>
 					<article class="project-card">
-						<a class="project-link" href="project-editor.html?project=posters-covers" aria-label="Open POSTERS & COVERS project">
+						<a class="project-link" href="project-editor.html?project=posters-covers" aria-label="Open POSTERS & COVERS project" data-i18n-attr="aria-label:work.p1.aria">
 						  <div class="project-image">
 							  <img src="https://ik.imagekit.io/7zyxg26dj/IMG_4683.jpg" alt="E-commerce Platform" loading="lazy" />
 						  </div>
 						  <div class="project-content">
-							  <h3 class="project-title">POSTERS & COVERS</h3>
-							  <p>Designs that stop the scroll: posters and covers with personality, bold visuals, 
+							  <h3 class="project-title" data-i18n="work.p1.title">POSTERS & COVERS</h3>
+							  <p data-i18n="work.p1.desc">Designs that stop the scroll: posters and covers with personality, bold visuals, 
 				clear ideas that make them memorable. </p>
 							  <div class="project-tags">
-								  <span>ADVERTISMENT</span><span>MUSIC COVERS</span><span>BOOK COVERS</span><span>FLYERS</span>
+								  <span data-i18n="work.p1.tag1">ADVERTISMENT</span><span data-i18n="work.p1.tag2">MUSIC COVERS</span><span data-i18n="work.p1.tag3">BOOK COVERS</span><span data-i18n="work.p1.tag4">FLYERS</span>
 							  </div>
 						  </div>
 						</a>
 					</article>
 					<article class="project-card">
-						<a class="project-link" href="project-editor.html?project=branding" aria-label="Open BRANDING project">
+						<a class="project-link" href="project-editor.html?project=branding" aria-label="Open BRANDING project" data-i18n-attr="aria-label:work.p2.aria">
 						  <div class="project-image">
 							  <!-- Use original GIF without transformations to preserve animation speed -->
 							  <img src="https://ik.imagekit.io/7zyxg26dj/Soda%20Can%20With%20Different%20Label%203D%20Animated%20Mockup.GIF" alt="Branding animation" loading="eager" width="400" height="300" />
 						  </div>
 						  <div class="project-content">
-							  <h3 class="project-title">BRANDING</h3>
-							  <p>I create brands with personality — from logos to visual identity, everything designed to stand out and connect.</p>
+							  <h3 class="project-title" data-i18n="work.p2.title">BRANDING</h3>
+							  <p data-i18n="work.p2.desc">I create brands with personality — from logos to visual identity, everything designed to stand out and connect.</p>
 							  <div class="project-tags">
-								  <span>LOGOS</span><span>POSITIONING</span><span>SLOGANS</span><span>CORPORATE/PERSONAL</span><span>BRAND GUIDELINES</span>
+								  <span data-i18n="work.p2.tag1">LOGOS</span><span data-i18n="work.p2.tag2">POSITIONING</span><span data-i18n="work.p2.tag3">SLOGANS</span><span data-i18n="work.p2.tag4">CORPORATE/PERSONAL</span><span data-i18n="work.p2.tag5">BRAND GUIDELINES</span>
 							  </div>
 						  </div>
 						</a>
 					</article>
 					<article class="project-card">
-						<a class="project-link" href="project-editor.html?project=videos-animations" aria-label="Open VIDEOS & ANIMATIONS project">
+						<a class="project-link" href="project-editor.html?project=videos-animations" aria-label="Open VIDEOS & ANIMATIONS project" data-i18n-attr="aria-label:work.p3.aria">
 						  <div class="project-image">
 							  <!-- Inline video for Videos & Animations: autoplay, loop, muted, playsinline with poster -->
 							  <video class="project-video" autoplay loop muted playsinline preload="metadata" poster="https://ik.imagekit.io/7zyxg26dj/IMG_4683.jpg" width="400" height="300">
@@ -164,56 +172,56 @@
 							  </video>
 						  </div>
 						  <div class="project-content">
-							  <h3 class="project-title">VIDEOS & ANIMATIONS</h3>
-							  <p>Making ideas move — fun, dynamic, and unforgettable with style and personality. I adapt to any style or vibe, 
+							  <h3 class="project-title" data-i18n="work.p3.title">VIDEOS & ANIMATIONS</h3>
+							  <p data-i18n="work.p3.desc">Making ideas move — fun, dynamic, and unforgettable with style and personality. I adapt to any style or vibe, 
 				from advertisement, stop motiion to 2/3D.
 			  </p>
 							  <div class="project-tags">
-								  <span>ADVERTISEMENT</span><span>MUSIC VIDEOS</span><span>MOTION GRAPHICS</span><span>VIDEO EDITS </span>
+								  <span data-i18n="work.p3.tag1">ADVERTISEMENT</span><span data-i18n="work.p3.tag2">MUSIC VIDEOS</span><span data-i18n="work.p3.tag3">MOTION GRAPHICS</span><span data-i18n="work.p3.tag4">VIDEO EDITS </span>
 							  </div>
 						  </div>
 						</a>
 					</article>
 					<article class="project-card">
-						<a class="project-link" href="project-editor.html?project=3d" aria-label="Open 3D project">
+						<a class="project-link" href="project-editor.html?project=3d" aria-label="Open 3D project" data-i18n-attr="aria-label:work.p4.aria">
 						  <div class="project-image">
 							  <img src="https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-06%20a%20las%2016.59.57.png" alt="Dashboard UI" loading="lazy" />
 						  </div>
 						  <div class="project-content">
-							  <h3 class="project-title">3D</h3>
-							  <p>Stop imagining and turning ideas into 3D visuals — see your products come alive before production.</p>
+							  <h3 class="project-title" data-i18n="work.p4.title">3D</h3>
+							  <p data-i18n="work.p4.desc">Stop imagining and turning ideas into 3D visuals — see your products come alive before production.</p>
 							  <div class="project-tags">
-								  <span>PACKAGING</span><span>OBJECTS</span><span>CHARACTERS</span><span>ANIMATED 3D</span>
+								  <span data-i18n="work.p4.tag1">PACKAGING</span><span data-i18n="work.p4.tag2">OBJECTS</span><span data-i18n="work.p4.tag3">CHARACTERS</span><span data-i18n="work.p4.tag4">ANIMATED 3D</span>
 							  </div>
 						  </div>
 						</a>
 					</article>
 					<article class="project-card">
-						<a class="project-link" href="project-editor.html?project=illustrations" aria-label="Open ILUSTRATIONS project">
+						<a class="project-link" href="project-editor.html?project=illustrations" aria-label="Open ILUSTRATIONS project" data-i18n-attr="aria-label:work.p5.aria">
 						  <div class="project-image">
 							  <img src="https://ik.imagekit.io/7zyxg26dj/IMG_4684.PNG" alt="Dashboard UI" loading="lazy" />
 						  </div>
 						  <div class="project-content">
-							  <h3 class="project-title">ILUSTRATIONS</h3>
-							  <p>I can adapt to different styles to fit any audience, message, or context — working with analogics, 
+							  <h3 class="project-title" data-i18n="work.p5.title">ILUSTRATIONS</h3>
+							  <p data-i18n="work.p5.desc">I can adapt to different styles to fit any audience, message, or context — working with analogics, 
 				mixed media and digital to bring ideas to life.</p>
 							  <div class="project-tags">
-								  <span>DIGITAL</span><span>ANALOG</span><span>MIXED MEDIA</span><span>COLLLAGE</span><span>BOOK ILUSTRATIONS</span>
+								  <span data-i18n="work.p5.tag1">DIGITAL</span><span data-i18n="work.p5.tag2">ANALOG</span><span data-i18n="work.p5.tag3">MIXED MEDIA</span><span data-i18n="work.p5.tag4">COLLLAGE</span><span data-i18n="work.p5.tag5">BOOK ILUSTRATIONS</span>
 							  </div>
 						  </div>
 						</a>
 					</article>
 					<article class="project-card">
-						<a class="project-link" href="project-editor.html?project=ux-ui" aria-label="Open UX/UI project">
+						<a class="project-link" href="project-editor.html?project=ux-ui" aria-label="Open UX/UI project" data-i18n-attr="aria-label:work.p6.aria">
 						  <div class="project-image">
 							  <img src="https://ik.imagekit.io/7zyxg26dj/Frame%201.png" alt="Dashboard UI" loading="lazy" />
 						  </div>
 						  <div class="project-content">
-							  <h3 class="project-title">UX/UI</h3>
-							  <p>Web and app prototypes that turn ideas into intuitive, usable, and visually striking experiences. 
+							  <h3 class="project-title" data-i18n="work.p6.title">UX/UI</h3>
+							  <p data-i18n="work.p6.desc">Web and app prototypes that turn ideas into intuitive, usable, and visually striking experiences. 
 				Easy to use and hard to forget.</p>
 							  <div class="project-tags">
-								  <span>VISUAL INTERFACE</span><span>MICROINTERACTIONS</span><span>USER FLOW</span><span>INTERACTIVE PROTOTYPES </span>
+								  <span data-i18n="work.p6.tag1">VISUAL INTERFACE</span><span data-i18n="work.p6.tag2">MICROINTERACTIONS</span><span data-i18n="work.p6.tag3">USER FLOW</span><span data-i18n="work.p6.tag4">INTERACTIVE PROTOTYPES </span>
 							  </div>
 						  </div>
 						</a>
@@ -225,14 +233,14 @@
 		<!-- Contact Section -->
 		<section id="contact" class="section contact">
 			<div class="container">
-				<h1 class="section-title animate-on-scroll">contact</h1>
+				<h1 class="section-title animate-on-scroll" data-i18n="contact.title">contact</h1>
 				<div class="contact-content animate-on-scroll">
-					<p>Got a cool project in mind? Let’s chat!</p>
-					<a href="mailto:candelaunicorns@gmail.com" class="btn btn-primary">Reach out</a>
+					<p data-i18n="contact.text">Got a cool project in mind? Let’s chat!</p>
+					<a href="mailto:cribastena@gmail.com" class="btn btn-primary" data-i18n="contact.btn">Reach out</a>
 					<div class="social-links">
-						<a href="#" aria-label="GitHub">Email</a>
-						<a href="#" aria-label="Instagram">Instagram</a>
-						<a href="#" aria-label="LinkedIn">LinkedIn</a>
+						<a href="mailto:cribastena@gmail.com" aria-label="Email">Email</a>
+						<a href="https://www.instagram.com/the.can.co/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
+						<a href="https://wa.me/34682405421" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">WhatsApp</a>
 					</div>
 				</div>
 			</div>
@@ -242,8 +250,8 @@
 	<!-- Footer -->
 	<footer class="footer">
 		<div class="container">
-			<p>&copy; 2025 Candela Ribas. vanilla HTML, CSS y JS.</p>
-			<a href="#hero" class="back-to-top" aria-label="Back to top">↑</a>
+			<p data-i18n="footer.copy">&copy; 2025 Candela Ribas. vanilla HTML, CSS y JS.</p>
+			<a href="#hero" class="back-to-top" aria-label="Back to top" data-i18n-attr="aria-label:footer.backToTop">↑</a>
 		</div>
 	</footer>
 

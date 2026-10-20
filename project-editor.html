@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Project editor</title>
   <link rel="stylesheet" href="./assets/css/main.css">
+  <script src="./assets/js/translations.js" defer></script>
   <script src="./assets/js/main.js" defer></script>
   <style>
    /* Ensure editor page has an off-white background (override site-wide background)
@@ -306,7 +307,7 @@
 </head>
 <body>
   <main class="editor">
-  <a class="btn btn-primary" href="index.html#projects" aria-label="Volver a Work">← Back</a>
+  <a class="btn btn-primary" href="index.html#projects" aria-label="Volver a Work" data-i18n="editor.back">← Back</a>
   <h1 id="project-title" class="section-title">Project</h1>
 
     <div class="upload-area" id="uploadArea">
@@ -324,7 +325,7 @@
   <!-- media container: we'll clone the clicked preview image into this node for instant render -->
   <div id="modal-media" class="modal-media" aria-hidden="true"></div>
         <div class="modal-actions">
-          <button id="modal-close-btn" class="btn btn-primary"><h3 style="margin:0; font-size:1rem; font-weight:600;">Close</h3></button>
+          <button id="modal-close-btn" class="btn btn-primary"><h3 style="margin:0; font-size:1rem; font-weight:600;" data-i18n="editor.close">Close</h3></button>
         </div>
       </div>
     </div>

@@ -2,6 +2,21 @@
 	background: var(--color-bg-alt);
 }
 
+/* Fuerza a que el título 'sobre mí' / 'about me' quede en 2 líneas en móvil */
+@media (max-width: 768px) {
+  .about .section-title {
+    max-width: min-content;
+    word-spacing: 9999px; /* fuerza salto de línea entre palabras */
+    line-height: 0.7;
+  }
+}
+
+@media (max-width: 420px) {
+  .about .section-title {
+    line-height: 0.65;
+  }
+}
+
 .about-grid {
 	display: grid;
 	gap: var(--space-xl);
