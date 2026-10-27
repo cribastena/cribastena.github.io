@@ -339,7 +339,7 @@
     }
 
     /* ZAMPO Showcase: Featured Image and 3 Columns */
-    .editor.project-ux-ui-1 {
+    .editor[class*="project-ux-ui-"] {
       max-width: 1200px;
     }
     .zampo-showcase {
@@ -595,7 +595,7 @@
     }
 
     // Set page title (custom formatted for sub-projects)
-    if(project === 'ux-ui-1'){
+    if(project.startsWith('ux-ui-')){
       const titleEl = document.getElementById('project-title');
       titleEl.classList.add('has-logo-title');
       titleEl.innerHTML = '<img src="https://ik.imagekit.io/7zyxg26dj/Vector%20(5).png" alt="ZAMPO" class="project-title-logo" />';
@@ -619,9 +619,6 @@
       if (typeof setLanguage === 'function' && typeof getCurrentLanguage === 'function') {
         setLanguage(getCurrentLanguage());
       }
-    } else if(project.startsWith('ux-ui-')){
-      const subNum = project.replace('ux-ui-', '');
-      document.getElementById('project-title').textContent = 'ux ui ' + subNum;
     } else if(project.startsWith('branding-')){
       const subNum = project.replace('branding-', '');
       document.getElementById('project-title').textContent = 'branding ' + subNum;
