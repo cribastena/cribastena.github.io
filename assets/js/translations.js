@@ -77,7 +77,7 @@ const TRANSLATIONS = {
 
     // Contact section
     'contact.title': 'contact',
-    'contact.text': 'Got a cool project in mind? Let’s chat!',
+    'contact.text': 'Got a cool project in mind?<br>Let’s chat!',
     'contact.btn': 'Reach out',
 
     // Footer
@@ -159,7 +159,7 @@ const TRANSLATIONS = {
 
     // Sección Contacto
     'contact.title': 'contacto',
-    'contact.text': '¿Tienes un proyecto en mente? ¡Hablemos!',
+    'contact.text': '¿Tienes un proyecto en mente?<br>¡Hablemos!',
     'contact.btn': 'Escríbeme',
 
     // Pie de página
@@ -207,7 +207,11 @@ function setLanguage(lang) {
   document.querySelectorAll('[data-i18n]').forEach((el) => {
     const key = el.getAttribute('data-i18n');
     if (dict[key] !== undefined) {
-      el.textContent = dict[key];
+      if (typeof dict[key] === 'string' && dict[key].includes('<br>')) {
+        el.innerHTML = dict[key];
+      } else {
+        el.textContent = dict[key];
+      }
     }
   });
 
