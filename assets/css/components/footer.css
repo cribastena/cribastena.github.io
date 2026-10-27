@@ -34,23 +34,25 @@
 
 	.footer .container {
 		flex-direction: row;
-		gap: var(--space-sm);
+		gap: var(--space-md);
 		align-items: center;
 		justify-content: space-between;
-		padding: 0 var(--space-sm);
+		padding: 0 var(--space-md);
 	}
 
 	.footer .container p {
-		font-size: 0.68rem;
+		font-size: clamp(0.7rem, 2.6vw, 0.84rem);
 		text-align: left;
-		flex: 1;
+		white-space: nowrap;
 		line-height: 1.2;
+		margin: 0;
 	}
 
 	.back-to-top {
-		width: 32px;
-		height: 32px;
+		width: 34px;
+		height: 34px;
 		flex-shrink: 0;
+		margin-right: 0.25rem;
 	}
 }
 
