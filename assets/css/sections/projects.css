@@ -201,3 +201,9 @@
 .project-card a[href="project-editor.html?project=posters-covers"]:hover .project-image img {
 	transform: scale(1.26); /* 1.20 * 1.05 = 1.26 on hover */
 }
+
+/* White background for UX/UI card image */
+.project-card a[href="ux-ui.html"] .project-image,
+.project-card a[href="ux-ui.html"] .project-image img {
+	background-color: #ffffff;
+}

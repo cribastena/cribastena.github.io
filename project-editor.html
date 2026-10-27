@@ -303,12 +303,262 @@
       transform: none !important; 
     }
     .modal-unmute:focus { outline: 3px solid rgba(255,255,255,0.08); outline-offset: 2px; }
+
+    /* Project Title Logo and Intro Text (e.g. ZAMPO) */
+    .section-title.has-logo-title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 4.5rem; /* Amplio espaciado superior */
+      margin-bottom: 3.5rem; /* mayor separación entre logo y texto */
+      word-spacing: normal !important;
+      line-height: normal;
+    }
+    .project-title-logo {
+      max-width: 320px;
+      width: 100%;
+      height: auto;
+      max-height: 110px;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto;
+    }
+    .project-intro {
+      max-width: 760px;
+      margin: 0 auto 3.5rem auto;
+      padding: 0 1rem;
+      text-align: center;
+    }
+    .project-intro p {
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: #333;
+      margin: 0;
+      font-weight: 400;
+    }
+
+    /* ZAMPO Showcase: Featured Image and 3 Columns */
+    .editor.project-ux-ui-1 {
+      max-width: 1200px;
+    }
+    .zampo-showcase {
+      width: 100%;
+      max-width: 1150px;
+      margin: 0 auto 4rem auto;
+      box-sizing: border-box;
+    }
+    .zampo-image-wrap {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto 3.5rem auto;
+      border-radius: 0;
+      overflow: visible;
+      box-shadow: none;
+      background: transparent;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .zampo-image-wrap:hover {
+      transform: translateY(-4px);
+      box-shadow: none;
+    }
+    .zampo-hero-image {
+      margin: 0 auto 5.5rem auto; /* Mayor separación entre imagen y columnas */
+    }
+    .zampo-featured-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      background: transparent;
+    }
+    .zampo-columns {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(1.5rem, 3vw, 2.75rem);
+      max-width: 1050px;
+      margin: 0 auto 5.5rem auto; /* Separación amplia hacia las imágenes inferiores */
+      padding: 0 0.5rem;
+      box-sizing: border-box;
+    }
+    .zampo-col {
+      display: flex;
+      flex-direction: column;
+    }
+    .zampo-col p {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: #333;
+      margin: 0;
+      text-align: left;
+      font-weight: 400;
+    }
+    .zampo-secondary-images {
+      width: 100%;
+      margin: 0 auto;
+    }
+    .zampo-secondary-images .zampo-image-wrap {
+      margin: 0 auto 4.5rem auto;
+    }
+    .zampo-conclusion-wrap {
+      max-width: 880px;
+      margin: 6.5rem auto 6.5rem auto; /* Mayor espacio por arriba para no estar pegado */
+      padding: 0 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(2rem, 4vw, 3.5rem);
+      box-sizing: border-box;
+    }
+    .zampo-conclusion-media {
+      flex: 0 0 auto;
+      max-width: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .zampo-conclusion-img {
+      width: 100%;
+      max-width: 190px;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      background: transparent;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .zampo-conclusion-img:hover {
+      transform: scale(1.04);
+    }
+    .zampo-conclusion-text {
+      flex: 1;
+      text-align: left;
+    }
+    .zampo-conclusion-text p {
+      font-family: var(--font-sans);
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: #333;
+      margin: 0;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .zampo-image-wrap {
+        width: 88%; /* Imágenes más pequeñas con márgenes laterales */
+        max-width: 88%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .zampo-hero-image {
+        margin-bottom: 3.5rem;
+      }
+      .zampo-columns {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+        padding: 0 1.75rem; /* Más margen lateral en textos */
+        margin-bottom: 3.5rem;
+      }
+      .zampo-col p {
+        font-size: 0.92rem;
+        line-height: 1.6;
+      }
+      .zampo-secondary-images .zampo-image-wrap {
+        margin-bottom: 3rem;
+      }
+      .zampo-conclusion-wrap {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.75rem;
+        margin: 4.5rem auto 4.5rem auto;
+        padding: 0 1.75rem; /* Más margen lateral en texto de conclusión */
+      }
+      .zampo-conclusion-media {
+        max-width: 115px; /* Reducción del 30% */
+      }
+      .zampo-conclusion-img {
+        max-width: 98px; /* 30% más pequeña (140px * 0.7 = 98px) */
+      }
+      .zampo-conclusion-text {
+        text-align: center;
+      }
+      .zampo-conclusion-text p {
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+    }
+    @media (max-width: 640px) {
+      .section-title.has-logo-title {
+        margin-top: 5.5rem; /* Más espacio en móvil */
+        margin-bottom: 2.25rem;
+        padding: 0 1.5rem;
+      }
+      .project-title-logo {
+        max-width: 220px;
+        max-height: 80px;
+      }
+      .project-intro {
+        margin-bottom: 2.5rem;
+        padding: 0 1.75rem; /* Más margen lateral en texto introductorio */
+      }
+      .project-intro p {
+        font-size: 0.95rem;
+        line-height: 1.55;
+      }
+    }
+    @media (max-width: 480px) {
+      .section-title.has-logo-title {
+        margin-top: 4.8rem;
+      }
+      .project-title-logo {
+        max-width: 190px;
+        max-height: 70px;
+      }
+    }
   </style>
 </head>
 <body>
   <main class="editor">
   <a class="btn btn-primary" href="index.html#projects" aria-label="Volver a Work" data-i18n="editor.back">← Back</a>
   <h1 id="project-title" class="section-title">Project</h1>
+  <div id="project-intro" class="project-intro" style="display:none;"></div>
+
+  <div id="zampo-showcase" class="zampo-showcase" style="display:none;">
+    <div class="zampo-image-wrap zampo-hero-image" title="Clic para ampliar">
+      <img src="https://ik.imagekit.io/7zyxg26dj/Group%20327.png?updatedAt=1792584316010" alt="ZAMPO Overview" class="zampo-featured-img" />
+    </div>
+    <div class="zampo-columns">
+      <div class="zampo-col">
+        <p data-i18n="project.zampo.col1">La propuesta surge como respuesta a la pérdida de relevancia de las aplicaciones gastronómicas tradicionales, percibidas como poco dinámicas, impersonales y alejadas de los nuevos hábitos de consumo digital.</p>
+      </div>
+      <div class="zampo-col">
+        <p data-i18n="project.zampo.col2">La investigación, basada en encuestas, entrevistas y análisis de la competencia, evidencia una preferencia por experiencias más visuales, sociales y participativas, así como una mayor conexión con plataformas dinámicas como TikTok o Instagram. Los resultados también destacan la importancia de la recomendación entre usuarios y el interés por dinámicas gamificadas aplicadas al descubrimiento gastronómico.</p>
+      </div>
+      <div class="zampo-col">
+        <p data-i18n="project.zampo.col3">A partir de estos hallazgos, ZAMPO propone una experiencia que integra descubrimiento, gamificación y comunidad mediante herramientas como retos, ruletas, filtros personalizados y recomendaciones sociales, convirtiendo la exploración gastronómica en una experiencia más entretenida y social.</p>
+      </div>
+    </div>
+
+    <div class="zampo-secondary-images">
+      <div class="zampo-image-wrap" title="Clic para ampliar">
+        <img src="https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-10-27%20a%20las%2020.27.54.png" alt="ZAMPO Process" class="zampo-featured-img" />
+      </div>
+      <div class="zampo-image-wrap" title="Clic para ampliar">
+        <img src="https://ik.imagekit.io/7zyxg26dj/Group%20320.png" alt="ZAMPO UI Screens" class="zampo-featured-img" />
+      </div>
+    </div>
+
+    <div class="zampo-conclusion-wrap">
+      <div class="zampo-conclusion-media">
+        <img src="https://ik.imagekit.io/7zyxg26dj/Frame%20(1).png" alt="ZAMPO Icon" class="zampo-conclusion-img" title="Clic para ampliar" />
+      </div>
+      <div class="zampo-conclusion-text">
+        <p data-i18n="project.zampo.conclusion">Como conclusión, ZAMPO se posiciona como una alternativa innovadora dentro del ecosistema digital gastronómico, alineada con los nuevos comportamientos y expectativas de los usuarios jóvenes.</p>
+      </div>
+    </div>
+  </div>
 
     <div class="upload-area" id="uploadArea">
       <p>Drag & drop images here or <label for="fileInput" style="color:blue; text-decoration:underline; cursor:pointer">choose files</label></p>
@@ -345,7 +595,31 @@
     }
 
     // Set page title (custom formatted for sub-projects)
-    if(project.startsWith('ux-ui-')){
+    if(project === 'ux-ui-1'){
+      const titleEl = document.getElementById('project-title');
+      titleEl.classList.add('has-logo-title');
+      titleEl.innerHTML = '<img src="https://ik.imagekit.io/7zyxg26dj/Vector%20(5).png" alt="ZAMPO" class="project-title-logo" />';
+      document.title = 'ZAMPO - Candela Ribas';
+
+      const introEl = document.getElementById('project-intro');
+      if(introEl){
+        introEl.style.display = 'block';
+        introEl.innerHTML = '<p data-i18n="project.zampo.intro">Este proyecto desarrolla el diseño conceptual y estratégico de ZAMPO, una aplicación móvil gastronómica dirigida a foodies jóvenes y urbanos, cuyo objetivo es transformar la forma en que las personas descubren y viven la gastronomía en el entorno digital.</p>';
+      }
+
+      const showcaseEl = document.getElementById('zampo-showcase');
+      if(showcaseEl){
+        showcaseEl.style.display = 'block';
+      }
+      const previewsEl = document.getElementById('previews');
+      if(previewsEl){
+        previewsEl.style.display = 'none';
+      }
+
+      if (typeof setLanguage === 'function' && typeof getCurrentLanguage === 'function') {
+        setLanguage(getCurrentLanguage());
+      }
+    } else if(project.startsWith('ux-ui-')){
       const subNum = project.replace('ux-ui-', '');
       document.getElementById('project-title').textContent = 'ux ui ' + subNum;
     } else if(project.startsWith('branding-')){
@@ -626,11 +900,7 @@
 
     // if this editor is opened for ux-ui sub-projects, prefill with their respective images
     if(project === 'ux-ui-1'){
-      addFromUrls([
-        'https://ik.imagekit.io/7zyxg26dj/Frame%201%20(1).png',
-        'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2015.29.47.png',
-        'https://ik.imagekit.io/7zyxg26dj/Frame%201.png'
-      ]);
+      // 3 previous images removed; ZAMPO uses showcase with Group 327.png
     }
 
     if(project === 'ux-ui-2'){
@@ -858,6 +1128,18 @@
         openImageModal(media);
       }
     }
+  });
+
+  // Enable click-to-enlarge modal for all ZAMPO showcase images
+  document.querySelectorAll('.zampo-featured-img, .zampo-conclusion-img').forEach((zampoImg) => {
+    zampoImg.tabIndex = 0;
+    zampoImg.addEventListener('click', () => openImageModal(zampoImg));
+    zampoImg.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        openImageModal(zampoImg);
+      }
+    });
   });
   </script>
   
