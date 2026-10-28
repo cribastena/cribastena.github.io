@@ -456,7 +456,8 @@
         margin-bottom: 3.5rem;
       }
       .zampo-columns {
-        grid-template-columns: 1fr;
+        /* !important needed: JS sets an inline grid-template-columns (e.g. 2 columns for Monel) */
+        grid-template-columns: 1fr !important;
         gap: 1.75rem;
         padding: 0 1.75rem; /* Más margen lateral en textos */
         margin-bottom: 3.5rem;
@@ -601,7 +602,7 @@
       const logoMap = {
         'ux-ui-1': { src: 'https://ik.imagekit.io/7zyxg26dj/Vector%20(5).png', alt: 'ZAMPO', title: 'ZAMPO - Candela Ribas' },
         'ux-ui-2': { src: 'https://ik.imagekit.io/7zyxg26dj/Group%2017.png', alt: 'Monel', title: 'Monel - Candela Ribas' },
-        'ux-ui-3': { src: 'https://ik.imagekit.io/7zyxg26dj/Vector%20(5).png', alt: 'UX/UI 3', title: 'UX/UI 3 - Candela Ribas' },
+        'ux-ui-3': { src: 'https://ik.imagekit.io/7zyxg26dj/desafi%CC%81o%20gourmet.png?updatedAt=1793185632273', alt: 'Desafío Gourmet', title: 'Desafío Gourmet - Candela Ribas' },
       };
       const logoInfo = logoMap[project] || logoMap['ux-ui-1'];
       titleEl.innerHTML = `<img src="${logoInfo.src}" alt="${logoInfo.alt}" class="project-title-logo" />`;
@@ -645,7 +646,7 @@
         const heroImgMap = {
           'ux-ui-1': 'https://ik.imagekit.io/7zyxg26dj/Group%20327.png?updatedAt=1792584316010',
           'ux-ui-2': 'https://ik.imagekit.io/7zyxg26dj/Group%201%20(1).png',
-          'ux-ui-3': 'https://ik.imagekit.io/7zyxg26dj/Group%20327.png?updatedAt=1792584316010',
+          'ux-ui-3': 'https://ik.imagekit.io/7zyxg26dj/Group%201%20(2).png?updatedAt=1793185477341',
         };
         const heroImg = showcaseEl.querySelector('.zampo-hero-image .zampo-featured-img');
         if(heroImg && heroImgMap[project]){
