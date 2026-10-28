@@ -323,6 +323,11 @@
       display: block;
       margin: 0 auto;
     }
+    /* Slightly larger logo for the Desafío Gourmet project */
+    .editor.project-ux-ui-3 .project-title-logo {
+      max-width: 380px;
+      max-height: 130px;
+    }
     .project-intro {
       max-width: 760px;
       margin: 0 auto 3.5rem auto;
@@ -522,7 +527,7 @@
 </head>
 <body>
   <main class="editor">
-  <a class="btn btn-primary" href="index.html#projects" aria-label="Volver a Work" data-i18n="editor.back">← Back</a>
+  <a class="btn btn-primary" href="javascript:void(0)" onclick="if(history.length>1){history.back()}else{location.href='ux-ui.html'}" aria-label="Volver a la página anterior" data-i18n="editor.back">← Back</a>
   <h1 id="project-title" class="section-title">Project</h1>
   <div id="project-intro" class="project-intro" style="display:none;"></div>
 
@@ -614,7 +619,7 @@
         const introKeyMap = {
           'ux-ui-1': { key: 'project.zampo.intro', text: 'Este proyecto desarrolla el diseño conceptual y estratégico de ZAMPO, una aplicación móvil gastronómica dirigida a foodies jóvenes y urbanos, cuyo objetivo es transformar la forma en que las personas descubren y viven la gastronomía en el entorno digital.' },
           'ux-ui-2': { key: 'project.monel.intro', text: 'Monel es una aplicación de gestión financiera para viajeros, diseñada para ayudar a organizar y controlar el dinero durante los viajes. Concebida como una solución todo en uno, integra herramientas como la planificación de presupuestos, el seguimiento de gastos en tiempo real, la conversión de divisas, la división de gastos compartidos y las recomendaciones personalizadas. Su objetivo es que los usuarios disfruten de sus experiencias sin preocuparse constantemente por el dinero.' },
-          'ux-ui-3': { key: 'project.zampo.intro', text: 'Este proyecto desarrolla el diseño conceptual y estratégico de ZAMPO, una aplicación móvil gastronómica dirigida a foodies jóvenes y urbanos, cuyo objetivo es transformar la forma en que las personas descubren y viven la gastronomía en el entorno digital.' },
+          'ux-ui-3': { key: 'project.desafio.intro', text: 'Desafío Gourmet es un juego interactivo en formato test que pone a prueba los conocimientos y las habilidades culinarias del usuario. A través de una serie de preguntas y decisiones, el jugador se enfrenta a diferentes situaciones en la cocina que determinarán su recorrido y el desenlace final.' },
         };
         const introInfo = introKeyMap[project] || introKeyMap['ux-ui-1'];
         introEl.innerHTML = `<p data-i18n="${introInfo.key}">${introInfo.text}</p>`;
@@ -627,6 +632,10 @@
         'ux-ui-2': [
           'El proyecto comenzó con una investigación de usuarios para identificar sus necesidades, comportamientos y principales dificultades financieras durante los viajes. Se analizaron diferentes perfiles, desde mochileros y viajeros independientes hasta grupos, familias y profesionales. La investigación reveló problemas comunes, como la pérdida de control sobre los gastos, la gestión de diferentes monedas y la necesidad de utilizar múltiples aplicaciones. El análisis de la competencia permitió identificar oportunidades para desarrollar una solución más completa y especializada.',
           'A partir de estos hallazgos, desarrollé la arquitectura de la información y la experiencia de usuario, priorizando una navegación intuitiva, una jerarquía visual clara y el acceso rápido a las funcionalidades principales. La interfaz combina una estética limpia y moderna con iconos intuitivos, visualizaciones de datos e ilustraciones vectoriales. La identidad visual refuerza una personalidad cercana, fresca y confiable.'
+        ],
+        'ux-ui-3': [
+          'La idea nace de la combinación de dos conceptos: conocimiento y caos. El proyecto explora qué puede suceder cuando alguien intenta preparar una receta sin tener los conocimientos necesarios: ¿conseguirá un buen resultado o terminará provocando un desastre culinario?',
+          'A partir de esta premisa, desarrollé una experiencia basada en preguntas interactivas y una narrativa ramificada, en la que cada respuesta conduce a diferentes caminos y finales. La estructura del juego busca mantener la curiosidad del usuario, fomentar su participación y hacer que cada decisión tenga un impacto en el desarrollo de la experiencia.'
         ]
       };
       const columnsEl = document.getElementById('zampo-showcase');
@@ -662,17 +671,22 @@
             'https://ik.imagekit.io/7zyxg26dj/Shot%20(9).png'
           ],
           conclusionText: 'El resultado es una experiencia digital que simplifica la gestión financiera durante los viajes mediante la integración de múltiples herramientas en una única interfaz accesible. Monel busca ofrecer a los usuarios un mayor control sobre sus gastos, facilitar la toma de decisiones financieras y convertir cada viaje en una experiencia más organizada, cómoda y libre de estrés.'
+        },
+        'ux-ui-3': {
+          conclusionText: 'El resultado es una propuesta lúdica que combina humor, toma de decisiones e interacción, transformando un test convencional en una experiencia dinámica y personalizada. Desafío Gourmet invita a los usuarios a poner a prueba sus habilidades culinarias y descubrir si son auténticos chefs o un auténtico caos en la cocina.'
         }
       };
       const mediaInfo = projectMediaMap[project];
       if(showcaseEl && mediaInfo){
         const secondaryImgs = showcaseEl.querySelectorAll('.zampo-secondary-images img');
-        secondaryImgs.forEach((img, i) => {
-          if(mediaInfo.secondary[i]){
-            img.src = mediaInfo.secondary[i];
-            img.alt = (logoInfo.alt || 'Project') + ' Detail ' + (i + 1);
-          }
-        });
+        if(mediaInfo.secondary){
+          secondaryImgs.forEach((img, i) => {
+            if(mediaInfo.secondary[i]){
+              img.src = mediaInfo.secondary[i];
+              img.alt = (logoInfo.alt || 'Project') + ' Detail ' + (i + 1);
+            }
+          });
+        }
         const conclusionP = showcaseEl.querySelector('.zampo-conclusion-text p');
         if(conclusionP){
           conclusionP.removeAttribute('data-i18n');
