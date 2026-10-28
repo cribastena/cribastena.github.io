@@ -92,7 +92,8 @@ const TRANSLATIONS = {
     'project.zampo.col1': 'The proposal emerges as a response to the loss of relevance of traditional gastronomic applications, perceived as lacking dynamism, impersonal, and disconnected from new digital consumption habits.',
     'project.zampo.col2': 'The research, based on surveys, interviews, and competitive analysis, highlights a preference for more visual, social, and participatory experiences, as well as a stronger connection with dynamic platforms such as TikTok or Instagram. The findings also emphasize the importance of peer recommendations and the interest in gamified dynamics applied to culinary discovery.',
     'project.zampo.col3': 'Drawing from these insights, ZAMPO proposes an experience that merges discovery, gamification, and community through tools such as challenges, roulettes, custom filters, and social recommendations, transforming gastronomic exploration into a more engaging and social journey.',
-    'project.zampo.conclusion': 'In conclusion, ZAMPO positions itself as an innovative alternative within the digital gastronomic ecosystem, aligned with the new behaviors and expectations of young users.'
+    'project.zampo.conclusion': 'In conclusion, ZAMPO positions itself as an innovative alternative within the digital gastronomic ecosystem, aligned with the new behaviors and expectations of young users.',
+    'project.monel.intro': 'Monel is a financial management app for travelers, designed to help organize and control money during trips. Conceived as an all-in-one solution, it integrates tools such as budget planning, real-time expense tracking, currency conversion, shared expense splitting, and personalized recommendations. Its goal is for users to enjoy their experiences without constantly worrying about money.'
   },
   es: {
     // Navegación
@@ -179,7 +180,8 @@ const TRANSLATIONS = {
     'project.zampo.col1': 'La propuesta surge como respuesta a la pérdida de relevancia de las aplicaciones gastronómicas tradicionales, percibidas como poco dinámicas, impersonales y alejadas de los nuevos hábitos de consumo digital.',
     'project.zampo.col2': 'La investigación, basada en encuestas, entrevistas y análisis de la competencia, evidencia una preferencia por experiencias más visuales, sociales y participativas, así como una mayor conexión con plataformas dinámicas como TikTok o Instagram. Los resultados también destacan la importancia de la recomendación entre usuarios y el interés por dinámicas gamificadas aplicadas al descubrimiento gastronómico.',
     'project.zampo.col3': 'A partir de estos hallazgos, ZAMPO propone una experiencia que integra descubrimiento, gamificación y comunidad mediante herramientas como retos, ruletas, filtros personalizados y recomendaciones sociales, convirtiendo la exploración gastronómica en una experiencia más entretenida y social.',
-    'project.zampo.conclusion': 'Como conclusión, ZAMPO se posiciona como una alternativa innovadora dentro del ecosistema digital gastronómico, alineada con los nuevos comportamientos y expectativas de los usuarios jóvenes.'
+    'project.zampo.conclusion': 'Como conclusión, ZAMPO se posiciona como una alternativa innovadora dentro del ecosistema digital gastronómico, alineada con los nuevos comportamientos y expectativas de los usuarios jóvenes.',
+    'project.monel.intro': 'Monel es una aplicación de gestión financiera para viajeros, diseñada para ayudar a organizar y controlar el dinero durante los viajes. Concebida como una solución todo en uno, integra herramientas como la planificación de presupuestos, el seguimiento de gastos en tiempo real, la conversión de divisas, la división de gastos compartidos y las recomendaciones personalizadas. Su objetivo es que los usuarios disfruten de sus experiencias sin preocuparse constantemente por el dinero.'
   }
 };
 
