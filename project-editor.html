@@ -619,6 +619,24 @@
         introEl.innerHTML = `<p data-i18n="${introInfo.key}">${introInfo.text}</p>`;
       }
 
+      // Per-project override of the three text columns below the hero image.
+      // For Monel (ux-ui-2) we replace the default ZAMPO columns with two
+      // project-specific columns (research + UX/UI design).
+      const columnsTextMap = {
+        'ux-ui-2': [
+          'El proyecto comenzó con una investigación de usuarios para identificar sus necesidades, comportamientos y principales dificultades financieras durante los viajes. Se analizaron diferentes perfiles, desde mochileros y viajeros independientes hasta grupos, familias y profesionales. La investigación reveló problemas comunes, como la pérdida de control sobre los gastos, la gestión de diferentes monedas y la necesidad de utilizar múltiples aplicaciones. El análisis de la competencia permitió identificar oportunidades para desarrollar una solución más completa y especializada.',
+          'A partir de estos hallazgos, desarrollé la arquitectura de la información y la experiencia de usuario, priorizando una navegación intuitiva, una jerarquía visual clara y el acceso rápido a las funcionalidades principales. La interfaz combina una estética limpia y moderna con iconos intuitivos, visualizaciones de datos e ilustraciones vectoriales. La identidad visual refuerza una personalidad cercana, fresca y confiable.'
+        ]
+      };
+      const columnsEl = document.getElementById('zampo-showcase');
+      const columnsElInner = columnsEl ? columnsEl.querySelector('.zampo-columns') : null;
+      if(columnsElInner && columnsTextMap[project]){
+        columnsElInner.innerHTML = columnsTextMap[project]
+          .map(text => '<div class="zampo-col"><p>' + text + '</p></div>')
+          .join('');
+        columnsElInner.style.gridTemplateColumns = 'repeat(' + columnsTextMap[project].length + ', 1fr)';
+      }
+
       const showcaseEl = document.getElementById('zampo-showcase');
       if(showcaseEl){
         showcaseEl.style.display = 'block';
@@ -635,6 +653,48 @@
           heroImg.alt = logoInfo.alt + ' Overview';
         }
       }
+      // Per-project override of secondary images and conclusion (Monel = ux-ui-2)
+      const projectMediaMap = {
+        'ux-ui-2': {
+          secondary: [
+            'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-10-28%20a%20las%2011.22.13.png',
+            'https://ik.imagekit.io/7zyxg26dj/Shot%20(9).png'
+          ],
+          conclusionText: 'El resultado es una experiencia digital que simplifica la gestión financiera durante los viajes mediante la integración de múltiples herramientas en una única interfaz accesible. Monel busca ofrecer a los usuarios un mayor control sobre sus gastos, facilitar la toma de decisiones financieras y convertir cada viaje en una experiencia más organizada, cómoda y libre de estrés.'
+        }
+      };
+      const mediaInfo = projectMediaMap[project];
+      if(showcaseEl && mediaInfo){
+        const secondaryImgs = showcaseEl.querySelectorAll('.zampo-secondary-images img');
+        secondaryImgs.forEach((img, i) => {
+          if(mediaInfo.secondary[i]){
+            img.src = mediaInfo.secondary[i];
+            img.alt = (logoInfo.alt || 'Project') + ' Detail ' + (i + 1);
+          }
+        });
+        const conclusionP = showcaseEl.querySelector('.zampo-conclusion-text p');
+        if(conclusionP){
+          conclusionP.removeAttribute('data-i18n');
+          conclusionP.textContent = mediaInfo.conclusionText;
+        }
+        // Conclusion: centered text, pulled up; no side image for Monel
+        if(showcaseEl){
+          const wrapEl = showcaseEl.querySelector('.zampo-conclusion-wrap');
+          const mediaEl = showcaseEl.querySelector('.zampo-conclusion-media');
+          const textEl = showcaseEl.querySelector('.zampo-conclusion-text');
+          if(mediaEl){
+            mediaEl.style.display = 'none';
+          }
+          if(wrapEl && textEl){
+            wrapEl.style.display = 'block';
+            wrapEl.style.maxWidth = '880px';
+            wrapEl.style.margin = '4.5rem auto 6.5rem auto';
+            wrapEl.style.padding = '0 1.75rem';
+            textEl.style.textAlign = 'center';
+          }
+        }
+      }
+
       const previewsEl = document.getElementById('previews');
       if(previewsEl){
         previewsEl.style.display = 'none';
