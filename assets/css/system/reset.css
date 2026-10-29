@@ -106,6 +106,14 @@ section {
 }
 html {
   background: var(--color-bg);
+  /* Prevent horizontal overflow when zooming out: no sideways scroll,
+     so the layout stays anchored and no side margin appears. */
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
+body {
+  overflow-x: clip;
 }
 
 body {
@@ -113,6 +121,9 @@ body {
   font-family: var(--font-sans);
   background: var(--color-bg);
   color: var(--color-text);
+  /* overflow-x clip on html is authoritative; hidden here as fallback */
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 a {

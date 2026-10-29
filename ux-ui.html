@@ -19,7 +19,7 @@
     }
 
     .editor {
-      padding: 1rem 0.5rem;
+      padding: 5rem 0.5rem;
       max-width: 1050px;
       margin: 0 auto;
       width: 100%;
@@ -27,7 +27,7 @@
       min-height: 90vh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
     }
 
@@ -128,8 +128,8 @@
       .ux-options-container {
         grid-template-columns: 1fr;
         gap: 2.25rem;
-        width: 64%;
-        max-width: 268px;
+        width: 54%;
+        max-width: 230px;
         margin: 0 auto 3rem auto;
         padding: 0;
       }
@@ -147,8 +147,8 @@
     @media (max-width: 380px) {
       .ux-options-container {
         gap: 2rem;
-        width: 64%;
-        max-width: 224px;
+        width: 54%;
+        max-width: 198px;
       }
     }
   </style>
@@ -156,8 +156,8 @@
 <body>
   <main class="editor">
     <a class="btn btn-primary" href="index.html#projects" aria-label="Volver a Proyectos" data-i18n="editor.back">← Back</a>
-    
-    <h1 class="section-title">ux ui</h1>
+
+    <h1 class="section-title" data-i18n="title.ux-ui">ux/ui</h1>
 
     <!-- 3 square options placed horizontally side by side -->
     <div class="ux-options-container">

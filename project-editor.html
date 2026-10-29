@@ -13,14 +13,20 @@
      site's green root background is not visible at the bottom of the page. */
    html, body { background: #f3f3f0; }
    body { min-height: 100vh; }
-  .editor { padding: 1rem 0.5rem; max-width: 1000px; margin: 0 auto; }
+  .editor { padding: 4rem 0.5rem 1rem 0.5rem; max-width: 1000px; margin: 0 auto; }
     .editor h1 { margin-bottom: 3rem; }
     /* center section titles on the editor page but keep the same font-size/height */
     .editor .section-title { text-align: center; }
-    
+    /* Reduce title size on desktop so titles fit on one line */
+    @media (min-width: 641px) {
+      .editor .section-title { font-size: 7rem; }
+      .editor.project-videos-animations .section-title,
+      .editor.project-posters-covers .section-title { font-size: 6rem; }
+    }
+
     /* Reduce title size on mobile so longer titles fit on screen */
     @media (max-width: 640px) {
-      .editor .section-title { 
+      .editor .section-title {
         font-size: 5rem; /* igual que títulos de 1 palabra */
         text-align: center;
         word-wrap: break-word;
@@ -38,7 +44,7 @@
       .editor.project-videos-animations .section-title { font-size: 3.5rem; }
     }
     @media (max-width: 480px) {
-      .editor .section-title { 
+      .editor .section-title {
         font-size: 4rem; /* igual que títulos de 1 palabra */
         padding: 0 0.5rem;
         margin-top: 3.5rem;
@@ -52,7 +58,7 @@
       .editor.project-videos-animations .section-title { font-size: 2.8rem; }
     }
     @media (max-width: 380px) {
-      .editor .section-title { 
+      .editor .section-title {
         font-size: 3.5rem; /* igual que títulos de 1 palabra */
         margin-top: 3rem;
         word-spacing: 9999px; /* fuerza salto de línea entre palabras */
@@ -66,7 +72,7 @@
     }
   /* place the Back button at the top-left corner of the viewport on the editor page */
   .editor > a.btn.btn-primary { position: fixed; top: 3rem; left: 3rem; z-index: 1200; }
-  
+
   /* Adjust Back button position on mobile - move it higher and more to the left */
   @media (max-width: 640px) {
     .editor > a.btn.btn-primary { top: 1.5rem; left: 1.5rem; }
@@ -109,14 +115,14 @@
   /* make images responsive and keep natural aspect ratio so the grid adapts to image height */
   .preview-slot img { width: 100%; height: auto; display: block; }
   /* make videos responsive like images */
-  .preview-slot video { 
-    width: 100%; 
-    height: auto; 
+  .preview-slot video {
+    width: 100%;
+    height: auto;
     display: block;
     visibility: visible;
     opacity: 1;
   }
-  
+
   /* Ensure videos are visible on mobile in project editor */
   @media (max-width: 640px) {
     .preview-slot video {
@@ -127,7 +133,7 @@
       height: auto;
     }
   }
-  
+
   .preview-slot .placeholder { font-size: 2rem; color: #bbb; }
     /* Microinteraction: stronger, immediate hover for pointer devices */
     @media (hover: hover) and (pointer: fine) {
@@ -149,7 +155,7 @@
         box-shadow: 0 18px 36px rgba(0,0,0,0.18);
       }
     }
-    
+
     /* Responsive column counts */
     @media (max-width: 1100px) {
       .previews { column-count: 3; }
@@ -296,11 +302,11 @@
     .modal-unmute svg { display: block; width: 24px; height: 24px; fill: #fff; }
     /* Subtle hover effect matching close button */
     .modal-unmute:hover,
-    .modal-unmute:active { 
-      background: rgba(255, 255, 255, 0.15) !important; 
+    .modal-unmute:active {
+      background: rgba(255, 255, 255, 0.15) !important;
       border-color: rgba(255, 255, 255, 0.3) !important;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15) !important; 
-      transform: none !important; 
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15) !important;
+      transform: none !important;
     }
     .modal-unmute:focus { outline: 3px solid rgba(255,255,255,0.08); outline-offset: 2px; }
 
@@ -406,6 +412,12 @@
     }
     .zampo-secondary-images .zampo-image-wrap {
       margin: 0 auto 4.5rem auto;
+    }
+    /* Slightly smaller secondary image on desktop for Desafío Gourmet */
+    @media (min-width: 861px) {
+      .editor.project-ux-ui-3 .zampo-secondary-images .zampo-image-wrap {
+        max-width: 78%;
+      }
     }
     .zampo-conclusion-wrap {
       max-width: 880px;
@@ -673,6 +685,10 @@
           conclusionText: 'El resultado es una experiencia digital que simplifica la gestión financiera durante los viajes mediante la integración de múltiples herramientas en una única interfaz accesible. Monel busca ofrecer a los usuarios un mayor control sobre sus gastos, facilitar la toma de decisiones financieras y convertir cada viaje en una experiencia más organizada, cómoda y libre de estrés.'
         },
         'ux-ui-3': {
+          secondary: [
+            'https://ik.imagekit.io/7zyxg26dj/Shot%20(10).png',
+            null // only one image for Desafío Gourmet; second one removed
+          ],
           conclusionText: 'El resultado es una propuesta lúdica que combina humor, toma de decisiones e interacción, transformando un test convencional en una experiencia dinámica y personalizada. Desafío Gourmet invita a los usuarios a poner a prueba sus habilidades culinarias y descubrir si son auténticos chefs o un auténtico caos en la cocina.'
         }
       };
@@ -684,6 +700,10 @@
             if(mediaInfo.secondary[i]){
               img.src = mediaInfo.secondary[i];
               img.alt = (logoInfo.alt || 'Project') + ' Detail ' + (i + 1);
+            } else {
+              // No image for this slot: remove the whole wrapper
+              const wrap = img.closest('.zampo-image-wrap') || img.parentElement;
+              if(wrap) wrap.remove(); else img.remove();
             }
           });
         }
@@ -719,11 +739,126 @@
         setLanguage(getCurrentLanguage());
       }
     } else if(project.startsWith('branding-')){
-      const subNum = project.replace('branding-', '');
-      document.getElementById('project-title').textContent = 'branding ' + subNum;
+      // ============================================
+      // BRANDNG SUB-PROJECTS — fully independent from UX/UI.
+      // Only shares the generic page shell (title/intro/showcase containers),
+      // but ALL content here is branding-specific. Edit ONLY this block
+      // to change branding info; the ux-ui block above is untouched.
+      // ============================================
+      const titleEl = document.getElementById('project-title');
+      const brandingTitleMap = {
+        'branding-1': { alt: 'Branding 1', title: 'Branding 1 - Candela Ribas', text: 'branding 1' },
+        'branding-2': { alt: 'Branding 2', title: 'Branding 2 - Candela Ribas', text: 'branding 2' },
+        'branding-3': { alt: 'Branding 3', title: 'Branding 3 - Candela Ribas', text: 'branding 3' },
+      };
+      const brandingInfo = brandingTitleMap[project] || brandingTitleMap['branding-1'];
+      titleEl.textContent = brandingInfo.text;
+      document.title = brandingInfo.title;
+
+      const introElB = document.getElementById('project-intro');
+      if(introElB){
+        introElB.style.display = 'block';
+        const brandingIntroMap = {
+          'branding-1': 'Intro del proyecto branding 1. Sustituye este texto.',
+          'branding-2': 'Intro del proyecto branding 2. Sustituye este texto.',
+          'branding-3': 'Intro del proyecto branding 3. Sustituye este texto.',
+        };
+        introElB.innerHTML = '<p>' + (brandingIntroMap[project] || brandingIntroMap['branding-1']) + '</p>';
+      }
+
+      const showcaseElB = document.getElementById('zampo-showcase');
+      if(showcaseElB){
+        showcaseElB.style.display = 'block';
+        // Hero image placeholder per branding project — replace src with real image
+        const brandingHeroMap = {
+          'branding-1': '',
+          'branding-2': '',
+          'branding-3': '',
+        };
+        const heroImgB = showcaseElB.querySelector('.zampo-hero-image .zampo-featured-img');
+        if(heroImgB){
+          if(brandingHeroMap[project]){
+            heroImgB.src = brandingHeroMap[project];
+          }
+          heroImgB.alt = brandingInfo.alt + ' Overview';
+        }
+        // Secondary images placeholders — replace src with real images
+        const brandingSecondaryMap = {
+          'branding-1': ['', ''],
+          'branding-2': ['', ''],
+          'branding-3': ['', ''],
+        };
+        const secondaryImgsB = showcaseElB.querySelectorAll('.zampo-secondary-images img');
+        const secondaryList = brandingSecondaryMap[project] || brandingSecondaryMap['branding-1'];
+        secondaryImgsB.forEach((img, i) => {
+          if(secondaryList[i]){
+            img.src = secondaryList[i];
+          }
+          img.alt = brandingInfo.alt + ' Detail ' + (i + 1);
+        });
+        // Branding-specific text columns — replace texts with real info
+        const brandingColsMap = {
+          'branding-1': ['Columna 1 branding 1.', 'Columna 2 branding 1.', 'Columna 3 branding 1.'],
+          'branding-2': ['Columna 1 branding 2.', 'Columna 2 branding 2.', 'Columna 3 branding 2.'],
+          'branding-3': ['Columna 1 branding 3.', 'Columna 2 branding 3.', 'Columna 3 branding 3.'],
+        };
+        const colsEl = showcaseElB.querySelector('.zampo-columns');
+        if(colsEl){
+          const cols = brandingColsMap[project] || brandingColsMap['branding-1'];
+          colsEl.innerHTML = cols.map(t => '<div class="zampo-col"><p>' + t + '</p></div>').join('');
+          colsEl.style.gridTemplateColumns = 'repeat(' + cols.length + ', 1fr)';
+        }
+        // Branding conclusion — replace text with real conclusion
+        const brandingConclusionMap = {
+          'branding-1': 'Conclusión del proyecto branding 1. Sustituye este texto.',
+          'branding-2': 'Conclusión del proyecto branding 2. Sustituye este texto.',
+          'branding-3': 'Conclusión del proyecto branding 3. Sustituye este texto.',
+        };
+        const conclusionPB = showcaseElB.querySelector('.zampo-conclusion-text p');
+        if(conclusionPB){
+          conclusionPB.removeAttribute('data-i18n');
+          conclusionPB.textContent = brandingConclusionMap[project] || brandingConclusionMap['branding-1'];
+        }
+        // Hide default conclusion side image for branding (text-centered like UX/UI overrides)
+        const mediaElB = showcaseElB.querySelector('.zampo-conclusion-media');
+        if(mediaElB){ mediaElB.style.display = 'none'; }
+        const wrapElB = showcaseElB.querySelector('.zampo-conclusion-wrap');
+        if(wrapElB){
+          wrapElB.style.display = 'block';
+          wrapElB.style.maxWidth = '880px';
+          wrapElB.style.margin = '4.5rem auto 6.5rem auto';
+          wrapElB.style.padding = '0 1.75rem';
+        }
+        const textElB = showcaseElB.querySelector('.zampo-conclusion-text');
+        if(textElB){ textElB.style.textAlign = 'center'; }
+
+        const previewsElB = document.getElementById('previews');
+        if(previewsElB){
+          previewsElB.style.display = 'none';
+        }
+      }
     } else {
-      document.getElementById('project-title').textContent = project.replace(/[-]/g, ' ').toLowerCase();
+      // Show '&' instead of '-' in titles like "videos & animations" / "posters & covers"
+      document.getElementById('project-title').textContent = project
+        .replace(/-/g, ' ')
+        .replace(/\bvideos\s+animations\b/i, 'videos & animations')
+        .replace(/\bposters\s+covers\b/i, 'posters & covers')
+        .toLowerCase();
     }
+
+    // Re-apply translatable title (e.g. "videos & animations") whenever the
+    // language changes via the header button.
+    function applyTranslatedTitle(){
+      const titleEl = document.getElementById('project-title');
+      if(!titleEl || titleEl.querySelector('img')) return; // logo-titled projects keep their image
+      const dict = (window.TRANSLATIONS && window.TRANSLATIONS[(window.getCurrentLanguage ? getCurrentLanguage() : 'es')]) || null;
+      const key = 'title.' + project;
+      if(dict && dict[key] !== undefined){
+        titleEl.textContent = dict[key];
+      }
+    }
+    document.addEventListener('languagechange', applyTranslatedTitle);
+    document.addEventListener('DOMContentLoaded', applyTranslatedTitle);
 
     // If inside a sub-project, Back button returns to the respective options screen
     if(project.startsWith('ux-ui-')){

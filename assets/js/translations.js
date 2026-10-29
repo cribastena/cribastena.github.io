@@ -88,6 +88,11 @@ const TRANSLATIONS = {
     'editor.back': '← Back',
     'editor.close': 'Close',
     'editor.unmute': 'Unmute video',
+    'title.videos-animations': 'videos & animations',
+    'title.posters-covers': 'posters & covers',
+    'title.3d': '3d',
+    'title.branding': 'branding',
+    'title.ux-ui': 'ux/ui',
     'project.zampo.intro': 'This project develops the conceptual and strategic design of ZAMPO, a gastronomic mobile app aimed at young and urban foodies, whose goal is to transform the way people discover and experience gastronomy in the digital environment.',
     'project.zampo.col1': 'The proposal emerges as a response to the loss of relevance of traditional gastronomic applications, perceived as lacking dynamism, impersonal, and disconnected from new digital consumption habits.',
     'project.zampo.col2': 'The research, based on surveys, interviews, and competitive analysis, highlights a preference for more visual, social, and participatory experiences, as well as a stronger connection with dynamic platforms such as TikTok or Instagram. The findings also emphasize the importance of peer recommendations and the interest in gamified dynamics applied to culinary discovery.',
@@ -177,6 +182,11 @@ const TRANSLATIONS = {
     'editor.back': '← Atrás',
     'editor.close': 'Cerrar',
     'editor.unmute': 'Activar sonido',
+    'title.videos-animations': 'vídeos & animación',
+    'title.posters-covers': 'posters & portadas',
+    'title.3d': '3d',
+    'title.branding': 'branding',
+    'title.ux-ui': 'ux/ui',
     'project.zampo.intro': 'Este proyecto desarrolla el diseño conceptual y estratégico de ZAMPO, una aplicación móvil gastronómica dirigida a foodies jóvenes y urbanos, cuyo objetivo es transformar la forma en que las personas descubren y viven la gastronomía en el entorno digital.',
     'project.zampo.col1': 'La propuesta surge como respuesta a la pérdida de relevancia de las aplicaciones gastronómicas tradicionales, percibidas como poco dinámicas, impersonales y alejadas de los nuevos hábitos de consumo digital.',
     'project.zampo.col2': 'La investigación, basada en encuestas, entrevistas y análisis de la competencia, evidencia una preferencia por experiencias más visuales, sociales y participativas, así como una mayor conexión con plataformas dinámicas como TikTok o Instagram. Los resultados también destacan la importancia de la recomendación entre usuarios y el interés por dinámicas gamificadas aplicadas al descubrimiento gastronómico.',
@@ -201,6 +211,9 @@ function getCurrentLanguage() {
  * Apply the selected language to the DOM
  * @param {'en' | 'es'} lang 
  */
+// Expose for per-page scripts (e.g. project-editor title translation)
+window.TRANSLATIONS = TRANSLATIONS;
+
 function setLanguage(lang) {
   if (!TRANSLATIONS[lang]) return;
 
@@ -261,6 +274,9 @@ function setLanguage(lang) {
       toggleBtn.title = dict['nav.langTitle'] || 'Cambiar idioma a Español';
     }
   }
+
+  // Notify other scripts (e.g. per-page title translation) that language changed
+  document.dispatchEvent(new CustomEvent('languagechange', { detail: { lang } }));
 }
 
 /**
