@@ -134,6 +134,38 @@
     }
   }
 
+  /* Video captions: one short line under each video in Videos & Animations */
+  .preview-slot .video-caption {
+    display: block;
+    font-size: 0.85rem;
+    color: #888;
+    padding: 0.35rem 0.15rem 0;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  /* Extra vertical spacing between videos in Videos & Animations on mobile */
+  @media (max-width: 640px) {
+    .editor.project-videos-animations .previews { column-gap: 1.5rem; }
+    .editor.project-videos-animations .preview-slot { margin-bottom: 2.5rem; }
+  }
+
+  /* Video captions: one short line under each video in Videos & Animations */
+  .preview-slot .video-caption {
+    display: block;
+    font-size: 0.85rem;
+    color: #888;
+    padding: 0.35rem 0.15rem 0;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  /* Extra vertical spacing between videos in Videos & Animations on mobile */
+  @media (max-width: 640px) {
+    .editor.project-videos-animations .previews { column-gap: 1.5rem; }
+    .editor.project-videos-animations .preview-slot { margin-bottom: 2.5rem; }
+  }
+
   .preview-slot .placeholder { font-size: 2rem; color: #bbb; }
     /* Microinteraction: stronger, immediate hover for pointer devices */
     @media (hover: hover) and (pointer: fine) {
@@ -838,12 +870,16 @@
         }
       }
     } else {
-      // Show '&' instead of '-' in titles like "videos & animations" / "posters & covers"
-      document.getElementById('project-title').textContent = project
+      // Show '&' instead of '-' in titles like "videos & animations" / "posters & covers".
+      // Bind each word to its following '&' with a non-breaking space so that on
+      // mobile the word-spacing trick wraps the title in 2 lines
+      // ("videos &" / "animations") instead of 3.
+      document.getElementById('project-title').innerHTML = project
         .replace(/-/g, ' ')
-        .replace(/\bvideos\s+animations\b/i, 'videos & animations')
-        .replace(/\bposters\s+covers\b/i, 'posters & covers')
-        .toLowerCase();
+        .replace(/\bvideos\s+animations\b/i, 'videos &amp; animations')
+        .replace(/\bposters\s+covers\b/i, 'posters &amp; covers')
+        .toLowerCase()
+        .replace(/\s+&/g, '&nbsp;&');
     }
 
     // Re-apply translatable title (e.g. "videos & animations") whenever the
@@ -854,7 +890,8 @@
       const dict = (window.TRANSLATIONS && window.TRANSLATIONS[(window.getCurrentLanguage ? getCurrentLanguage() : 'es')]) || null;
       const key = 'title.' + project;
       if(dict && dict[key] !== undefined){
-        titleEl.textContent = dict[key];
+        // bind the word before '&' so '&' stays attached to it on wrap (2 lines on mobile)
+        titleEl.innerHTML = dict[key].replace(/\s+&/g, '&nbsp;&');
       }
     }
     document.addEventListener('languagechange', applyTranslatedTitle);
@@ -968,8 +1005,36 @@
       }
     })();
 
-    // helper to populate a slot from a remote URL (used to prefill project examples)
-    function fillSlotWithURL(url){
+  const videoCaptionMap = {
+    'videos-animations': [
+      { url: 'output%20(2).webm', caption: 'Latin Grammy — animación de logotipo' },
+      { url: 'output.webm', caption: 'Movimiento tipográfico' },
+      { url: 'output%20(3).webm', caption: 'Loop 3D — lata de refresco' },
+      { url: 'output%20(4).webm', caption: 'Exploración de formas y color' },
+      { url: 'output%20(5).webm', caption: 'Reel de animación' }
+    ]
+  };
+
+  function getCaptionFor(url){
+    const list = videoCaptionMap[project];
+    if(!list) return null;
+    const match = list.find(item => decodeURIComponent(url).includes(decodeURIComponent(item.url)));
+    return match ? match.caption : null;
+  }
+
+  function appendCaption(slot, url){
+    const text = getCaptionFor(url);
+    if(!text) return;
+    const cap = document.createElement('span');
+    cap.className = 'video-caption';
+    cap.textContent = text;
+    slot.appendChild(cap);
+  }
+
+  window.videoCaptionMap = videoCaptionMap;
+
+  // helper to populate a slot from a remote URL (used to prefill project examples)
+  function fillSlotWithURL(url){
       // find an empty slot; if none exists and we haven't hit MAX_SLOTS,
       // create a new slot on-demand (this avoids showing empty placeholders
       // for projects like ux-ui).
@@ -1029,6 +1094,7 @@
           mediaEl.addEventListener('keydown', (e) => { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openImageModal(mediaEl); } });
           slot.appendChild(mediaEl);
           slot.classList.remove('loading');
+          appendCaption(slot, url);
           // play muted preview; swallow promise rejection and try multiple times
           setTimeout(() => {
             const p = mediaEl.play(); 

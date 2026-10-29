@@ -15,6 +15,18 @@
 	background-color: var(--color-bg-alt);
 }
 
+/* Mobile: use the ImageKit rotation transformation (rt-90) so the image is
+   delivered already rotated to portrait orientation. Its long side then fits
+   the tall viewport without zooming, avoiding the pixelated look caused by
+   stretching the landscape original to cover a phone screen. */
+@media (max-width: 640px) {
+	.projects {
+		background-image: url("https://ik.imagekit.io/7zyxg26dj/cryon%20bg.jpg?tr=rt-90");
+		background-size: cover;
+		background-position: center;
+	}
+}
+
 /* Center the section title inside the projects section */
 .projects .section-title {
 	text-align: center;
