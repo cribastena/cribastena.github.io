@@ -18,7 +18,7 @@ const TRANSLATIONS = {
 
     // About section
     'about.title': 'about me',
-    'about.p1': 'Hi! I’m Candela Ribas, a graphic and UX/UI designer with a multidisciplinary curious mind, always eager to create projects where aesthetics and experience go hand in hand. I believe great design comes from questioning everything, experimenting without fear, and playing with new ideas.',
+    'about.p1': 'Hi! I’m Candela Ribas, a graphic and audiovisual designer from Ibiza, Spain. I enjoy creating projects where aesthetics and functionality go hand in hand. I believe great design comes from observing the world and its details, experimenting without fear, and exploring new ideas.',
     'about.p2': 'I\'m versatile and curious: I move freely between visual aesthetics and UX logic. I’m always looking to give each project its own personality and make an impact.',
     'about.p3': 'Thanks for checking out, feel free to explore!',
 
@@ -112,7 +112,7 @@ const TRANSLATIONS = {
 
     // Sección Sobre mí
     'about.title': 'sobre mí',
-    'about.p1': '¡Hola! Soy Candela Ribas, diseñadora gráfica y de UX/UI con una mente curiosa y multidisciplinar, siempre con ganas de crear proyectos donde la estética y la experiencia vayan de la mano. Creo que el buen diseño nace de cuestionarlo todo, experimentar sin miedo y jugar con nuevas ideas.',
+    'about.p1': '¡Hola! Soy Candela Ribas, diseñadora gráfica y audiovisual de Ibiza, España. Disfruto creando proyectos donde la estética y la funcionalidad van de la mano. Creo que el buen diseño nace de observar el mundo y sus detalles, experimentar sin miedo y explorar nuevas ideas.',
     'about.p2': 'Soy versátil y curiosa: me muevo con soltura entre la estética visual y la lógica de UX. Siempre busco aportar a cada proyecto su propia personalidad y generar impacto.',
     'about.p3': '¡Gracias por pasarte, siéntete libre de explorar!',
 

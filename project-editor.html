@@ -994,7 +994,7 @@
 
     // Maximum slot counts per project (we'll create slots on-demand for ux-ui, branding
     // and videos-animations so we don't show empty placeholders). 3d stays at 4; ux-ui/branding limited to 9; videos-animations limited to 5.
-    const MAX_SLOTS = (project === '3d') ? 4 : (project.startsWith('ux-ui') || project.startsWith('branding')) ? 9 : (project === 'videos-animations') ? 5 : 20;
+    const MAX_SLOTS = (project === '3d') ? 4 : (project.startsWith('ux-ui') || project.startsWith('branding')) ? 9 : (project === 'videos-animations') ? 7 : 20;
 
     // Create placeholder slots for most projects. For ux-ui, branding and videos-animations we avoid creating
     // empty placeholder slots up-front so the grid only shows actual media.
@@ -1016,7 +1016,9 @@
       { url: 'output.webm', caption: 'Movimiento tipográfico' },
       { url: 'output%20(3).webm', caption: 'Loop 3D — lata de refresco' },
       { url: 'output%20(4).webm', caption: 'Exploración de formas y color' },
-      { url: 'output%20(5).webm', caption: 'Reel de animación' }
+      { url: 'output%20(5).webm', caption: 'Reel de animación' },
+      { url: 'Spot%20publicitario.MOV', caption: 'Spot publicitario' },
+      { url: 'Case%20study.MOV', caption: 'Case study' }
     ]
   };
 
@@ -1239,7 +1241,9 @@
         'https://ik.imagekit.io/7zyxg26dj/output.webm/ik-video.mp4?updatedAt=1767713032606',
         'https://ik.imagekit.io/7zyxg26dj/output%20(3).webm/ik-video.mp4',
         'https://ik.imagekit.io/7zyxg26dj/output%20(4).webm/ik-video.mp4',
-        'https://ik.imagekit.io/7zyxg26dj/output%20(5).webm/ik-video.mp4'
+        'https://ik.imagekit.io/7zyxg26dj/output%20(5).webm/ik-video.mp4',
+        'https://ik.imagekit.io/7zyxg26dj/Spot%20publicitario.MOV/ik-video.mp4',
+        'https://ik.imagekit.io/7zyxg26dj/Case%20study.MOV/ik-video.mp4'
       ]);
     }
 
