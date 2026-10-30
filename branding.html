@@ -37,17 +37,17 @@
       line-height: 1;
     }
 
-    /* Fixed Back button matching project-editor page */
+    /* Fixed Back button matching project-editor page (below sticky nav) */
     .editor > a.btn.btn-primary {
       position: fixed;
-      top: 3rem;
+      top: 5.5rem;
       left: 3rem;
       z-index: 1200;
     }
 
     @media (max-width: 640px) {
       .editor > a.btn.btn-primary {
-        top: 1.5rem;
+        top: 4.5rem;
         left: 1.5rem;
       }
       .editor .section-title {
@@ -59,7 +59,7 @@
 
     @media (max-width: 480px) {
       .editor > a.btn.btn-primary {
-        top: 1rem;
+        top: 4rem;
         left: 1.25rem;
       }
       .editor .section-title {
@@ -154,6 +154,25 @@
   </style>
 </head>
 <body>
+  <nav class="nav">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" aria-label="Candela Ribas logo">
+        <img class="nav-logo-img" src="https://ik.imagekit.io/7zyxg26dj/IMG_4680.PNG" alt="Candela Ribas logo" loading="eager" />
+      </a>
+      <div class="nav-actions">
+        <ul class="nav-links">
+          <li><a href="index.html#about" data-i18n="nav.about">ABOUT ME</a></li>
+          <li><a href="index.html#projects" data-i18n="nav.work">WORK</a></li>
+          <li><a href="index.html#contact" data-i18n="nav.contact">CONTACT</a></li>
+        </ul>
+        <button type="button" class="lang-switch-btn" id="lang-toggle" aria-label="Switch language to Spanish" title="Cambiar idioma a Español">
+          <span class="lang-option lang-en active">EN</span>
+          <span class="lang-divider" aria-hidden="true">/</span>
+          <span class="lang-option lang-es">ES</span>
+        </button>
+      </div>
+    </div>
+  </nav>
   <main class="editor">
     <a class="btn btn-primary" href="index.html#projects" aria-label="Volver a Proyectos" data-i18n="editor.back">← Back</a>
 

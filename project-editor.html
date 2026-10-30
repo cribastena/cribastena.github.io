@@ -24,61 +24,47 @@
       .editor.project-posters-covers .section-title { font-size: 6rem; }
     }
 
-    /* Reduce title size on mobile so longer titles fit on screen */
+    /* Reduce title size on mobile so longer titles fit on screen.
+       Titles flow naturally in horizontal lines (no word-spacing trick). */
     @media (max-width: 640px) {
       .editor .section-title {
-        font-size: 5rem; /* igual que títulos de 1 palabra */
+        font-size: 5rem;
         text-align: center;
         word-wrap: break-word;
         overflow-wrap: break-word;
         padding: 0 1rem;
-        margin-top: 4rem; /* mucho margen superior en móvil */
-        word-spacing: 9999px; /* fuerza salto de línea entre palabras */
-        line-height: 1;
+        margin-top: 4rem;
+        line-height: 0.8; /* menos separación entre las 2 líneas */
       }
-      /* Exception: keep "ux ui" on one line */
-      .editor.project-ux-ui .section-title {
-        word-spacing: normal;
-      }
-      /* Extra reduction for longer titles like "videos & animations" (3 palabras) */
+      /* Slightly smaller so 2-word titles split into 2 clean lines */
       .editor.project-videos-animations .section-title { font-size: 3.5rem; }
     }
     @media (max-width: 480px) {
       .editor .section-title {
-        font-size: 4rem; /* igual que títulos de 1 palabra */
+        font-size: 4rem;
         padding: 0 0.5rem;
         margin-top: 3.5rem;
-        word-spacing: 9999px; /* fuerza salto de línea entre palabras */
-        line-height: 1;
-      }
-      /* Exception: keep "ux ui" on one line */
-      .editor.project-ux-ui .section-title {
-        word-spacing: normal;
+        line-height: 0.8;
       }
       .editor.project-videos-animations .section-title { font-size: 2.8rem; }
     }
     @media (max-width: 380px) {
       .editor .section-title {
-        font-size: 3.5rem; /* igual que títulos de 1 palabra */
+        font-size: 3.5rem;
         margin-top: 3rem;
-        word-spacing: 9999px; /* fuerza salto de línea entre palabras */
-        line-height: 1;
-      }
-      /* Exception: keep "ux ui" on one line */
-      .editor.project-ux-ui .section-title {
-        word-spacing: normal;
+        line-height: 0.8;
       }
       .editor.project-videos-animations .section-title { font-size: 2.4rem; }
     }
-  /* place the Back button at the top-left corner of the viewport on the editor page */
-  .editor > a.btn.btn-primary { position: fixed; top: 3rem; left: 3rem; z-index: 1200; }
+  /* Back button sits below the sticky nav instead of overlapping it */
+  .editor > a.btn.btn-primary { position: fixed; top: 5.5rem; left: 3rem; z-index: 1200; }
 
   /* Adjust Back button position on mobile - move it higher and more to the left */
   @media (max-width: 640px) {
-    .editor > a.btn.btn-primary { top: 1.5rem; left: 1.5rem; }
+    .editor > a.btn.btn-primary { top: 4.5rem; left: 1.5rem; }
   }
   @media (max-width: 480px) {
-    .editor > a.btn.btn-primary { top: 1rem; left: 1.25rem; }
+    .editor > a.btn.btn-primary { top: 4rem; left: 1.25rem; }
   }
     /* Hide upload area so only grid, title, and back button are visible */
     .upload-area { display: none; }
@@ -570,6 +556,25 @@
   </style>
 </head>
 <body>
+  <nav class="nav">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" aria-label="Candela Ribas logo">
+        <img class="nav-logo-img" src="https://ik.imagekit.io/7zyxg26dj/IMG_4680.PNG" alt="Candela Ribas logo" loading="eager" />
+      </a>
+      <div class="nav-actions">
+        <ul class="nav-links">
+          <li><a href="index.html#about" data-i18n="nav.about">ABOUT ME</a></li>
+          <li><a href="index.html#projects" data-i18n="nav.work">WORK</a></li>
+          <li><a href="index.html#contact" data-i18n="nav.contact">CONTACT</a></li>
+        </ul>
+        <button type="button" class="lang-switch-btn" id="lang-toggle" aria-label="Switch language to Spanish" title="Cambiar idioma a Español">
+          <span class="lang-option lang-en active">EN</span>
+          <span class="lang-divider" aria-hidden="true">/</span>
+          <span class="lang-option lang-es">ES</span>
+        </button>
+      </div>
+    </div>
+  </nav>
   <main class="editor">
   <a class="btn btn-primary" href="javascript:void(0)" onclick="if(history.length>1){history.back()}else{location.href='ux-ui.html'}" aria-label="Volver a la página anterior" data-i18n="editor.back">← Back</a>
   <h1 id="project-title" class="section-title">Project</h1>

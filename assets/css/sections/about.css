@@ -10,6 +10,9 @@
     max-width: min-content;
     word-spacing: 9999px; /* fuerza salto de línea entre palabras */
     line-height: 0.7;
+    margin-left: 0;      /* alineado al mismo margen que el texto */
+    padding-left: 0;
+    text-align: left;
   }
 }
 

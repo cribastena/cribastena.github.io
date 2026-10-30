@@ -34,6 +34,19 @@
 	margin-inline: 0;
 }
 
+/* Mobile: kill the desktop nudge so the title really sits centered */
+@media (max-width: 767px) {
+	.projects > .container > .section-title {
+		transform: none;
+		margin-bottom: var(--space-lg);
+	}
+	/* Spanish "trabajos" is wider than "work": shrink a bit so it fits.
+	   The i18n script sets <html lang="es">, so :lang(es) matches only in Spanish. */
+	.projects > .container > .section-title:lang(es) {
+		font-size: 0.8em;
+	}
+}
+
 /* Nudge the title more on larger screens and ensure it's centered */
 @media (min-width: 768px) {
 	.projects > .container > .section-title {

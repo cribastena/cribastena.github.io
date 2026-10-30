@@ -107,13 +107,16 @@ section {
 html {
   background: var(--color-bg);
   /* Prevent horizontal overflow when zooming out: no sideways scroll,
-     so the layout stays anchored and no side margin appears. */
+     so the layout stays anchored and no side margin appears.
+     NOTE: both axes stay "clip"/"visible" — using overflow-x:hidden here
+     or on body would create a scroll container and break the sticky nav. */
   overflow-x: clip;
   overflow-y: visible;
 }
 
 body {
   overflow-x: clip;
+  overflow-y: visible;
 }
 
 body {
@@ -121,8 +124,9 @@ body {
   font-family: var(--font-sans);
   background: var(--color-bg);
   color: var(--color-text);
-  /* overflow-x clip on html is authoritative; hidden here as fallback */
-  overflow-x: hidden;
+  /* sticky nav fix: no overflow-x:hidden on body — "clip" does not create
+     a scroll container, so position:sticky keeps working. */
+  overflow-x: clip;
   overflow-y: visible;
 }
 
