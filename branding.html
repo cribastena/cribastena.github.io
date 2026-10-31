@@ -144,11 +144,57 @@
       }
     }
 
+    /* MOBILE: horizontal carousel for the 3 option cards.
+       Only affects <=640px; desktop keeps the exact 3-column grid above. */
+    @media (max-width: 640px) {
+      .branding-options-container {
+        display: flex;
+        flex-direction: row;
+        gap: 6vw;                     /* visible, uniform gap: cards never glued */
+        width: 100%;
+        max-width: none;
+        margin: 0 auto 3rem auto;
+        padding: 0.5rem 0;
+        overflow-x: auto;
+        overflow-y: hidden;
+        /* no scroll-snap: the JS snaps by index with smooth animation */
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;          /* no visible scrollbar */
+        -ms-overflow-style: none;
+        box-sizing: content-box;
+      }
+      .branding-options-container::-webkit-scrollbar { display: none; }
+
+      .branding-option-card {
+        flex: 0 0 56vw;               /* active card: ~56% of screen width */
+        max-width: 56vw;
+        aspect-ratio: 1 / 1;
+        width: auto;
+        height: auto;
+        border-radius: 10px;
+        transform: scale(0.8);        /* side cards smaller = peeking effect */
+        transition: transform 0.3s var(--ease-out), box-shadow 0.25s ease, border-color 0.25s ease;
+      }
+
+      /* Active (snapped/centered) card: bigger and fully centered */
+      .branding-option-card.active {
+        transform: scale(1);
+      }
+
+      .branding-option-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
     @media (max-width: 380px) {
       .branding-options-container {
-        gap: 2rem;
-        width: 54%;
-        max-width: 198px;
+        gap: 5vw;
+      }
+      .branding-option-card {
+        flex-basis: 58vw;
+        max-width: 58vw;
       }
     }
   </style>
@@ -191,6 +237,172 @@
       </a>
     </div>
   </main>
+  <script>
+    // Mobile infinite carousel — index-based, one-card-per-swipe, both
+    // directions, no visible start or end.
+    //
+    // How it works:
+    // - 9 identical sets of the 3 cards are rendered (4 clone sets left,
+    //   the originals, 4 clone sets right).
+    // - `logical` position is a card index within a set (0..2) plus a running
+    //   set offset `base` that never resets (grows/shrinks freely) => the
+    //   direction of the gesture is always preserved.
+    // - scrollToCard(idx) centers card idx with a smooth animation.
+    // - after a swipe ends, we advance exactly one card in the gesture's
+    //   direction and animate there, then `recenter()` silently shifts the
+    //   scroll back by whole sets when we drift too far (pixel-identical jump).
+    (function(){
+      const track = document.querySelector('.branding-options-container');
+      if(!track) return;
+      const originals = Array.from(track.querySelectorAll('.branding-option-card'));
+      if(!originals.length) return;
+      if(!window.matchMedia('(max-width: 640px)').matches) return; // desktop untouched
+
+      const N = originals.length;              // 3
+      const SETS_PER_SIDE = 4;
+      for(let i = 0; i < SETS_PER_SIDE; i++){
+        originals.forEach(c => track.insertBefore(c.cloneNode(true), track.firstChild));
+      }
+      for(let i = 0; i < SETS_PER_SIDE; i++){
+        originals.forEach(c => track.appendChild(c.cloneNode(true)));
+      }
+      const allCards = Array.from(track.querySelectorAll('.branding-option-card'));
+      const START = SETS_PER_SIDE * N;         // index of first original card
+
+      // step = card width + gap (measured, includes flex gap)
+      const step = () => allCards[START + 1].offsetLeft - allCards[START].offsetLeft;
+
+      // logical position: START + n (n can grow/shrink without limit)
+      let n = 0;                                // 0 => originals[0] (Zampo) centered
+      let animating = false;
+      let touchStartX = 0, touchStartY = 0, touchMoved = false, gestureActive = false;
+
+      function scrollToCard(idx, smooth){
+        const tr = track.getBoundingClientRect();
+        const cr = allCards[idx].getBoundingClientRect();
+        const delta = (cr.left + cr.width / 2) - (tr.left + tr.width / 2);
+        if(smooth && typeof track.scrollBy === 'function'){
+          track.scrollBy({ left: delta, behavior: 'smooth' });
+        } else {
+          track.scrollLeft += delta;
+        }
+      }
+
+      function updateActive(){
+        const tr = track.getBoundingClientRect();
+        const center = tr.left + tr.width / 2;
+        const s = track.scrollLeft;
+        const i = Math.round(s / step());
+        const idx = Math.min(allCards.length - 1, Math.max(0, i));
+        allCards.forEach((c, k) => c.classList.toggle('active', k === idx));
+      }
+
+      // Silent recenter: shift scroll by whole sets so we stay near the middle
+      // band. All cards are equally spaced, so shifting by whole sets is a
+      // pixel-identical jump and never changes the logical card.
+      function recenter(){
+        const s = track.scrollLeft;
+        const st = step();
+        const i = Math.round(s / st);          // current global card index
+        const rel = i - START;                 // logical offset from originals
+        const span = (SETS_PER_SIDE - 1) * N;  // allowed drift (±1 set)
+        if(rel > span || rel < -span){
+          const shift = Math.round(rel / N) * N; // whole sets only
+          track.scrollLeft = s - shift * st;   // instant, invisible
+        }
+      }
+
+      function go(delta){
+        if(animating) return;
+        animating = true;
+        n += delta;                            // direction preserved, unbounded
+        scrollToCard(n + START, true);
+        // wait for the smooth scroll to settle before unlocking
+        const st = step();
+        const target = (n + START) * st;
+        (function check(){
+          const diff = Math.abs(track.scrollLeft - target);
+          if(diff < 1.5){
+            recenter();
+            updateActive();
+            animating = false;
+          } else {
+            requestAnimationFrame(check);
+          }
+        })();
+      }
+
+      // --- gesture handling: one card per swipe ------------------------
+      track.addEventListener('touchstart', e => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchMoved = false;
+        gestureActive = true;
+      }, { passive: true });
+
+      track.addEventListener('touchmove', e => {
+        if(!gestureActive) return;
+        const dx = e.touches[0].clientX - touchStartX;
+        const dy = e.touches[0].clientY - touchStartY;
+        if(Math.abs(dx) > 18 && Math.abs(dx) > Math.abs(dy)){
+          touchMoved = true;
+        }
+      }, { passive: true });
+
+      track.addEventListener('touchend', e => {
+        if(!gestureActive) return;
+        gestureActive = false;
+        const dx = (e.changedTouches[0].clientX - touchStartX);
+        const dy = (e.changedTouches[0].clientY - touchStartY);
+        // left swipe => advance one card; right swipe => go back one card
+        if(touchMoved && Math.abs(dx) > 18 && Math.abs(dx) > Math.abs(dy) * 1.2){
+          go(dx < 0 ? 1 : -1);
+        } else {
+          // tiny/ambiguous gesture: still snap back to the nearest card
+          go(0);
+        }
+      });
+
+      // mouse wheel / trackpad horizontal scroll also advances card-by-card
+      let wheelLock = false;
+      track.addEventListener('wheel', e => {
+        if(Math.abs(e.deltaX) < Math.abs(e.deltaY)) return; // page scroll wins
+        e.preventDefault();
+        if(wheelLock || animating) return;
+        wheelLock = true;
+        go(e.deltaX > 0 ? 1 : -1);
+        setTimeout(() => wheelLock = false, 350);
+      }, { passive: false });
+
+      // catch any free scroll that ends between cards (momentum edge cases)
+      let scrollIdle = null;
+      track.addEventListener('scroll', () => {
+        updateActive();
+        if(animating) return;
+        clearTimeout(scrollIdle);
+        scrollIdle = setTimeout(() => {
+          if(animating) return;
+          const s = track.scrollLeft;
+          const i = Math.round(s / step());
+          if(Math.abs(s - i * step()) > 2){
+            n = i - START;                     // adopt wherever we are
+            scrollToCard(n + START, true);     // finish centering this card
+          }
+        }, 140);
+      }, { passive: true });
+
+      // Initial: Zampo centered
+      scrollToCard(START, false);
+      updateActive();
+
+      window.addEventListener('resize', () => {
+        if(window.matchMedia('(max-width: 640px)').matches){
+          scrollToCard(n + START, false);
+          updateActive();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
 
