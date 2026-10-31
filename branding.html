@@ -260,11 +260,18 @@
 
       const N = originals.length;              // 3
       const SETS_PER_SIDE = 4;
+      // Left clones: build each set in a fragment so the original order
+      // (Zampo → Monel → Desafío) is preserved. insertBefore one-by-one
+      // would reverse the set and put two equal cards next to each other.
       for(let i = 0; i < SETS_PER_SIDE; i++){
-        originals.forEach(c => track.insertBefore(c.cloneNode(true), track.firstChild));
+        const frag = document.createDocumentFragment();
+        originals.forEach(c => frag.appendChild(c.cloneNode(true)));
+        track.insertBefore(frag, track.firstChild);
       }
       for(let i = 0; i < SETS_PER_SIDE; i++){
-        originals.forEach(c => track.appendChild(c.cloneNode(true)));
+        const frag = document.createDocumentFragment();
+        originals.forEach(c => frag.appendChild(c.cloneNode(true)));
+        track.appendChild(frag);
       }
       const allCards = Array.from(track.querySelectorAll('.branding-option-card'));
       const START = SETS_PER_SIDE * N;         // index of first original card
@@ -275,6 +282,8 @@
       // logical position: START + n (n can grow/shrink without limit)
       let n = 0;                                // 0 => originals[0] (Zampo) centered
       let animating = false;
+      let pending = 0;                          // gestures queued while animating
+      let animId = null;
       let touchStartX = 0, touchStartY = 0, touchMoved = false, gestureActive = false;
 
       function scrollToCard(idx, smooth){
@@ -289,8 +298,6 @@
       }
 
       function updateActive(){
-        const tr = track.getBoundingClientRect();
-        const center = tr.left + tr.width / 2;
         const s = track.scrollLeft;
         const i = Math.round(s / step());
         const idx = Math.min(allCards.length - 1, Math.max(0, i));
@@ -312,24 +319,47 @@
         }
       }
 
+      // Settle watcher: always terminates (timeout safety net), so `animating`
+      // can never stay true forever — this was the cause of the lock-up.
       function go(delta){
-        if(animating) return;
+        if(animating){ pending += delta; return; } // queue quick successive swipes
         animating = true;
         n += delta;                            // direction preserved, unbounded
         scrollToCard(n + START, true);
-        // wait for the smooth scroll to settle before unlocking
         const st = step();
         const target = (n + START) * st;
-        (function check(){
-          const diff = Math.abs(track.scrollLeft - target);
-          if(diff < 1.5){
-            recenter();
+        const t0 = performance.now();
+        let lastS = track.scrollLeft;
+        let still = 0;
+        (function check(now){
+          const s = track.scrollLeft;
+          const diff = Math.abs(s - target);
+          if(diff < 2){
+            // settled: finish and unlock, then flush queued gestures
             updateActive();
+            recenter();
             animating = false;
+            if(pending !== 0){ const p = pending; pending = 0; go(p); }
+          } else if(now - t0 > 1200){
+            // smooth scroll stalled (interrupted): jump instantly to target
+            track.scrollLeft = target;
+            updateActive();
+            recenter();
+            animating = false;
+            if(pending !== 0){ const p = pending; pending = 0; go(p); }
           } else {
-            requestAnimationFrame(check);
+            if(Math.abs(s - lastS) < 0.5){ still++; } else { still = 0; lastS = s; }
+            if(still > 24){                    // scroll stopped short of target
+              track.scrollLeft = target;
+              updateActive();
+              recenter();
+              animating = false;
+              if(pending !== 0){ const p = pending; pending = 0; go(p); }
+            } else {
+              animId = requestAnimationFrame(check);
+            }
           }
-        })();
+        })(t0);
       }
 
       // --- gesture handling: one card per swipe ------------------------
