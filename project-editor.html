@@ -128,28 +128,33 @@
     padding: 0.35rem 0.15rem 0;
     text-align: center;
     line-height: 1.3;
+    position: relative;
+    z-index: 2; /* siempre por encima del vídeo escalado en hover */
+    background: transparent;
   }
 
-  /* Extra vertical spacing between videos in Videos & Animations on mobile */
+  /* More air between videos on desktop: bigger column gap and vertical margin */
+  @media (min-width: 641px) {
+    .editor.project-videos-animations .previews {
+      column-gap: 3rem;
+    }
+    .editor.project-videos-animations .preview-slot {
+      margin-bottom: 3rem;
+    }
+  }
+
+  /* Extra vertical spacing between videos on mobile */
   @media (max-width: 640px) {
     .editor.project-videos-animations .previews { column-gap: 1.5rem; }
     .editor.project-videos-animations .preview-slot { margin-bottom: 2.5rem; }
   }
 
-  /* Video captions: one short line under each video in Videos & Animations */
-  .preview-slot .video-caption {
-    display: block;
-    font-size: 0.85rem;
-    color: #888;
-    padding: 0.35rem 0.15rem 0;
-    text-align: center;
-    line-height: 1.3;
-  }
-
-  /* Extra vertical spacing between videos in Videos & Animations on mobile */
-  @media (max-width: 640px) {
-    .editor.project-videos-animations .previews { column-gap: 1.5rem; }
-    .editor.project-videos-animations .preview-slot { margin-bottom: 2.5rem; }
+  /* Hover scale must not cover the caption: keep the scale origin near the
+     top of the video so the enlarged video grows away from the caption. */
+  @media (hover: hover) and (min-width: 641px) {
+    .editor.project-videos-animations .preview-slot video {
+      transform-origin: 50% 20% !important;
+    }
   }
 
   .preview-slot .placeholder { font-size: 2rem; color: #bbb; }
@@ -994,7 +999,7 @@
 
     // Maximum slot counts per project (we'll create slots on-demand for ux-ui, branding
     // and videos-animations so we don't show empty placeholders). 3d stays at 4; ux-ui/branding limited to 9; videos-animations limited to 5.
-    const MAX_SLOTS = (project === '3d') ? 4 : (project.startsWith('ux-ui') || project.startsWith('branding')) ? 9 : (project === 'videos-animations') ? 7 : 20;
+    const MAX_SLOTS = (project === '3d') ? 4 : (project.startsWith('ux-ui') || project.startsWith('branding')) ? 9 : (project === 'videos-animations') ? 6 : 20;
 
     // Create placeholder slots for most projects. For ux-ui, branding and videos-animations we avoid creating
     // empty placeholder slots up-front so the grid only shows actual media.
@@ -1012,13 +1017,12 @@
 
   const videoCaptionMap = {
     'videos-animations': [
-      { url: 'output%20(2).webm', caption: 'Latin Grammy — animación de logotipo' },
-      { url: 'output.webm', caption: 'Movimiento tipográfico' },
-      { url: 'output%20(3).webm', caption: 'Loop 3D — lata de refresco' },
-      { url: 'output%20(4).webm', caption: 'Exploración de formas y color' },
-      { url: 'output%20(5).webm', caption: 'Reel de animación' },
-      { url: 'Spot%20publicitario.webm', caption: 'Spot publicitario' },
-      { url: 'Case%20study.webm', caption: 'Case study' }
+      { url: 'output%20(2).webm', caption: 'Motion lyrics. IDGAF — Drake ft. Yeat' },
+      { url: 'output.webm', caption: 'Ilustración animada. Feel Good — Gorillaz' },
+      { url: 'output%20(3).webm', caption: 'Publicidad refresco — loop de fotos' },
+      { url: 'output%20(4).webm', caption: 'Publicidad compañía aérea' },
+      { url: 'Spot%20publicitario.webm', caption: 'Spot publicitario app Zampo' },
+      { url: 'Case%20study.webm', caption: 'Case study app Zampo' }
     ]
   };
 
@@ -1241,7 +1245,6 @@
         'https://ik.imagekit.io/7zyxg26dj/output.webm/ik-video.mp4?updatedAt=1767713032606',
         'https://ik.imagekit.io/7zyxg26dj/output%20(3).webm/ik-video.mp4',
         'https://ik.imagekit.io/7zyxg26dj/output%20(4).webm/ik-video.mp4',
-        'https://ik.imagekit.io/7zyxg26dj/output%20(5).webm/ik-video.mp4',
         'https://ik.imagekit.io/5dtde8xj3/Spot%20publicitario.webm',
         'https://ik.imagekit.io/5dtde8xj3/Case%20study.webm'
       ]);
