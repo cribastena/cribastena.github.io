@@ -162,22 +162,30 @@
         scrollbar-width: none;
         -ms-overflow-style: none;
         box-sizing: content-box;
+        /* vertical padding so the scaled-up (1.2) active card is not clipped
+           by overflow-x:auto forcing overflow-y to clip */
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+        margin-top: -2.5rem;
+        margin-bottom: 0.5rem;
       }
       .ux-options-container::-webkit-scrollbar { display: none; }
 
       .ux-option-card {
-        flex: 0 0 56vw;               /* active card: ~56% of screen width */
+        flex: 0 0 56vw;               /* card width: unchanged */
         max-width: 56vw;
         aspect-ratio: 1 / 1;
         width: auto;
         height: auto;
         border-radius: 10px;
-        transform: scale(0.8);
+        transform: scale(1);          /* side cards: normal size */
         transition: transform 0.3s var(--ease-out), box-shadow 0.25s ease, border-color 0.25s ease;
       }
 
+      /* Centered card: 20% bigger — driven by JS .active, never by hover */
       .ux-option-card.active {
-        transform: scale(1);
+        transform: scale(1.2);
+        z-index: 2;                   /* above neighbours, never behind */
       }
 
       .ux-option-card img {
