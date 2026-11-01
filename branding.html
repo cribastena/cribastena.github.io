@@ -53,7 +53,7 @@
       .editor .section-title {
         font-size: 5rem;
         margin-top: 4.5rem;
-        margin-bottom: 2.5rem;
+        margin-bottom: 4rem; /* más aire sobre el carrusel */
       }
     }
 
@@ -65,7 +65,7 @@
       .editor .section-title {
         font-size: 3.8rem;
         margin-top: 3.5rem;
-        margin-bottom: 2rem;
+        margin-bottom: 3.25rem; /* más aire sobre el carrusel */
       }
     }
 
@@ -286,20 +286,29 @@
       let animId = null;
       let touchStartX = 0, touchStartY = 0, touchMoved = false, gestureActive = false;
 
-      function scrollToCard(idx, smooth){
+      // Real resting scrollLeft for card idx so that its CENTER coincides
+      // with the CENTER of the track (viewport). Measured from the DOM, so
+      // card width, gap, margins and padding are all accounted for.
+      function centerScrollLeft(idx){
         const tr = track.getBoundingClientRect();
         const cr = allCards[idx].getBoundingClientRect();
-        const delta = (cr.left + cr.width / 2) - (tr.left + tr.width / 2);
+        const cur = track.scrollLeft;
+        // delta needed to bring the card's center to the track's center
+        return cur + (cr.left + cr.width / 2) - (tr.left + tr.width / 2);
+      }
+
+      function scrollToCard(idx, smooth){
+        const target = centerScrollLeft(idx);
         if(smooth && typeof track.scrollBy === 'function'){
-          track.scrollBy({ left: delta, behavior: 'smooth' });
+          track.scrollBy({ left: target - track.scrollLeft, behavior: 'smooth' });
         } else {
-          track.scrollLeft += delta;
+          track.scrollLeft = target;
         }
       }
 
       function updateActive(){
         const s = track.scrollLeft;
-        const i = Math.round(s / step());
+        const i = Math.round((s - centerScrollLeft(START)) / step());
         const idx = Math.min(allCards.length - 1, Math.max(0, i));
         allCards.forEach((c, k) => c.classList.toggle('active', k === idx));
       }
@@ -308,12 +317,13 @@
       // band. All cards are equally spaced, so shifting by whole sets is a
       // pixel-identical jump and never changes the logical card.
       function recenter(){
+        const base = centerScrollLeft(START);  // resting position of card START
         const s = track.scrollLeft;
         const st = step();
-        const i = Math.round(s / st);          // current global card index
-        const rel = i - START;                 // logical offset from originals
+        const i = Math.round((s - base) / st); // current global card index
+        const rel = i - 0;                     // offset from originals (n)
         const span = (SETS_PER_SIDE - 1) * N;  // allowed drift (±1 set)
-        if(rel > span || rel < -span){
+        if(Math.abs(rel) > span){
           const shift = Math.round(rel / N) * N; // whole sets only
           track.scrollLeft = s - shift * st;   // instant, invisible
         }
@@ -325,9 +335,9 @@
         if(animating){ pending += delta; return; } // queue quick successive swipes
         animating = true;
         n += delta;                            // direction preserved, unbounded
-        scrollToCard(n + START, true);
-        const st = step();
-        const target = (n + START) * st;
+        const idx = n + START;
+        const target = centerScrollLeft(idx);  // measured BEFORE scrolling starts
+        scrollToCard(idx, true);
         const t0 = performance.now();
         let lastS = track.scrollLeft;
         let still = 0;
@@ -412,10 +422,12 @@
         clearTimeout(scrollIdle);
         scrollIdle = setTimeout(() => {
           if(animating) return;
-          const s = track.scrollLeft;
-          const i = Math.round(s / step());
-          if(Math.abs(s - i * step()) > 2){
-            n = i - START;                     // adopt wherever we are
+          const base = centerScrollLeft(START);
+          const st = step();
+          const rel = (track.scrollLeft - base) / st;
+          const nearest = Math.round(rel);
+          if(Math.abs(rel - nearest) > 0.02){
+            n = nearest;                       // adopt wherever we are
             scrollToCard(n + START, true);     // finish centering this card
           }
         }, 140);
