@@ -357,6 +357,23 @@
       max-width: 380px;
       max-height: 130px;
     }
+    /* Branding 3: logo tamaño correcto, menos margen superior */
+    .editor.project-branding-3 .section-title.has-logo-title {
+      margin-top: 2.25rem;
+    }
+    .editor.project-branding-3 .project-title-logo {
+      max-width: 480px;
+      max-height: 170px;
+    }
+    /* Branding 4: logo aún más grande, pegado arriba y sin hueco con el texto */
+    .editor.project-branding-4 .section-title.has-logo-title {
+      margin-top: -3.5rem;   /* sube hasta casi la nav: la imagen tiene fondo blanco */
+      margin-bottom: -1.75rem; /* pega el texto de debajo al logo */
+    }
+    .editor.project-branding-4 .project-title-logo {
+      max-width: 1200px;
+      max-height: 420px;
+    }
     .project-intro {
       max-width: 760px;
       margin: 0 auto 3.5rem auto;
@@ -540,6 +557,23 @@
         max-width: 220px;
         max-height: 80px;
       }
+      /* Branding 3 & 4: bigger logos + less top margin on mobile */
+      .editor.project-branding-3 .section-title.has-logo-title,
+      .editor.project-branding-4 .section-title.has-logo-title {
+        margin-top: 3rem;
+      }
+      .editor.project-branding-3 .project-title-logo {
+        max-width: 320px;
+        max-height: 110px;
+      }
+      .editor.project-branding-4 .section-title.has-logo-title {
+        margin-top: -2rem;
+        margin-bottom: -1rem;
+      }
+      .editor.project-branding-4 .project-title-logo {
+        max-width: 100%;
+        max-height: 300px;
+      }
       .project-intro {
         margin-bottom: 2.5rem;
         padding: 0 1.75rem; /* Más margen lateral en texto introductorio */
@@ -556,6 +590,22 @@
       .project-title-logo {
         max-width: 190px;
         max-height: 70px;
+      }
+      /* Branding 3 & 4: bigger logos + less top margin on small phones */
+      .editor.project-branding-3 .section-title.has-logo-title {
+        margin-top: 2.75rem;
+      }
+      .editor.project-branding-3 .project-title-logo {
+        max-width: 280px;
+        max-height: 100px;
+      }
+      .editor.project-branding-4 .section-title.has-logo-title {
+        margin-top: -1.75rem;
+        margin-bottom: -0.75rem;
+      }
+      .editor.project-branding-4 .project-title-logo {
+        max-width: 100%;
+        max-height: 260px;
       }
     }
   </style>
@@ -830,10 +880,16 @@
         'branding-4': { alt: 'Branding 4', title: 'Branding 4 - Candela Ribas', text: 'branding 4' },
       };
       const brandingInfo = brandingTitleMap[project] || brandingTitleMap['branding-2'];
-      // branding-2 uses a logo image as its title instead of text
-      if(project === 'branding-2'){
+      // branding-2/3/4 use a logo image as their title instead of text
+      const brandingLogoMap = {
+        'branding-2': { src: 'https://ik.imagekit.io/5dtde8xj3/image%201.png', alt: 'Branding 2' },
+        'branding-3': { src: 'https://ik.imagekit.io/5dtde8xj3/IMG_3998%201%20_Vectorized_%20(1).png', alt: 'Branding 3' },
+        'branding-4': { src: 'https://ik.imagekit.io/5dtde8xj3/Frame%209%201%20(1).png', alt: 'Branding 4' },
+      };
+      const logoB = brandingLogoMap[project];
+      if(logoB){
         titleEl.classList.add('has-logo-title');
-        titleEl.innerHTML = '<img src="https://ik.imagekit.io/5dtde8xj3/image%201.png" alt="Branding 2" class="project-title-logo" />';
+        titleEl.innerHTML = '<img src="' + logoB.src + '" alt="' + logoB.alt + '" class="project-title-logo" />';
         document.title = brandingInfo.title;
       } else {
         titleEl.textContent = brandingInfo.text;
