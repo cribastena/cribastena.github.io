@@ -788,22 +788,65 @@
       // to change branding info; the ux-ui block above is untouched.
       // ============================================
       const titleEl = document.getElementById('project-title');
+      // branding-1 mirrors the ZAMPO (ux-ui-1) sub-project completely:
+      // same logo title, same intro, same hero/secondary images, same texts.
+      if(project === 'branding-1'){
+        titleEl.classList.add('has-logo-title');
+        titleEl.innerHTML = '<img src="https://ik.imagekit.io/7zyxg26dj/Vector%20(5).png" alt="ZAMPO" class="project-title-logo" />';
+        document.title = 'ZAMPO - Candela Ribas';
+
+        const introElZ = document.getElementById('project-intro');
+        if(introElZ){
+          introElZ.style.display = 'block';
+          introElZ.innerHTML = '<p data-i18n="project.zampo.intro">Este proyecto desarrolla el diseño conceptual y estratégico de ZAMPO, una aplicación móvil gastronómica dirigida a foodies jóvenes y urbanos, cuyo objetivo es transformar la forma en que las personas descubren y viven la gastronomía en el entorno digital.</p>';
+        }
+
+        const showcaseElZ = document.getElementById('zampo-showcase');
+        if(showcaseElZ){
+          showcaseElZ.style.display = 'block';
+          // Same hero image as ux-ui-1
+          const heroImgZ = showcaseElZ.querySelector('.zampo-hero-image .zampo-featured-img');
+          if(heroImgZ){
+            heroImgZ.src = 'https://ik.imagekit.io/7zyxg26dj/Group%20327.png?updatedAt=1792584316010';
+            heroImgZ.alt = 'ZAMPO Overview';
+          }
+          // Same secondary images as ux-ui-1 (defaults — no override needed)
+          const conclusionPZ = showcaseElZ.querySelector('.zampo-conclusion-text p');
+          if(conclusionPZ){ conclusionPZ.removeAttribute('data-i18n'); }
+          const mediaElZ = showcaseElZ.querySelector('.zampo-conclusion-media');
+          if(mediaElZ){ mediaElZ.style.display = ''; }
+        }
+
+        const previewsElZ = document.getElementById('previews');
+        if(previewsElZ){ previewsElZ.style.display = 'none'; }
+
+        if (typeof setLanguage === 'function' && typeof getCurrentLanguage === 'function') {
+          setLanguage(getCurrentLanguage());
+        }
+      } else {
       const brandingTitleMap = {
-        'branding-1': { alt: 'Branding 1', title: 'Branding 1 - Candela Ribas', text: 'branding 1' },
         'branding-2': { alt: 'Branding 2', title: 'Branding 2 - Candela Ribas', text: 'branding 2' },
         'branding-3': { alt: 'Branding 3', title: 'Branding 3 - Candela Ribas', text: 'branding 3' },
+        'branding-4': { alt: 'Branding 4', title: 'Branding 4 - Candela Ribas', text: 'branding 4' },
       };
-      const brandingInfo = brandingTitleMap[project] || brandingTitleMap['branding-1'];
-      titleEl.textContent = brandingInfo.text;
-      document.title = brandingInfo.title;
+      const brandingInfo = brandingTitleMap[project] || brandingTitleMap['branding-2'];
+      // branding-2 uses a logo image as its title instead of text
+      if(project === 'branding-2'){
+        titleEl.classList.add('has-logo-title');
+        titleEl.innerHTML = '<img src="https://ik.imagekit.io/5dtde8xj3/image%201.png" alt="Branding 2" class="project-title-logo" />';
+        document.title = brandingInfo.title;
+      } else {
+        titleEl.textContent = brandingInfo.text;
+        document.title = brandingInfo.title;
+      }
 
       const introElB = document.getElementById('project-intro');
       if(introElB){
         introElB.style.display = 'block';
         const brandingIntroMap = {
-          'branding-1': 'Intro del proyecto branding 1. Sustituye este texto.',
           'branding-2': 'Intro del proyecto branding 2. Sustituye este texto.',
           'branding-3': 'Intro del proyecto branding 3. Sustituye este texto.',
+          'branding-4': 'Intro del proyecto branding 4. Sustituye este texto.',
         };
         introElB.innerHTML = '<p>' + (brandingIntroMap[project] || brandingIntroMap['branding-1']) + '</p>';
       }
@@ -813,9 +856,9 @@
         showcaseElB.style.display = 'block';
         // Hero image placeholder per branding project — replace src with real image
         const brandingHeroMap = {
-          'branding-1': '',
-          'branding-2': '',
+          'branding-2': 'https://ik.imagekit.io/5dtde8xj3/image%201.png',
           'branding-3': '',
+          'branding-4': '',
         };
         const heroImgB = showcaseElB.querySelector('.zampo-hero-image .zampo-featured-img');
         if(heroImgB){
@@ -826,9 +869,9 @@
         }
         // Secondary images placeholders — replace src with real images
         const brandingSecondaryMap = {
-          'branding-1': ['', ''],
           'branding-2': ['', ''],
           'branding-3': ['', ''],
+          'branding-4': ['', ''],
         };
         const secondaryImgsB = showcaseElB.querySelectorAll('.zampo-secondary-images img');
         const secondaryList = brandingSecondaryMap[project] || brandingSecondaryMap['branding-1'];
@@ -840,9 +883,9 @@
         });
         // Branding-specific text columns — replace texts with real info
         const brandingColsMap = {
-          'branding-1': ['Columna 1 branding 1.', 'Columna 2 branding 1.', 'Columna 3 branding 1.'],
           'branding-2': ['Columna 1 branding 2.', 'Columna 2 branding 2.', 'Columna 3 branding 2.'],
           'branding-3': ['Columna 1 branding 3.', 'Columna 2 branding 3.', 'Columna 3 branding 3.'],
+          'branding-4': ['Columna 1 branding 4.', 'Columna 2 branding 4.', 'Columna 3 branding 4.'],
         };
         const colsEl = showcaseElB.querySelector('.zampo-columns');
         if(colsEl){
@@ -852,9 +895,9 @@
         }
         // Branding conclusion — replace text with real conclusion
         const brandingConclusionMap = {
-          'branding-1': 'Conclusión del proyecto branding 1. Sustituye este texto.',
           'branding-2': 'Conclusión del proyecto branding 2. Sustituye este texto.',
           'branding-3': 'Conclusión del proyecto branding 3. Sustituye este texto.',
+          'branding-4': 'Conclusión del proyecto branding 4. Sustituye este texto.',
         };
         const conclusionPB = showcaseElB.querySelector('.zampo-conclusion-text p');
         if(conclusionPB){
@@ -879,6 +922,7 @@
           previewsElB.style.display = 'none';
         }
       }
+      } // end else (non-branding-1 branding sub-projects)
     } else {
       // Show '&' instead of '-' in titles like "videos & animations" / "posters & covers".
       // Bind each word to its following '&' with a non-breaking space so that on

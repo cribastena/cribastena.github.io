@@ -69,13 +69,13 @@
       }
     }
 
-    /* 3 Horizontal square image buttons container */
+    /* 4 Horizontal square image buttons container */
     .branding-options-container {
       width: 100%;
-      max-width: 960px;
+      max-width: 1180px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: clamp(0.75rem, 2.5vw, 2.5rem);
       padding: 0 1rem;
       box-sizing: border-box;
@@ -232,16 +232,19 @@
 
     <h1 class="section-title" data-i18n="title.branding">branding</h1>
 
-    <!-- 3 square options placed horizontally side by side -->
+    <!-- 4 square options placed horizontally side by side -->
     <div class="branding-options-container">
       <a href="project-editor.html?project=branding-1" class="branding-option-card" aria-label="Abrir subapartado 1 de Branding">
         <img src="https://ik.imagekit.io/7zyxg26dj/zampo%20cover.png" alt="Branding Opción 1" loading="eager" />
       </a>
       <a href="project-editor.html?project=branding-2" class="branding-option-card" aria-label="Abrir subapartado 2 de Branding">
-        <img src="https://ik.imagekit.io/7zyxg26dj/monel%20cover.png?updatedAt=1792597032476" alt="Branding Opción 2" loading="eager" />
+        <img src="https://ik.imagekit.io/5dtde8xj3/Frame%2011.png" alt="Branding Opción 2" loading="lazy" />
       </a>
       <a href="project-editor.html?project=branding-3" class="branding-option-card" aria-label="Abrir subapartado 3 de Branding">
-        <img src="https://ik.imagekit.io/7zyxg26dj/desafio%20gourmet%20cover.png?updatedAt=1792597032447" alt="Branding Opción 3" loading="eager" />
+        <img src="https://ik.imagekit.io/5dtde8xj3/Group%201%20(3).png" alt="Branding Opción 3" loading="lazy" />
+      </a>
+      <a href="project-editor.html?project=branding-4" class="branding-option-card" aria-label="Abrir subapartado 4 de Branding">
+        <img src="https://ik.imagekit.io/5dtde8xj3/Frame%209.png" alt="Branding Opción 4" loading="lazy" />
       </a>
     </div>
   </main>
@@ -266,7 +269,7 @@
       if(!originals.length) return;
       if(!window.matchMedia('(max-width: 640px)').matches) return; // desktop untouched
 
-      const N = originals.length;              // 3
+      const N = originals.length;              // number of cards in a set (4)
       const SETS_PER_SIDE = 4;
       // Left clones: build each set in a fragment so the original order
       // (Zampo → Monel → Desafío) is preserved. insertBefore one-by-one
