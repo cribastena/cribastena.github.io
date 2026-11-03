@@ -92,6 +92,9 @@ const TRANSLATIONS = {
     'title.posters-covers': 'posters & covers',
     'title.3d': '3d',
     'title.branding': 'branding',
+    'title.branding-2': 'branding 2',
+    'title.branding-3': 'branding 3',
+    'title.branding-4': 'branding 4',
     'title.ux-ui': 'ux/ui',
     'project.zampo.intro': 'This project develops the conceptual and strategic design of ZAMPO, a gastronomic mobile app aimed at young and urban foodies, whose goal is to transform the way people discover and experience gastronomy in the digital environment.',
     'project.zampo.col1': 'The proposal emerges as a response to the loss of relevance of traditional gastronomic applications, perceived as lacking dynamism, impersonal, and disconnected from new digital consumption habits.',
@@ -99,7 +102,25 @@ const TRANSLATIONS = {
     'project.zampo.col3': 'Drawing from these insights, ZAMPO proposes an experience that merges discovery, gamification, and community through tools such as challenges, roulettes, custom filters, and social recommendations, transforming gastronomic exploration into a more engaging and social journey.',
     'project.zampo.conclusion': 'In conclusion, ZAMPO positions itself as an innovative alternative within the digital gastronomic ecosystem, aligned with the new behaviors and expectations of young users.',
     'project.monel.intro': 'Monel is a financial management app for travelers, designed to help organize and control money during trips. Conceived as an all-in-one solution, it integrates tools such as budget planning, real-time expense tracking, currency conversion, shared expense splitting, and personalized recommendations. Its goal is for users to enjoy their experiences without constantly worrying about money.',
-    'project.desafio.intro': 'Desafío Gourmet is an interactive quiz-style game that tests the user’s culinary knowledge and skills. Through a series of questions and decisions, the player faces different kitchen situations that determine their path and the final outcome.'
+    'project.desafio.intro': 'Desafío Gourmet is an interactive quiz-style game that tests the user’s culinary knowledge and skills. Through a series of questions and decisions, the player faces different kitchen situations that determine their path and the final outcome.',
+    // Branding 2 (Dicrea)
+    'project.dicrea.intro': 'The new identity of Dicrea: the university of design and creativity. A creative ecosystem where learning is experienced in an original, dynamic and professional way.',
+    'project.dicrea.col1.title': 'Naming & tagline.',
+    'project.dicrea.col1.p1': 'Naming – DICREA: A combination of diseño, innovación and creatividad. The two final dots symbolise openness, continuity and the endless possibilities that begin with Dicrea.',
+    'project.dicrea.col1.p2': 'Tagline – “Dicrea tu propia idea”: A playful expression encouraging students to create, experiment and develop their own ideas.',
+    'project.dicrea.col2.title': 'Visual identity.',
+    'project.dicrea.col2.p1': 'Logo & symbols: A distinctive visual system inspired by the letters of the name and its two dots. Each degree has its own symbol, forming a playful face that brings personality and consistency to the identity.',
+    'project.dicrea.col2.p2': 'Graphic language: Bold typography, expressive symbols and playful visual elements create a recognisable and flexible identity. Also combinating vibrant colours that reflects creativity, diversity, youth and innovation.',
+    'project.dicrea.voice': 'The brand voice is inspirational, modern and approachable, combining youthful energy with professional credibility. Dicrea communicates with confidence and enthusiasm, encouraging students to explore new perspectives and challenge their creative limits.',
+    // Branding 3 (BASSA)
+    'project.bassa.intro': 'BASSA is a ready-to-drink cocktail brand inspired by the energy, colours and Mediterranean spirit of Ibiza. Combining local ingredients, refreshing flavours and a playful visual identity, it brings the island’s carefree lifestyle into a vibrant and accessible drinking experience.',
+    // Branding 4 (KineKick)
+    'project.kinekick.intro': 'KineKick is a functional cereal brand designed for active adults who want to boost their energy and well-being from breakfast. Combining whole grains, plant-based proteins, vitamins and superfoods such as maca, ginseng and ashwagandha, it offers a nutritious alternative to traditional sugary cereals without compromising on flavour.',
+    'project.kinekick.flavours': 'Flavours: Cocoa, Mixed Berries or peanut.',
+    'project.kinekick.target': 'Target: Active adults aged 18–45, health-conscious consumers.',
+    'project.kinekick.positioning': 'Positioning: Breakfast alternative for an active lifestyle.',
+    'project.kinekick.values': 'Values: Energy, wellness, sustainability and creativity.',
+    'project.kinekick.personality': 'Personality: Dynamic, bold, playful and full of character.'
   },
   es: {
     // Navegación
@@ -186,13 +207,35 @@ const TRANSLATIONS = {
     'title.posters-covers': 'posters & portadas',
     'title.3d': '3d',
     'title.branding': 'branding',
+    'title.branding-2': 'branding 2',
+    'title.branding-3': 'branding 3',
+    'title.branding-4': 'branding 4',
     'title.ux-ui': 'ux/ui',
     'project.zampo.intro': 'Este proyecto desarrolla el diseño conceptual y estratégico de ZAMPO, una aplicación móvil gastronómica dirigida a foodies jóvenes y urbanos, cuyo objetivo es transformar la forma en que las personas descubren y viven la gastronomía en el entorno digital.',
     'project.zampo.col1': 'La propuesta surge como respuesta a la pérdida de relevancia de las aplicaciones gastronómicas tradicionales, percibidas como poco dinámicas, impersonales y alejadas de los nuevos hábitos de consumo digital.',
     'project.zampo.col2': 'La investigación, basada en encuestas, entrevistas y análisis de la competencia, evidencia una preferencia por experiencias más visuales, sociales y participativas, así como una mayor conexión con plataformas dinámicas como TikTok o Instagram. Los resultados también destacan la importancia de la recomendación entre usuarios y el interés por dinámicas gamificadas aplicadas al descubrimiento gastronómico.',
     'project.zampo.col3': 'A partir de estos hallazgos, ZAMPO propone una experiencia que integra descubrimiento, gamificación y comunidad mediante herramientas como retos, ruletas, filtros personalizados y recomendaciones sociales, convirtiendo la exploración gastronómica en una experiencia más entretenida y social.',
     'project.zampo.conclusion': 'Como conclusión, ZAMPO se posiciona como una alternativa innovadora dentro del ecosistema digital gastronómico, alineada con los nuevos comportamientos y expectativas de los usuarios jóvenes.',
-    'project.monel.intro': 'Monel es una aplicación de gestión financiera para viajeros, diseñada para ayudar a organizar y controlar el dinero durante los viajes. Concebida como una solución todo en uno, integra herramientas como la planificación de presupuestos, el seguimiento de gastos en tiempo real, la conversión de divisas, la división de gastos compartidos y las recomendaciones personalizadas. Su objetivo es que los usuarios disfruten de sus experiencias sin preocuparse constantemente por el dinero.'
+    'project.monel.intro': 'Monel es una aplicación de gestión financiera para viajeros, diseñada para ayudar a organizar y controlar el dinero durante los viajes. Concebida como una solución todo en uno, integra herramientas como la planificación de presupuestos, el seguimiento de gastos en tiempo real, la conversión de divisas, la división de gastos compartidos y las recomendaciones personalizadas. Su objetivo es que los usuarios disfruten de sus experiencias sin preocuparse constantemente por el dinero.',
+    'project.desafio.intro': 'Desafío Gourmet es un juego interactivo en formato test que pone a prueba los conocimientos y las habilidades culinarias del usuario. A través de una serie de preguntas y decisiones, el jugador se enfrenta a diferentes situaciones en la cocina que determinarán su recorrido y el desenlace final.',
+    // Branding 2 (Dicrea)
+    'project.dicrea.intro': 'La nueva identidad de Dicrea: la universidad de diseño y creatividad. Un ecosistema creativo donde el aprendizaje se vive de forma original, dinámica y profesional.',
+    'project.dicrea.col1.title': 'Naming y tagline.',
+    'project.dicrea.col1.p1': 'Naming – DICREA: una combinación de diseño, innovación y creatividad. Los dos puntos finales simbolizan apertura, continuidad y las infinitas posibilidades que empiezan con Dicrea.',
+    'project.dicrea.col1.p2': 'Tagline – “Dicrea tu propia idea”: una expresión lúdica que anima a los estudiantes a crear, experimentar y desarrollar sus propias ideas.',
+    'project.dicrea.col2.title': 'Identidad visual.',
+    'project.dicrea.col2.p1': 'Logotipo y símbolos: un sistema visual distintivo inspirado en las letras del nombre y sus dos puntos. Cada grado tiene su propio símbolo, formando una cara juguetona que aporta personalidad y consistencia a la identidad.',
+    'project.dicrea.col2.p2': 'Lenguaje gráfico: una tipografía audaz, símbolos expresivos y elementos visuales juguetones crean una identidad reconocible y flexible. También combinan colores vibrantes que reflejan creatividad, diversidad, juventud e innovación.',
+    'project.dicrea.voice': 'La voz de marca es inspiradora, moderna y cercana, combinando energía juvenil con credibilidad profesional. Dicrea comunica con confianza y entusiasmo, animando a los estudiantes a explorar nuevas perspectivas y a desafiar sus límites creativos.',
+    // Branding 3 (BASSA)
+    'project.bassa.intro': 'BASSA es una marca de cócteles ready-to-drink inspirada en la energía, los colores y el espíritu mediterráneo de Ibiza. Combinando ingredientes locales, sabores refrescantes y una identidad visual juguetona, traslada el estilo de vida despreocupado de la isla a una experiencia de bebida vibrante y accesible.',
+    // Branding 4 (KineKick)
+    'project.kinekick.intro': 'KineKick es una marca de cereales funcionales diseñada para adultos activos que quieren potenciar su energía y bienestar desde el desayuno. Combinando cereales integrales, proteínas vegetales, vitaminas y superalimentos como maca, ginseng y ashwagandha, ofrece una alternativa nutritiva a los cereales azucarados tradicionales sin renunciar al sabor.',
+    'project.kinekick.flavours': 'Sabores: cacao, frutos rojos o cacahuete.',
+    'project.kinekick.target': 'Público objetivo: adultos activos de 18 a 45 años, consumidores preocupados por su salud.',
+    'project.kinekick.positioning': 'Posicionamiento: alternativa de desayuno para un estilo de vida activo.',
+    'project.kinekick.values': 'Valores: energía, bienestar, sostenibilidad y creatividad.',
+    'project.kinekick.personality': 'Personalidad: dinámica, atrevida, juguetona y llena de carácter.'
   }
 };
 

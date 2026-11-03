@@ -446,6 +446,98 @@
       text-align: left;
       font-weight: 400;
     }
+    /* Column titles in bold (e.g. Dicrea "Naming & tagline") */
+    .zampo-col-title {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #333;
+      margin: 0 0 0.6rem 0;
+      text-align: left;
+    }
+    /* Images inside columns: same width as the column + side margins */
+    .zampo-col-img-wrap {
+      width: 100%;
+      margin-top: 1.25rem;
+      padding: 0 0.5rem;
+      box-sizing: border-box;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .zampo-col-img-wrap:hover {
+      transform: translateY(-4px);
+    }
+    .zampo-col-img-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      background: transparent;
+    }
+    /* Centered text under Dicrea column images */
+    .dicrea-voice {
+      max-width: 880px;
+      margin: 4.5rem auto 3rem auto;
+      padding: 0 1.75rem;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    .dicrea-voice p {
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: #333;
+      margin: 0;
+      font-weight: 400;
+    }
+    /* Masonry photo grid for Dicrea gallery — explicit flex columns, centered,
+       wider than tall overall */
+    .dicrea-masonry {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto 5.5rem auto;
+      padding: 0 1.5rem;
+      box-sizing: border-box;
+    }
+    .dicrea-masonry .masonry-col {
+      flex: 1 1 0;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .dicrea-masonry .masonry-slot {
+      display: block;
+      width: 100%;
+      margin: 0;
+      overflow: hidden;
+      border-radius: 6px;
+      background: #f6f6f6;
+    }
+    .dicrea-masonry .masonry-slot img {
+      width: 100%;
+      height: auto;
+      display: block;
+      cursor: pointer;
+      transition: transform 100ms cubic-bezier(.22,1,.36,1), box-shadow 120ms ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .dicrea-masonry .masonry-slot:hover img {
+        transform: translateY(-4px) scale(1.08);
+        box-shadow: 0 18px 36px rgba(0,0,0,0.18);
+      }
+    }
+    @media (max-width: 800px) {
+      .dicrea-masonry { flex-wrap: wrap; gap: 1.5rem; }
+      .dicrea-masonry .masonry-col { flex: 1 1 45%; }
+    }
+    @media (max-width: 480px) {
+      .dicrea-masonry .masonry-col { flex: 1 1 100%; }
+      .dicrea-voice { margin: 3rem auto 2.5rem auto; }
+    }
     .zampo-secondary-images {
       width: 100%;
       margin: 0 auto;
@@ -720,22 +812,20 @@
         <p data-i18n="project.zampo.col3">A partir de estos hallazgos, ZAMPO propone una experiencia que integra descubrimiento, gamificación y comunidad mediante herramientas como retos, ruletas, filtros personalizados y recomendaciones sociales, convirtiendo la exploración gastronómica en una experiencia más entretenida y social.</p>
       </div>
     </div>
-
-    <div class="zampo-secondary-images">
-      <div class="zampo-image-wrap" title="Clic para ampliar">
-        <img src="https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-10-27%20a%20las%2020.27.54.png" alt="ZAMPO Process" class="zampo-featured-img" />
+    <div class="dicrea-voice" id="dicrea-voice" style="display:none;"></div>
+    <div class="dicrea-masonry" id="dicrea-masonry" style="display:none;"></div>
+    <div class="dicrea-columns" id="dicrea-columns" style="display:none;">
+      <div class="dicrea-text-col">
+        <h3 class="dicrea-col-title">Naming y tagline.</h3>
+        <p>Naming – DICREA: una combinación de diseño, innovación y creatividad. Los dos puntos finales simbolizan apertura, continuidad y las infinitas posibilidades que empiezan con Dicrea.</p>
+        <p>Tagline – “Dicrea tu propia idea”: una expresión lúdica que anima a los estudiantes a crear, experimentar y desarrollar sus propias ideas.</p>
+        <div class="dicrea-col-img-wrap" title="Clic para ampliar"><img src="https://ik.imagekit.io/5dtde8xj3/image%2011.png" alt="Dicrea Naming" loading="lazy" /></div>
       </div>
-      <div class="zampo-image-wrap" title="Clic para ampliar">
-        <img src="https://ik.imagekit.io/7zyxg26dj/Group%20320.png" alt="ZAMPO UI Screens" class="zampo-featured-img" />
-      </div>
-    </div>
-
-    <div class="zampo-conclusion-wrap">
-      <div class="zampo-conclusion-media">
-        <img src="https://ik.imagekit.io/7zyxg26dj/Frame%20(1).png" alt="ZAMPO Icon" class="zampo-conclusion-img" title="Clic para ampliar" />
-      </div>
-      <div class="zampo-conclusion-text">
-        <p data-i18n="project.zampo.conclusion">Como conclusión, ZAMPO se posiciona como una alternativa innovadora dentro del ecosistema digital gastronómico, alineada con los nuevos comportamientos y expectativas de los usuarios jóvenes.</p>
+      <div class="dicrea-text-col">
+        <h3 class="dicrea-col-title">Identidad visual.</h3>
+        <p>Logotipo y símbolos: un sistema visual distintivo inspirado en las letras del nombre y sus dos puntos. Cada grado tiene su propio símbolo, formando una cara juguetona que aporta personalidad y consistencia a la identidad.</p>
+        <p>Lenguaje gráfico: una tipografía audaz, símbolos expresivos y elementos visuales juguetones crean una identidad reconocible y flexible. También combinan colores vibrantes que reflejan creatividad, diversidad, juventud e innovación.</p>
+        <div class="dicrea-col-img-wrap" title="Clic para ampliar"><img src="https://ik.imagekit.io/5dtde8xj3/Group%2026.png" alt="Dicrea Visual identity" loading="lazy" /></div>
       </div>
     </div>
   </div>
@@ -971,10 +1061,20 @@
         introElB.style.display = 'block';
         const brandingIntroMap = {
           'branding-2': 'La nueva identidad de Dicrea: la universidad de diseño y creatividad. Un ecosistema creativo donde el aprendizaje se vive de forma original, dinámica y profesional.',
-          'branding-3': 'BASSA is a ready-to-drink cocktail brand inspired by the energy, colours and Mediterranean spirit of Ibiza. Combining local ingredients, refreshing flavours and a playful visual identity, it brings the island’s carefree lifestyle into a vibrant and accessible drinking experience.',
-          'branding-4': 'KineKick is a functional cereal brand designed for active adults who want to boost their energy and well-being from breakfast. Combining whole grains, plant-based proteins, vitamins and superfoods such as maca, ginseng and ashwagandha, it offers a nutritious alternative to traditional sugary cereals without compromising on flavour.',
+          'branding-3': 'BASSA es una marca de cócteles ready-to-drink inspirada en la energía, los colores y el espíritu mediterráneo de Ibiza. Combinando ingredientes locales, sabores refrescantes y una identidad visual juguetona, traslada el estilo de vida despreocupado de la isla a una experiencia de bebida vibrante y accesible.',
+          'branding-4': 'KineKick es una marca de cereales funcionales diseñada para adultos activos que quieren potenciar su energía y bienestar desde el desayuno. Combinando cereales integrales, proteínas vegetales, vitaminas y superalimentos como maca, ginseng y ashwagandha, ofrece una alternativa nutritiva a los cereales azucarados tradicionales sin renunciar al sabor.',
         };
-        introElB.innerHTML = '<p>' + (brandingIntroMap[project] || brandingIntroMap['branding-1']) + '</p>';
+        const brandingIntroI18n = {
+          'branding-2': 'project.dicrea.intro',
+          'branding-3': 'project.bassa.intro',
+          'branding-4': 'project.kinekick.intro',
+        };
+        const introKey = brandingIntroI18n[project];
+        if(introKey){
+          introElB.innerHTML = '<p data-i18n="' + introKey + '">' + (brandingIntroMap[project] || brandingIntroMap['branding-1']) + '</p>';
+        } else {
+          introElB.innerHTML = '<p>' + (brandingIntroMap[project] || brandingIntroMap['branding-1']) + '</p>';
+        }
       }
 
       const showcaseElB = document.getElementById('zampo-showcase');
@@ -1025,10 +1125,52 @@
           'branding-4': ['Columna 1 branding 4.', 'Columna 2 branding 4.', 'Columna 3 branding 4.'],
         };
         const colsEl = showcaseElB.querySelector('.zampo-columns');
+        // Branding 2 (Dicrea): bilingual columns (ES fallback / EN via data-i18n)
+        const dicreaCol1TitleEs = 'Naming y tagline.';
+        const dicreaCol1TitleEn = 'Naming & tagline.';
+        const dicreaCol1P1Es = 'Naming – DICREA: una combinación de diseño, innovación y creatividad. Los dos puntos finales simbolizan apertura, continuidad y las infinitas posibilidades que empiezan con Dicrea.';
+        const dicreaCol1P1En = 'Naming – DICREA: A combination of diseño, innovación and creatividad. The two final dots symbolise openness, continuity and the endless possibilities that begin with Dicrea.';
+        const dicreaCol1P2Es = 'Tagline – “Dicrea tu propia idea”: una expresión lúdica que anima a los estudiantes a crear, experimentar y desarrollar sus propias ideas.';
+        const dicreaCol1P2En = 'Tagline – “Dicrea tu propia idea”: A playful expression encouraging students to create, experiment and develop their own ideas.';
+        const dicreaCol2TitleEs = 'Identidad visual.';
+        const dicreaCol2TitleEn = 'Visual identity.';
+        const dicreaCol2P1Es = 'Logotipo y símbolos: un sistema visual distintivo inspirado en las letras del nombre y sus dos puntos. Cada grado tiene su propio símbolo, formando una cara juguetona que aporta personalidad y consistencia a la identidad.';
+        const dicreaCol2P1En = 'Logo & symbols: A distinctive visual system inspired by the letters of the name and its two dots. Each degree has its own symbol, forming a playful face that brings personality and consistency to the identity.';
+        const dicreaCol2P2Es = 'Lenguaje gráfico: una tipografía audaz, símbolos expresivos y elementos visuales juguetones crean una identidad reconocible y flexible. También combinan colores vibrantes que reflejan creatividad, diversidad, juventud e innovación.';
+        const dicreaCol2P2En = 'Graphic language: Bold typography, expressive symbols and playful visual elements create a recognisable and flexible identity. Also combinating vibrant colours that reflects creativity, diversity, youth and innovation.';
+        const dicreaIsEn = typeof getCurrentLanguage === 'function' && getCurrentLanguage() === 'en';
+        const dicreaC = dicreaIsEn ? {
+          t1: dicreaCol1TitleEn, p1a: dicreaCol1P1En, p1b: dicreaCol1P2En,
+          t2: dicreaCol2TitleEn, p2a: dicreaCol2P1En, p2b: dicreaCol2P2En
+        } : {
+          t1: dicreaCol1TitleEs, p1a: dicreaCol1P1Es, p1b: dicreaCol1P2Es,
+          t2: dicreaCol2TitleEs, p2a: dicreaCol2P1Es, p2b: dicreaCol2P2Es
+        };
+        const brandingColsHTMLMap = {
+          'branding-2':
+            '<div class="zampo-col">' +
+              '<h3 class="zampo-col-title" data-i18n="project.dicrea.col1.title">' + dicreaC.t1 + '</h3>' +
+              '<p data-i18n="project.dicrea.col1.p1">' + dicreaC.p1a + '</p>' +
+              '<p data-i18n="project.dicrea.col1.p2">' + dicreaC.p1b + '</p>' +
+              '<div class="zampo-col-img-wrap" title="Clic para ampliar"><img src="https://ik.imagekit.io/5dtde8xj3/image%2011.png" alt="Dicrea Naming" /></div>' +
+            '</div>' +
+            '<div class="zampo-col zampo-col-wide">' +
+              '<h3 class="zampo-col-title" data-i18n="project.dicrea.col2.title">' + dicreaC.t2 + '</h3>' +
+              '<p data-i18n="project.dicrea.col2.p1">' + dicreaC.p2a + '</p>' +
+              '<p data-i18n="project.dicrea.col2.p2">' + dicreaC.p2b + '</p>' +
+              '<div class="zampo-col-img-wrap" title="Clic para ampliar"><img src="https://ik.imagekit.io/5dtde8xj3/Group%2026.png" alt="Dicrea Visual identity" /></div>' +
+            '</div>'
+        };
         if(colsEl){
-          const cols = brandingColsMap[project] || brandingColsMap['branding-1'];
-          colsEl.innerHTML = cols.map(t => '<div class="zampo-col"><p>' + t + '</p></div>').join('');
-          colsEl.style.gridTemplateColumns = 'repeat(' + cols.length + ', 1fr)';
+          if(brandingColsHTMLMap[project]){
+            // Columna 2 ocupa el ancho de las columnas 2 y 3 (ratio 1:2)
+            colsEl.innerHTML = brandingColsHTMLMap[project];
+            colsEl.style.gridTemplateColumns = '1fr 2fr';
+          } else {
+            const cols = brandingColsMap[project] || brandingColsMap['branding-1'];
+            colsEl.innerHTML = cols.map(t => '<div class="zampo-col"><p>' + t + '</p></div>').join('');
+            colsEl.style.gridTemplateColumns = 'repeat(' + cols.length + ', 1fr)';
+          }
         }
         // Branding conclusion — replace text with real conclusion
         const brandingConclusionMap = {
@@ -1057,6 +1199,66 @@
         const previewsElB = document.getElementById('previews');
         if(previewsElB){
           previewsElB.style.display = 'none';
+        }
+
+        // Branding 2 (Dicrea): centered brand-voice text + masonry photo grid
+        const dicreaVoiceEl = document.getElementById('dicrea-voice');
+        const dicreaMasonryEl = document.getElementById('dicrea-masonry');
+        // Dicrea brand-voice texts (ES fallback / EN translation, applied via setLanguage)
+        const dicreaVoiceEs = 'La voz de marca es inspiradora, moderna y cercana, combinando energía juvenil con credibilidad profesional. Dicrea comunica con confianza y entusiasmo, animando a los estudiantes a explorar nuevas perspectivas y a desafiar sus límites creativos.';
+        const dicreaVoiceEn = 'The brand voice is inspirational, modern and approachable, combining youthful energy with professional credibility. Dicrea communicates with confidence and enthusiasm, encouraging students to explore new perspectives and challenge their creative limits.';
+        const dicreaVoiceText = (typeof getCurrentLanguage === 'function' && getCurrentLanguage() === 'en') ? dicreaVoiceEn : dicreaVoiceEs;
+        if(dicreaVoiceEl){
+          dicreaVoiceEl.innerHTML = '<p>' + dicreaVoiceText + '</p>';
+        }
+        // Ordered to balance visual weight: landscape (wide) images predominate,
+        // portraits are interleaved so the grid reads wider than tall.
+        const dicreaMasonryCols = [
+          [ // Columna 1 (izquierda)
+            'https://ik.imagekit.io/5dtde8xj3/IMG_4525%202.png',   // landscape 1810x1354
+            'https://ik.imagekit.io/5dtde8xj3/Iphone%2014%20-%201%201.png', // portrait 664x1390 (reducida)
+            'https://ik.imagekit.io/5dtde8xj3/IMG_4527%201.png'    // landscape 1608x1276
+          ],
+          [ // Columna 2 (centro)
+            'https://ik.imagekit.io/5dtde8xj3/pen%201.png',        // wide 3106x1738
+            'https://ik.imagekit.io/5dtde8xj3/Mockup%202.png'      // portrait 1312x1582
+          ],
+          [ // Columna 3 (derecha)
+            'https://ik.imagekit.io/5dtde8xj3/IMG_4541%203.png',   // landscape 2082x1304
+            'https://ik.imagekit.io/5dtde8xj3/IMG_4534%201.png'    // portrait 1172x1454
+          ]
+        ];
+        if(project === 'branding-2'){
+          if(dicreaVoiceEl){ dicreaVoiceEl.style.display = 'block'; }
+          if(dicreaMasonryEl){
+            dicreaMasonryEl.innerHTML = dicreaMasonryCols
+              .map(colImgs => '<div class="masonry-col">' +
+                colImgs.map(src => '<div class="masonry-slot"><img src="' + src + '" alt="Dicrea gallery" loading="lazy" /></div>').join('') +
+              '</div>')
+              .join('');
+            // La imagen vertical del iPhone es muy grande: limita su ancho dentro de su slot
+            const iphoneSlot = dicreaMasonryEl.querySelector('.masonry-slot img[src*="Iphone%2014"]');
+            if(iphoneSlot){
+              iphoneSlot.style.width = '55%';
+              iphoneSlot.style.margin = '0 auto';
+              iphoneSlot.closest('.masonry-slot').style.background = 'transparent';
+            }
+            dicreaMasonryEl.style.display = 'flex';
+            // click-to-enlarge for masonry images
+            dicreaMasonryEl.querySelectorAll('.masonry-slot img').forEach((img) => {
+              img.tabIndex = 0;
+              img.addEventListener('click', () => openImageModal(img));
+              img.addEventListener('keydown', (e) => {
+                if(e.key === 'Enter' || e.key === ' '){
+                  e.preventDefault();
+                  openImageModal(img);
+                }
+              });
+            });
+          }
+        } else {
+          if(dicreaVoiceEl){ dicreaVoiceEl.style.display = 'none'; }
+          if(dicreaMasonryEl){ dicreaMasonryEl.style.display = 'none'; }
         }
       }
       } // end else (non-branding-1 branding sub-projects)
@@ -1628,6 +1830,18 @@
       if(e.key === 'Enter' || e.key === ' '){
         e.preventDefault();
         openImageModal(zampoImg);
+      }
+    });
+  });
+
+  // Enable click-to-enlarge modal for images inside text columns (e.g. Dicrea)
+  document.querySelectorAll('.zampo-col-img-wrap img').forEach((colImg) => {
+    colImg.tabIndex = 0;
+    colImg.addEventListener('click', () => openImageModal(colImg));
+    colImg.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        openImageModal(colImg);
       }
     });
   });
