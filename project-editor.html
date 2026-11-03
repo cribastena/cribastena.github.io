@@ -583,6 +583,64 @@
         line-height: 1.55;
       }
     }
+    /* Branding 4 (KineKick): hero image on left half, spec text on right half */
+    .kinekick-split {
+      display: none;
+      width: 100%;
+      max-width: 1150px;
+      margin: 0 auto 4.5rem auto;
+      padding: 0 1.5rem;
+      box-sizing: border-box;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 4vw, 3.5rem);
+      align-items: center;
+    }
+    .kinekick-split.kinekick-split-on {
+      display: grid;
+    }
+    .kinekick-split .kinekick-image-wrap {
+      width: 100%;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .kinekick-split .kinekick-image-wrap:hover {
+      transform: translateY(-4px);
+    }
+    .kinekick-split .kinekick-image-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      background: transparent;
+    }
+    .kinekick-split .kinekick-specs p {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: #333;
+      margin: 0 0 0.9rem 0;
+      text-align: left;
+      font-weight: 400;
+    }
+    .kinekick-split .kinekick-specs p:last-child {
+      margin-bottom: 0;
+    }
+    @media (max-width: 768px) {
+      .kinekick-split.kinekick-split-on {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+        margin-bottom: 3.5rem;
+        padding: 0 1.75rem;
+      }
+      .kinekick-split .kinekick-image-wrap {
+        max-width: 88%;
+        margin: 0 auto;
+      }
+      .kinekick-split .kinekick-specs p {
+        font-size: 0.92rem;
+        line-height: 1.6;
+      }
+    }
     @media (max-width: 480px) {
       .section-title.has-logo-title {
         margin-top: 4.8rem;
@@ -636,6 +694,18 @@
   <div id="project-intro" class="project-intro" style="display:none;"></div>
 
   <div id="zampo-showcase" class="zampo-showcase" style="display:none;">
+    <div id="kinekick-split" class="kinekick-split">
+      <div class="kinekick-image-wrap" title="Clic para ampliar">
+        <img src="https://ik.imagekit.io/5dtde8xj3/Captura%20de%20pantalla%202026-11-03%20a%20las%2011.03.58%201.png" alt="KineKick Detail 1" />
+      </div>
+      <div class="kinekick-specs">
+        <p>Flavours: Cocoa, Mixed Berries or peanut.</p>
+        <p>Target: Active adults aged 18–45,  health-conscious consumers.</p>
+        <p>Positioning: Breakfast alternative for an active lifestyle.</p>
+        <p>Values: Energy, wellness, sustainability and creativity.</p>
+        <p>Personality: Dynamic, bold, playful and full of character.</p>
+      </div>
+    </div>
     <div class="zampo-image-wrap zampo-hero-image" title="Clic para ampliar">
       <img src="https://ik.imagekit.io/7zyxg26dj/Group%20327.png?updatedAt=1792584316010" alt="ZAMPO Overview" class="zampo-featured-img" />
     </div>
@@ -900,9 +970,9 @@
       if(introElB){
         introElB.style.display = 'block';
         const brandingIntroMap = {
-          'branding-2': 'Intro del proyecto branding 2. Sustituye este texto.',
+          'branding-2': 'La nueva identidad de Dicrea: la universidad de diseño y creatividad. Un ecosistema creativo donde el aprendizaje se vive de forma original, dinámica y profesional.',
           'branding-3': 'BASSA is a ready-to-drink cocktail brand inspired by the energy, colours and Mediterranean spirit of Ibiza. Combining local ingredients, refreshing flavours and a playful visual identity, it brings the island’s carefree lifestyle into a vibrant and accessible drinking experience.',
-          'branding-4': 'Intro del proyecto branding 4. Sustituye este texto.',
+          'branding-4': 'KineKick is a functional cereal brand designed for active adults who want to boost their energy and well-being from breakfast. Combining whole grains, plant-based proteins, vitamins and superfoods such as maca, ginseng and ashwagandha, it offers a nutritious alternative to traditional sugary cereals without compromising on flavour.',
         };
         introElB.innerHTML = '<p>' + (brandingIntroMap[project] || brandingIntroMap['branding-1']) + '</p>';
       }
@@ -912,9 +982,9 @@
         showcaseElB.style.display = 'block';
         // Hero image placeholder per branding project — replace src with real image
         const brandingHeroMap = {
-          'branding-2': 'https://ik.imagekit.io/5dtde8xj3/image%201.png',
+          'branding-2': 'https://ik.imagekit.io/5dtde8xj3/IMG_6218%201.png?updatedAt=1793625540790',
           'branding-3': 'https://ik.imagekit.io/5dtde8xj3/Captura%20de%20pantalla%202026-11-02%20a%20las%2014.01.57%201.png',
-          'branding-4': '',
+          'branding-4': 'https://ik.imagekit.io/5dtde8xj3/Captura%20de%20pantalla%202026-11-03%20a%20las%2011.03.58%201.png',
         };
         const heroImgB = showcaseElB.querySelector('.zampo-hero-image .zampo-featured-img');
         if(heroImgB){
@@ -922,6 +992,17 @@
             heroImgB.src = brandingHeroMap[project];
           }
           heroImgB.alt = brandingInfo.alt + ' Overview';
+        }
+        // Branding 4 (KineKick): hide the full-width hero and show the
+        // split layout (image left half / spec text right half) instead.
+        const heroWrapB = showcaseElB.querySelector('.zampo-hero-image');
+        const kinekickSplit = document.getElementById('kinekick-split');
+        if(project === 'branding-4'){
+          if(heroWrapB){ heroWrapB.style.display = 'none'; }
+          if(kinekickSplit){ kinekickSplit.classList.add('kinekick-split-on'); }
+        } else if(kinekickSplit){
+          kinekickSplit.classList.remove('kinekick-split-on');
+          if(heroWrapB){ heroWrapB.style.display = ''; }
         }
         // Secondary images placeholders — replace src with real images
         const brandingSecondaryMap = {
