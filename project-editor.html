@@ -474,6 +474,19 @@
       object-fit: contain;
       background: transparent;
     }
+    /* KineKick (branding-4): image occupies the full right column */
+    .editor.project-branding-4 .zampo-columns {
+      max-width: 1200px;
+    }
+    .kinekick-col-img {
+      display: flex;
+      align-items: center;
+    }
+    .kinekick-col-img .zampo-col-img-wrap {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
     /* Centered text under Dicrea column images */
     .dicrea-voice {
       max-width: 880px;
@@ -791,11 +804,11 @@
         <img src="https://ik.imagekit.io/5dtde8xj3/Captura%20de%20pantalla%202026-11-03%20a%20las%2011.03.58%201.png" alt="KineKick Detail 1" />
       </div>
       <div class="kinekick-specs">
-        <p>Flavours: Cocoa, Mixed Berries or peanut.</p>
-        <p>Target: Active adults aged 18–45,  health-conscious consumers.</p>
-        <p>Positioning: Breakfast alternative for an active lifestyle.</p>
-        <p>Values: Energy, wellness, sustainability and creativity.</p>
-        <p>Personality: Dynamic, bold, playful and full of character.</p>
+        <p><strong>Flavours:</strong> Cocoa, Mixed Berries or peanut.</p>
+        <p><strong>Target:</strong> Active adults aged 18–45,  health-conscious consumers.</p>
+        <p><strong>Positioning:</strong> Breakfast alternative for an active lifestyle.</p>
+        <p><strong>Values:</strong> Energy, wellness, sustainability and creativity.</p>
+        <p><strong>Personality:</strong> Dynamic, bold, playful and full of character.</p>
       </div>
     </div>
     <div class="zampo-image-wrap zampo-hero-image" title="Clic para ampliar">
@@ -1159,10 +1172,25 @@
               '<p data-i18n="project.dicrea.col2.p1">' + dicreaC.p2a + '</p>' +
               '<p data-i18n="project.dicrea.col2.p2">' + dicreaC.p2b + '</p>' +
               '<div class="zampo-col-img-wrap" title="Clic para ampliar"><img src="https://ik.imagekit.io/5dtde8xj3/Group%2026.png" alt="Dicrea Visual identity" /></div>' +
+            '</div>',
+          // Branding 4 (KineKick): Naming & tagline a la izquierda, imagen a la derecha (mitad/mitad)
+          'branding-4':
+            '<div class="zampo-col">' +
+              '<h3 class="zampo-col-title">Naming & tagline</h3>' +
+              '<p>Naming – KineKick: A combination of Kinetic and Quick, inspired by movement, dynamism and an active lifestyle.</p>' +
+              '<p>Tagline – “Feel the Kick”: A short, energetic statement that communicates the brand’s purpose: bringing an extra boost to everyday routines.</p>' +
+            '</div>' +
+            '<div class="zampo-col kinekick-col-img">' +
+              '<div class="zampo-col-img-wrap" title="Clic para ampliar"><img src="https://ik.imagekit.io/5dtde8xj3/Captura%20de%20pantalla%202026-11-03%20a%20las%2013.23.59%201.png" alt="KineKick Naming" loading="lazy" /></div>' +
             '</div>'
         };
         if(colsEl){
-          if(brandingColsHTMLMap[project]){
+          if(project === 'branding-4'){
+            // KineKick: texto a la izquierda (mitad) + imagen a la derecha (mitad)
+            colsEl.innerHTML = brandingColsHTMLMap['branding-4'];
+            colsEl.style.gridTemplateColumns = '1fr 1fr';
+            colsEl.style.alignItems = 'center';
+          } else if(brandingColsHTMLMap[project]){
             // Columna 2 ocupa el ancho de las columnas 2 y 3 (ratio 1:2)
             colsEl.innerHTML = brandingColsHTMLMap[project];
             colsEl.style.gridTemplateColumns = '1fr 2fr';
