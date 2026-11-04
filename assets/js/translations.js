@@ -114,10 +114,14 @@ const TRANSLATIONS = {
     'project.dicrea.voice': 'The brand voice is inspirational, modern and approachable, combining youthful energy with professional credibility. Dicrea communicates with confidence and enthusiasm, encouraging students to explore new perspectives and challenge their creative limits.',
     // Branding 3 (BASSA)
     'project.bassa.intro': 'BASSA is a ready-to-drink cocktail brand inspired by the energy, colours and Mediterranean spirit of Ibiza. Combining local ingredients, refreshing flavours and a playful visual identity, it brings the island’s carefree lifestyle into a vibrant and accessible drinking experience.',
+    'project.bassa.voice': 'BASSA communicates through an informal, friendly and playful tone of voice that reflects the brand’s youthful personality. Its communication is spontaneous, approachable and full of energy, encouraging people to connect, celebrate and enjoy the little moments.',
+    'project.bassa.merch': 'The brand experience also extends beyond the drink itself. Inspired by Ibiza’s beach culture and summer lifestyle, BASSA incorporates a collection of branded merchandise, including tote bags, beach towels and reusable glasses. These elements strengthen the brand’s identity across different touchpoints, turning it into a lifestyle concept that people can enjoy, share and take with them beyond the product.',
+    'project.bassa.sust': 'Sustainability is integrated into the brand through a conscious approach to both product and packaging. The use of locally sourced ingredients celebrates the flavours and identity of the Mediterranean, while recyclable packaging helps reduce the environmental impact of the product.',
     // Branding 4 (KineKick)
     'project.kinekick.intro': 'KineKick is a functional cereal brand designed for active adults who want to boost their energy and well-being from breakfast. Combining whole grains, plant-based proteins, vitamins and superfoods such as maca, ginseng and ashwagandha, it offers a nutritious alternative to traditional sugary cereals without compromising on flavour.',
+    'project.kinekick.voice': 'The brand personality is informal, confident and humorous. KineKick speaks to a young, active audience through playful communication and colourful, eye-catching designs that differentiate each flavour and stand out on the shelves.',
     'project.kinekick.flavours': 'Flavours: Cocoa, Mixed Berries or peanut.',
-    'project.kinekick.target': 'Target: Active adults aged 18–45, health-conscious consumers.',
+    'project.kinekick.target': 'Target: Active adults aged 18–45,  health-conscious consumers.',
     'project.kinekick.positioning': 'Positioning: Breakfast alternative for an active lifestyle.',
     'project.kinekick.values': 'Values: Energy, wellness, sustainability and creativity.',
     'project.kinekick.personality': 'Personality: Dynamic, bold, playful and full of character.'
@@ -229,8 +233,12 @@ const TRANSLATIONS = {
     'project.dicrea.voice': 'La voz de marca es inspiradora, moderna y cercana, combinando energía juvenil con credibilidad profesional. Dicrea comunica con confianza y entusiasmo, animando a los estudiantes a explorar nuevas perspectivas y a desafiar sus límites creativos.',
     // Branding 3 (BASSA)
     'project.bassa.intro': 'BASSA es una marca de cócteles ready-to-drink inspirada en la energía, los colores y el espíritu mediterráneo de Ibiza. Combinando ingredientes locales, sabores refrescantes y una identidad visual juguetona, traslada el estilo de vida despreocupado de la isla a una experiencia de bebida vibrante y accesible.',
+    'project.bassa.voice': 'BASSA comunica a través de un tono informal, cercano y juguetón que refleja la personalidad juvenil de la marca. Su comunicación es espontánea, accesible y llena de energía, animando a la gente a conectar, celebrar y disfrutar de los pequeños momentos.',
+    'project.bassa.merch': 'La experiencia de marca también va más allá de la propia bebida. Inspirada en la cultura de playa y el estilo de vida veraniego de Ibiza, BASSA incorpora una colección de merchandising de marca, incluyendo tote bags, toallas de playa y vasos reutilizables. Estos elementos refuerzan la identidad de la marca en diferentes puntos de contacto, convirtiéndola en un concepto de estilo de vida que la gente puede disfrutar, compartir y llevarse más allá del producto.',
+    'project.bassa.sust': 'La sostenibilidad está integrada en la marca mediante un enfoque consciente tanto del producto como del packaging. El uso de ingredientes de proximidad celebra los sabores y la identidad del Mediterráneo, mientras que el packaging reciclable ayuda a reducir el impacto ambiental del producto.',
     // Branding 4 (KineKick)
     'project.kinekick.intro': 'KineKick es una marca de cereales funcionales diseñada para adultos activos que quieren potenciar su energía y bienestar desde el desayuno. Combinando cereales integrales, proteínas vegetales, vitaminas y superalimentos como maca, ginseng y ashwagandha, ofrece una alternativa nutritiva a los cereales azucarados tradicionales sin renunciar al sabor.',
+    'project.kinekick.voice': 'La personalidad de la marca es informal, segura de sí misma y con humor. KineKick se dirige a un público joven y activo a través de una comunicación juguetona y diseños coloridos y llamativos que diferencian cada sabor y destacan en las estanterías.',
     'project.kinekick.flavours': 'Sabores: cacao, frutos rojos o cacahuete.',
     'project.kinekick.target': 'Público objetivo: adultos activos de 18 a 45 años, consumidores preocupados por su salud.',
     'project.kinekick.positioning': 'Posicionamiento: alternativa de desayuno para un estilo de vida activo.',
