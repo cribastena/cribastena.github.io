@@ -889,6 +889,10 @@
       margin: 0 auto 5rem auto;
     }
     .bassa-carousel.bassa-on { display: flex; }
+    /* Flechas centradas verticalmente respecto a la imagen visible */
+    .bassa-carousel .kinekick-carousel-btn {
+      align-self: center;
+    }
 
     /* KineKick (branding-4): visual identity image + brand voice + carousel */
 
@@ -1134,11 +1138,7 @@
     <div class="bassa-voice" id="bassa-voice">
       <p>BASSA communicates through an informal, friendly and playful tone of voice that reflects the brand's youthful personality. Its communication is spontaneous, approachable and full of energy, encouraging people to connect, celebrate and enjoy the little moments.</p>
     </div>
-    <!-- BASSA: 3D mockup (autoplay + loop) -->
-    <div class="bassa-media" id="bassa-media">
-      <img src="https://ik.imagekit.io/7zyxg26dj/Soda%20Can%20With%20Different%20Label%203D%20Animated%20Mockup.GIF?updatedAt=1767701033871" alt="BASSA 3D animated mockup" loading="lazy" />
-    </div>
-    <!-- BASSA: merchandising -->
+    <!-- BASSA: merchandising (el GIF mockup ahora vive dentro del masonry, entre los dos textos) -->
     <div class="bassa-text" id="bassa-text-merch">
       <p>The brand experience also extends beyond the drink itself. Inspired by Ibiza's beach culture and summer lifestyle, BASSA incorporates a collection of branded merchandise, including tote bags, beach towels and reusable glasses. These elements strengthen the brand's identity across different touchpoints, turning it into a lifestyle concept that people can enjoy, share and take with them beyond the product.</p>
     </div>
@@ -1500,19 +1500,20 @@
         if(isBassa && bassaMasonry && !bassaMasonry.dataset.filled){
           bassaMasonry.dataset.filled = '1';
           bassaMasonry.innerHTML = [
+            'https://ik.imagekit.io/7zyxg26dj/Soda%20Can%20With%20Different%20Label%203D%20Animated%20Mockup.GIF?updatedAt=1767701033871',
             'https://ik.imagekit.io/7zyxg26dj/IMG_4172.jpg?updatedAt=1767868980669',
             'https://ik.imagekit.io/7zyxg26dj/IMG_4109.PNG?updatedAt=1767872515128',
             'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.37.11.png?updatedAt=1767981059252',
             'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.36.53.png?updatedAt=1767981061849',
-            'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.58.35.png?updatedAt=1767981554378'
+            'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.58.35.png?updatedAt=1767981554378',
+            'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2019.28.50.png?updatedAt=1767983836581',
+            'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.38.40.png?updatedAt=1767981064488'
           ].map(src => '<div class="masonry-slot"><img src="' + src + '" alt="BASSA gallery" loading="lazy" /></div>').join('');
         }
         // Carrusel infinito BASSA: rellenar una sola vez (6 imágenes, clones incluidos)
         if(isBassa && bassaCarousel && !bassaCarousel.dataset.filled){
           bassaCarousel.dataset.filled = '1';
           const bassaSlides = [
-            'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.39.24.png?updatedAt=1767981064557',
-            'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.38.40.png?updatedAt=1767981064488',
             'https://ik.imagekit.io/5dtde8xj3/IMG_4022.PNG?updatedAt=1793541302600',
             'https://ik.imagekit.io/5dtde8xj3/IMG_4025.PNG?updatedAt=1793541302610',
             'https://ik.imagekit.io/5dtde8xj3/IMG_4021%202.PNG?updatedAt=1793541302527',
