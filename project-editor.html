@@ -730,6 +730,175 @@
     .kinekick-split .kinekick-specs p:last-child {
       margin-bottom: 0;
     }
+    /* BASSA (branding-3): full-width horizontal photo banner */
+    .bassa-banner {
+      display: none;
+      width: 100%;
+      margin: 0 auto 5rem auto;
+    }
+    .bassa-banner.bassa-banner-on {
+      display: flex;
+      flex-wrap: nowrap;          /* nunca se parte en varias filas */
+      align-items: stretch;
+      /* Full-bleed: de un lado al otro de la pantalla, sin márgenes */
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+    }
+    .bassa-banner-track {
+      display: flex;
+      flex-wrap: nowrap;
+      width: 100%;
+    }
+    /* Los clones (con alt="") solo existen para el bucle móvil: ocultos en ordenador */
+    .bassa-banner-track img[alt=""] {
+      display: none;
+    }
+    .bassa-banner-track img {
+      flex: 0 0 12.5%;            /* 8 fotos → 1/8 del ancho cada una */
+      min-width: 0;
+      aspect-ratio: 3 / 4;        /* ratio rectangular consistente */
+      height: auto;
+      object-fit: cover;          /* llena su espacio sin distorsión */
+      display: block;
+      margin: 0;
+      border: 0;
+    }
+    /* ---- Móvil: carrusel automático en bucle hacia la izquierda (3 visibles) ---- */
+    @media (max-width: 640px) {
+      /* Rompe el contenedor del showcase para ir de borde a borde */
+      .bassa-banner.bassa-banner-on {
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
+        margin-bottom: 4rem;
+        overflow: hidden;
+      }
+      .bassa-banner-track {
+        width: max-content;
+        animation: bassa-marquee 24s linear infinite;
+      }
+      .bassa-banner-track img {
+        flex: 0 0 33.3334%;       /* 3 fotos visibles por pantalla */
+        aspect-ratio: 4 / 5;
+      }
+      /* En móvil los clones SÍ se muestran (necesarios para el bucle) */
+      .bassa-banner-track img[alt=""] {
+        display: block;
+      }
+      /* Pausa al tocar la tira */
+      .bassa-banner:hover .bassa-banner-track,
+      .bassa-banner:active .bassa-banner-track {
+        animation-play-state: paused;
+      }
+    }
+    @keyframes bassa-marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); } /* recorre el set original (los clones repiten después) */
+    }
+
+    /* KineKick (branding-4): visual identity image + brand voice + carousel */
+
+    /* KineKick (branding-4): visual identity image + brand voice + carousel */
+    .kinekick-visual {
+      display: none;
+      width: 100%;
+      max-width: 1150px;
+      margin: 0 auto 5.5rem auto;
+      padding: 0 1.5rem;
+      box-sizing: border-box;
+    }
+    .kinekick-visual.kinekick-visual-on {
+      display: block;
+    }
+    .kinekick-visual-img-wrap {
+      width: 100%;
+      max-width: 1050px;
+      margin: 0 auto;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .kinekick-visual-img-wrap:hover {
+      transform: translateY(-4px);
+    }
+    .kinekick-visual-img-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      background: transparent;
+    }
+    .kinekick-voice {
+      max-width: 880px;
+      margin: 4.5rem auto 3rem auto;
+      padding: 0 1.75rem;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    .kinekick-voice p {
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: #333;
+      margin: 0;
+      font-weight: 400;
+    }
+    /* Infinite carousel (one image at a time, arrows left/right) */
+    .kinekick-carousel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(1rem, 3vw, 2rem);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .kinekick-carousel-btn {
+      flex: 0 0 auto;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      background: #fff;
+      color: #333;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+    }
+    .kinekick-carousel-btn:hover {
+      background: #f0f0ee;
+      transform: scale(1.06);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    }
+    .kinekick-carousel-btn:active {
+      transform: scale(0.96);
+    }
+    .kinekick-carousel-viewport {
+      flex: 1 1 auto;
+      min-width: 0;
+      overflow: hidden;
+      border-radius: 6px;
+    }
+    .kinekick-carousel-track {
+      display: flex;
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform;
+    }
+    .kinekick-carousel-track .kinekick-slide {
+      flex: 0 0 100%;
+      min-width: 0;
+    }
+    .kinekick-carousel-track .kinekick-slide img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      background: transparent;
+    }
+    @media (max-width: 768px) {
+      .kinekick-visual { margin-bottom: 3.5rem; padding: 0 1.75rem; }
+      .kinekick-voice { margin: 3rem auto 2.5rem auto; }
+      .kinekick-voice p { font-size: 0.95rem; line-height: 1.55; }
+    }
     @media (max-width: 768px) {
       .kinekick-split.kinekick-split-on {
         grid-template-columns: 1fr;
@@ -825,8 +994,46 @@
         <p data-i18n="project.zampo.col3">A partir de estos hallazgos, ZAMPO propone una experiencia que integra descubrimiento, gamificación y comunidad mediante herramientas como retos, ruletas, filtros personalizados y recomendaciones sociales, convirtiendo la exploración gastronómica en una experiencia más entretenida y social.</p>
       </div>
     </div>
+    <div class="zampo-secondary-images" id="zampo-secondary">
+      <div class="zampo-image-wrap" title="Clic para ampliar">
+        <img src="https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-10-27%20a%20las%2020.27.54.png" alt="ZAMPO Process" class="zampo-featured-img" />
+      </div>
+      <div class="zampo-image-wrap" title="Clic para ampliar">
+        <img src="https://ik.imagekit.io/7zyxg26dj/Group%20320.png" alt="ZAMPO UI Screens" class="zampo-featured-img" />
+      </div>
+    </div>
+    <div class="zampo-conclusion-wrap" id="zampo-conclusion">
+      <div class="zampo-conclusion-media">
+        <img src="https://ik.imagekit.io/7zyxg26dj/Frame%20(1).png" alt="ZAMPO Icon" class="zampo-conclusion-img" title="Clic para ampliar" />
+      </div>
+      <div class="zampo-conclusion-text">
+        <p data-i18n="project.zampo.conclusion">Como conclusión, ZAMPO se posiciona como una alternativa innovadora dentro del ecosistema digital gastronómico, alineada con los nuevos comportamientos y expectativas de los usuarios jóvenes.</p>
+      </div>
+    </div>
     <div class="dicrea-voice" id="dicrea-voice" style="display:none;"></div>
     <div class="dicrea-masonry" id="dicrea-masonry" style="display:none;"></div>
+    <!-- BASSA (branding-3): full-width horizontal photo banner -->
+    <div class="bassa-banner" id="bassa-banner">
+      <div class="bassa-banner-track">
+        <img src="https://ik.imagekit.io/7zyxg26dj/foto1.jpg" alt="BASSA 1" loading="lazy" />
+        <img src="https://ik.imagekit.io/7zyxg26dj/foto2.jpg" alt="BASSA 2" loading="lazy" />
+        <img src="https://ik.imagekit.io/7zyxg26dj/foto3.jpg" alt="BASSA 3" loading="lazy" />
+        <img src="https://ik.imagekit.io/7zyxg26dj/foto4.jpg" alt="BASSA 4" loading="lazy" />
+        <img src="https://ik.imagekit.io/7zyxg26dj/foto5.jpg" alt="BASSA 5" loading="lazy" />
+        <img src="https://ik.imagekit.io/7zyxg26dj/imagen6.jpg" alt="BASSA 6" loading="lazy" />
+        <img src="https://ik.imagekit.io/7zyxg26dj/foto7.jpg" alt="BASSA 7" loading="lazy" />
+        <img src="https://ik.imagekit.io/7zyxg26dj/foto8.jpg" alt="BASSA 8" loading="lazy" />
+        <!-- clones para el bucle infinito en móvil (se ocultan en ordenador) -->
+        <img src="https://ik.imagekit.io/7zyxg26dj/foto1.jpg" alt="" loading="lazy" />
+        <img src="https://ik.imagekit.io/7zyxg26dj/foto2.jpg" alt="" loading="lazy" />
+        <img src="https://ik.imagekit.io/7zyxg26dj/foto3.jpg" alt="" loading="lazy" />
+        <img src="https://ik.imagekit.io/7zyxg26dj/foto4.jpg" alt="" loading="lazy" />
+        <img src="https://ik.imagekit.io/7zyxg26dj/foto5.jpg" alt="" loading="lazy" />
+        <img src="https://ik.imagekit.io/7zyxg26dj/imagen6.jpg" alt="" loading="lazy" />
+        <img src="https://ik.imagekit.io/7zyxg26dj/foto7.jpg" alt="" loading="lazy" />
+        <img src="https://ik.imagekit.io/7zyxg26dj/foto8.jpg" alt="" loading="lazy" />
+      </div>
+    </div>
     <div class="dicrea-columns" id="dicrea-columns" style="display:none;">
       <div class="dicrea-text-col">
         <h3 class="dicrea-col-title">Naming y tagline.</h3>
@@ -839,6 +1046,27 @@
         <p>Logotipo y símbolos: un sistema visual distintivo inspirado en las letras del nombre y sus dos puntos. Cada grado tiene su propio símbolo, formando una cara juguetona que aporta personalidad y consistencia a la identidad.</p>
         <p>Lenguaje gráfico: una tipografía audaz, símbolos expresivos y elementos visuales juguetones crean una identidad reconocible y flexible. También combinan colores vibrantes que reflejan creatividad, diversidad, juventud e innovación.</p>
         <div class="dicrea-col-img-wrap" title="Clic para ampliar"><img src="https://ik.imagekit.io/5dtde8xj3/Group%2026.png" alt="Dicrea Visual identity" loading="lazy" /></div>
+      </div>
+    </div>
+
+    <!-- KineKick (branding-4): visual image + brand personality + carousel -->
+    <div class="kinekick-visual" id="kinekick-visual">
+      <div class="kinekick-visual-img-wrap" title="Clic para ampliar">
+        <img src="https://ik.imagekit.io/5dtde8xj3/Group%2010.png" alt="KineKick Visual identity" loading="lazy" />
+      </div>
+      <div class="kinekick-voice">
+        <p>The brand personality is informal, confident and humorous. KineKick speaks to a young, active audience through playful communication and colourful, eye-catching designs that differentiate each flavour and stand out on the shelves.</p>
+      </div>
+      <div class="kinekick-carousel">
+        <button type="button" class="kinekick-carousel-btn" id="kinekick-prev" aria-label="Previous image">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="kinekick-carousel-viewport">
+          <div class="kinekick-carousel-track" id="kinekick-track"></div>
+        </div>
+        <button type="button" class="kinekick-carousel-btn" id="kinekick-next" aria-label="Next image">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </div>
   </div>
@@ -1110,12 +1338,27 @@
         // split layout (image left half / spec text right half) instead.
         const heroWrapB = showcaseElB.querySelector('.zampo-hero-image');
         const kinekickSplit = document.getElementById('kinekick-split');
+        const kinekickVisual = document.getElementById('kinekick-visual');
         if(project === 'branding-4'){
           if(heroWrapB){ heroWrapB.style.display = 'none'; }
           if(kinekickSplit){ kinekickSplit.classList.add('kinekick-split-on'); }
+          if(kinekickVisual){ kinekickVisual.classList.add('kinekick-visual-on'); }
         } else if(kinekickSplit){
           kinekickSplit.classList.remove('kinekick-split-on');
+          if(kinekickVisual){ kinekickVisual.classList.remove('kinekick-visual-on'); }
           if(heroWrapB){ heroWrapB.style.display = ''; }
+        }
+        // Branding 2/3/4: hide the UX/UI-only blocks (secondary images + conclusion)
+        const secondaryWrapB = document.getElementById('zampo-secondary');
+        const conclusionWrapB = document.getElementById('zampo-conclusion');
+        const bassaBanner = document.getElementById('bassa-banner');
+        if(bassaBanner){
+          if(project === 'branding-3'){ bassaBanner.classList.add('bassa-banner-on'); }
+          else { bassaBanner.classList.remove('bassa-banner-on'); }
+        }
+        if(project !== 'branding-1'){
+          if(secondaryWrapB){ secondaryWrapB.style.display = 'none'; }
+          if(conclusionWrapB){ conclusionWrapB.style.display = 'none'; }
         }
         // Secondary images placeholders — replace src with real images
         const brandingSecondaryMap = {
@@ -1182,6 +1425,19 @@
             '</div>' +
             '<div class="zampo-col kinekick-col-img">' +
               '<div class="zampo-col-img-wrap" title="Clic para ampliar"><img src="https://ik.imagekit.io/5dtde8xj3/Captura%20de%20pantalla%202026-11-03%20a%20las%2013.23.59%201.png" alt="KineKick Naming" loading="lazy" /></div>' +
+            '</div>',
+          // Branding 3 (BASSA): dos columnas (concepto + identidad visual)
+          'branding-3':
+            '<div class="zampo-col">' +
+              '<h3 class="zampo-col-title">Brand concept.</h3>' +
+              '<p>Innovative, refreshing and low-alcohol cocktails designed for a new generation of consumers who value convenience without compromising on flavour. BASSA embraces sustainability, authenticity, creativity and social connection, positioning itself as a playful and accessible alternative within the premium-inspired cocktail market.</p>' +
+            '</div>' +
+            '<div class="zampo-col">' +
+              '<h3 class="zampo-col-title">Visual identity.</h3>' +
+              '<p>Logo: Custom-designed Ruffles typeface, inspired by waves, bubbles and fluid movement.</p>' +
+              '<p>Isotype: A symbol created by merging the two “S” letters in the logo.</p>' +
+              '<p>Typography: Ruffles for personality and expressive headlines, paired with Caviar Dreams for clarity and readability.</p>' +
+              '<p>Colour palette: Vibrant colours inspired by cocktail flavours, balanced with pastel tones and contrasting accents.</p>' +
             '</div>'
         };
         if(colsEl){
@@ -1190,6 +1446,10 @@
             colsEl.innerHTML = brandingColsHTMLMap['branding-4'];
             colsEl.style.gridTemplateColumns = '1fr 1fr';
             colsEl.style.alignItems = 'center';
+          } else if(project === 'branding-3'){
+            // BASSA: dos columnas iguales (la antigua columna 3 se elimina)
+            colsEl.innerHTML = brandingColsHTMLMap['branding-3'];
+            colsEl.style.gridTemplateColumns = '1fr 1fr';
           } else if(brandingColsHTMLMap[project]){
             // Columna 2 ocupa el ancho de las columnas 2 y 3 (ratio 1:2)
             colsEl.innerHTML = brandingColsHTMLMap[project];
@@ -1227,6 +1487,13 @@
         const previewsElB = document.getElementById('previews');
         if(previewsElB){
           previewsElB.style.display = 'none';
+        }
+        // Branding 2/3/4: keep the UX/UI-only blocks hidden (ZAMPO secondary images + conclusion)
+        const secondaryElFinal = document.getElementById('zampo-secondary');
+        const conclusionElFinal = document.getElementById('zampo-conclusion');
+        if(project !== 'branding-1'){
+          if(secondaryElFinal){ secondaryElFinal.style.display = 'none'; }
+          if(conclusionElFinal){ conclusionElFinal.style.display = 'none'; }
         }
 
         // Branding 2 (Dicrea): centered brand-voice text + masonry photo grid
@@ -1873,6 +2140,96 @@
       }
     });
   });
+
+  // Enable click-to-enlarge modal for KineKick visual identity image
+  document.querySelectorAll('.kinekick-visual-img-wrap img').forEach((kImg) => {
+    kImg.tabIndex = 0;
+    kImg.addEventListener('click', () => openImageModal(kImg));
+    kImg.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        openImageModal(kImg);
+      }
+    });
+  });
+
+  /* ---------- KineKick infinite carousel (branding-4) ---------- */
+  (function initKinekickCarousel(){
+    const track = document.getElementById('kinekick-track');
+    const prevBtn = document.getElementById('kinekick-prev');
+    const nextBtn = document.getElementById('kinekick-next');
+    if(!track || !prevBtn || !nextBtn) return;
+
+    const slides = [
+      'https://ik.imagekit.io/5dtde8xj3/Captura%20de%20pantalla%202026-11-03%20a%20las%2013.50.57.png',
+      'https://ik.imagekit.io/5dtde8xj3/Captura%20de%20pantalla%202026-11-03%20a%20las%2013.51.12.png'
+    ];
+
+    // Build: [cloneOfLast] [real slides] [cloneOfFirst] → infinite loop with smooth slide
+    track.innerHTML = '';
+    const mkSlide = (src) => {
+      const d = document.createElement('div');
+      d.className = 'kinekick-slide';
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = 'KineKick carousel';
+      img.loading = 'lazy';
+      d.appendChild(img);
+      return d;
+    };
+    track.appendChild(mkSlide(slides[slides.length - 1])); // clone last (before slide 1)
+    slides.forEach(s => track.appendChild(mkSlide(s)));    // real slides
+    track.appendChild(mkSlide(slides[0]));                 // clone first (after last)
+
+    let index = 1; // start on the first real slide
+    let animating = false;
+
+    const setTransform = (animate) => {
+      track.style.transition = animate ? 'transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)' : 'none';
+      track.style.transform = 'translateX(-' + (index * 100) + '%)';
+    };
+    setTransform(false);
+
+    function goTo(nextIndex){
+      if(animating) return;
+      animating = true;
+      index = nextIndex;
+      setTransform(true);
+      track.addEventListener('transitionend', function onEnd(){
+        track.removeEventListener('transitionend', onEnd);
+        // If we slid onto a clone, silently jump to the matching real slide
+        if(index === 0){
+          index = slides.length;
+          setTransform(false);
+        } else if(index === slides.length + 1){
+          index = 1;
+          setTransform(false);
+        }
+        animating = false;
+      });
+    }
+
+    nextBtn.addEventListener('click', () => goTo(index + 1));
+    prevBtn.addEventListener('click', () => goTo(index - 1));
+
+    // Keyboard support while the carousel is focused/hovered
+    [prevBtn, nextBtn].forEach(btn => {
+      btn.addEventListener('keydown', (e) => {
+        if(e.key === 'ArrowLeft') prevBtn.click();
+        if(e.key === 'ArrowRight') nextBtn.click();
+      });
+    });
+
+    // Basic touch/swipe support
+    let touchStartX = null;
+    track.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', (e) => {
+      if(touchStartX === null) return;
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if(Math.abs(dx) > 40){ (dx < 0 ? nextBtn : prevBtn).click(); }
+      touchStartX = null;
+    }, { passive: true });
+  })();
   </script>
   
   
