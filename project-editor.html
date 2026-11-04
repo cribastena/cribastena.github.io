@@ -749,12 +749,13 @@
       flex-wrap: nowrap;
       width: 100%;
     }
-    /* Los clones (con alt="") solo existen para el bucle móvil: ocultos en ordenador */
+    /* Los clones (con alt="") ya no se ocultan: el bucle necesita las 16 */
     .bassa-banner-track img[alt=""] {
-      display: none;
+      display: block;
     }
     .bassa-banner-track img {
-      flex: 0 0 12.5%;            /* 8 fotos → 1/8 del ancho cada una */
+      flex: 0 0 14.2857vw;        /* 7 fotos visibles en ordenador (100/7) */
+      width: 14.2857vw;
       min-width: 0;
       aspect-ratio: 3 / 4;        /* ratio rectangular consistente */
       height: auto;
@@ -762,6 +763,18 @@
       display: block;
       margin: 0;
       border: 0;
+    }
+    /* Ordenador también animado: la 8ª foto se descubre al desplazarse */
+    .bassa-banner.bassa-banner-on .bassa-banner-track {
+      width: max-content;
+      animation: bassa-marquee 32s linear infinite;   /* lento en ordenador */
+    }
+    .bassa-banner:hover .bassa-banner-track {
+      animation-play-state: paused;
+    }
+    /* Los clones (con alt="") solo existen para el bucle: en ordenador también se muestran */
+    .bassa-banner-track img[alt=""] {
+      display: block;
     }
     /* ---- Móvil: carrusel automático en bucle hacia la izquierda (3 visibles) ---- */
     @media (max-width: 640px) {
@@ -774,10 +787,11 @@
       }
       .bassa-banner-track {
         width: max-content;
-        animation: bassa-marquee 24s linear infinite;
+        animation: bassa-marquee 16s linear infinite;   /* más rápido en móvil */
       }
       .bassa-banner-track img {
-        flex: 0 0 33.3334%;       /* 3 fotos visibles por pantalla */
+        flex: 0 0 33.3334vw;      /* 3 fotos visibles por pantalla */
+        width: 33.3334vw;
         aspect-ratio: 4 / 5;
       }
       /* En móvil los clones SÍ se muestran (necesarios para el bucle) */
@@ -794,6 +808,89 @@
       from { transform: translateX(0); }
       to   { transform: translateX(-50%); } /* recorre el set original (los clones repiten después) */
     }
+
+    /* ---- BASSA: textos centrados ---- */
+    .bassa-voice,
+    .bassa-text {
+      display: none;
+      max-width: 880px;
+      margin: 4.5rem auto 3rem auto;
+      padding: 0 1.75rem;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    .bassa-voice.bassa-on,
+    .bassa-text.bassa-on {
+      display: block;
+    }
+    .bassa-voice p,
+    .bassa-text p {
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: #333;
+      margin: 0;
+      font-weight: 400;
+    }
+    /* ---- BASSA: GIF mockup (no demasiado grande, centrado) ---- */
+    .bassa-media {
+      display: none;
+      max-width: 420px;
+      margin: 0 auto 4.5rem auto;
+      padding: 0 1.5rem;
+      box-sizing: border-box;
+    }
+    .bassa-media.bassa-on { display: block; }
+    .bassa-media img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+    }
+    /* ---- BASSA: masonry editorial ---- */
+    .bassa-masonry {
+      display: none;
+      column-count: 3;
+      column-gap: 1.25rem;
+      max-width: 1000px;
+      margin: 0 auto 5rem auto;
+      padding: 0 1rem;
+      box-sizing: border-box;
+    }
+    .bassa-masonry.bassa-on { display: block; }
+    .bassa-masonry .masonry-slot {
+      display: inline-block;
+      width: 100%;
+      margin: 0 0 1.25rem;
+      break-inside: avoid;
+      -webkit-column-break-inside: avoid;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #f6f6f6;
+    }
+    .bassa-masonry .masonry-slot img {
+      width: 100%;
+      height: auto;              /* conserva el ratio original, sin recortar */
+      display: block;
+      object-fit: initial;       /* sin recortes: cada foto con sus proporciones */
+      cursor: pointer;
+    }
+    @media (max-width: 800px) {
+      .bassa-masonry { column-count: 2; column-gap: 1rem; }
+    }
+    @media (max-width: 480px) {
+      .bassa-masonry { column-count: 2; column-gap: 0.75rem; padding: 0 0.75rem; }
+      .bassa-voice, .bassa-text { margin: 3rem auto 2.5rem auto; }
+    }
+    /* ---- BASSA: carrusel infinito (reutiliza botones/viewport de KineKick) ---- */
+    .bassa-carousel {
+      display: none;
+      max-width: 900px;
+      margin: 0 auto 5rem auto;
+    }
+    .bassa-carousel.bassa-on { display: flex; }
+
+    /* KineKick (branding-4): visual identity image + brand voice + carousel */
 
     /* KineKick (branding-4): visual identity image + brand voice + carousel */
 
@@ -1010,8 +1107,7 @@
         <p data-i18n="project.zampo.conclusion">Como conclusión, ZAMPO se posiciona como una alternativa innovadora dentro del ecosistema digital gastronómico, alineada con los nuevos comportamientos y expectativas de los usuarios jóvenes.</p>
       </div>
     </div>
-    <div class="dicrea-voice" id="dicrea-voice" style="display:none;"></div>
-    <div class="dicrea-masonry" id="dicrea-masonry" style="display:none;"></div>
+
     <!-- BASSA (branding-3): full-width horizontal photo banner -->
     <div class="bassa-banner" id="bassa-banner">
       <div class="bassa-banner-track">
@@ -1023,7 +1119,7 @@
         <img src="https://ik.imagekit.io/7zyxg26dj/imagen6.jpg" alt="BASSA 6" loading="lazy" />
         <img src="https://ik.imagekit.io/7zyxg26dj/foto7.jpg" alt="BASSA 7" loading="lazy" />
         <img src="https://ik.imagekit.io/7zyxg26dj/foto8.jpg" alt="BASSA 8" loading="lazy" />
-        <!-- clones para el bucle infinito en móvil (se ocultan en ordenador) -->
+        <!-- clones para el bucle infinito (alt="") -->
         <img src="https://ik.imagekit.io/7zyxg26dj/foto1.jpg" alt="" loading="lazy" />
         <img src="https://ik.imagekit.io/7zyxg26dj/foto2.jpg" alt="" loading="lazy" />
         <img src="https://ik.imagekit.io/7zyxg26dj/foto3.jpg" alt="" loading="lazy" />
@@ -1034,6 +1130,39 @@
         <img src="https://ik.imagekit.io/7zyxg26dj/foto8.jpg" alt="" loading="lazy" />
       </div>
     </div>
+    <!-- BASSA: brand voice -->
+    <div class="bassa-voice" id="bassa-voice">
+      <p>BASSA communicates through an informal, friendly and playful tone of voice that reflects the brand's youthful personality. Its communication is spontaneous, approachable and full of energy, encouraging people to connect, celebrate and enjoy the little moments.</p>
+    </div>
+    <!-- BASSA: 3D mockup (autoplay + loop) -->
+    <div class="bassa-media" id="bassa-media">
+      <img src="https://ik.imagekit.io/7zyxg26dj/Soda%20Can%20With%20Different%20Label%203D%20Animated%20Mockup.GIF?updatedAt=1767701033871" alt="BASSA 3D animated mockup" loading="lazy" />
+    </div>
+    <!-- BASSA: merchandising -->
+    <div class="bassa-text" id="bassa-text-merch">
+      <p>The brand experience also extends beyond the drink itself. Inspired by Ibiza's beach culture and summer lifestyle, BASSA incorporates a collection of branded merchandise, including tote bags, beach towels and reusable glasses. These elements strengthen the brand's identity across different touchpoints, turning it into a lifestyle concept that people can enjoy, share and take with them beyond the product.</p>
+    </div>
+    <!-- BASSA: masonry photo grid -->
+    <div class="bassa-masonry" id="bassa-masonry"></div>
+    <!-- BASSA: sustainability text (después del masonry, antes del carrusel) -->
+    <div class="bassa-text" id="bassa-text-sust">
+      <p>Sustainability is integrated into the brand through a conscious approach to both product and packaging. The use of locally sourced ingredients celebrates the flavours and identity of the Mediterranean, while recyclable packaging helps reduce the environmental impact of the product.</p>
+    </div>
+    <!-- BASSA: infinite carousel (6 imágenes) -->
+    <div class="bassa-carousel" id="bassa-carousel">
+      <button type="button" class="kinekick-carousel-btn" id="bassa-prev" aria-label="Previous image">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="kinekick-carousel-viewport">
+        <div class="kinekick-carousel-track" id="bassa-track"></div>
+      </div>
+      <button type="button" class="kinekick-carousel-btn" id="bassa-next" aria-label="Next image">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+
+    <div class="dicrea-masonry" id="dicrea-masonry" style="display:none;"></div>
+    <div class="dicrea-voice" id="dicrea-voice" style="display:none;"></div>
     <div class="dicrea-columns" id="dicrea-columns" style="display:none;">
       <div class="dicrea-text-col">
         <h3 class="dicrea-col-title">Naming y tagline.</h3>
@@ -1352,9 +1481,46 @@
         const secondaryWrapB = document.getElementById('zampo-secondary');
         const conclusionWrapB = document.getElementById('zampo-conclusion');
         const bassaBanner = document.getElementById('bassa-banner');
+        const bassaVoice = document.getElementById('bassa-voice');
+        const bassaMedia = document.getElementById('bassa-media');
+        const bassaMerch = document.getElementById('bassa-text-merch');
+        const bassaMasonry = document.getElementById('bassa-masonry');
+        const bassaSust = document.getElementById('bassa-text-sust');
+        const bassaCarousel = document.getElementById('bassa-carousel');
+        const isBassa = (project === 'branding-3');
         if(bassaBanner){
-          if(project === 'branding-3'){ bassaBanner.classList.add('bassa-banner-on'); }
+          if(isBassa){ bassaBanner.classList.add('bassa-banner-on'); }
           else { bassaBanner.classList.remove('bassa-banner-on'); }
+        }
+        // Toggle de bloques BASSA
+        [bassaVoice, bassaMedia, bassaMerch, bassaMasonry, bassaSust, bassaCarousel].forEach(el => {
+          if(el){ el.classList.toggle('bassa-on', isBassa); }
+        });
+        // Masonry BASSA: rellenar una sola vez (5 imágenes, ratios originales)
+        if(isBassa && bassaMasonry && !bassaMasonry.dataset.filled){
+          bassaMasonry.dataset.filled = '1';
+          bassaMasonry.innerHTML = [
+            'https://ik.imagekit.io/7zyxg26dj/IMG_4172.jpg?updatedAt=1767868980669',
+            'https://ik.imagekit.io/7zyxg26dj/IMG_4109.PNG?updatedAt=1767872515128',
+            'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.37.11.png?updatedAt=1767981059252',
+            'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.36.53.png?updatedAt=1767981061849',
+            'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.58.35.png?updatedAt=1767981554378'
+          ].map(src => '<div class="masonry-slot"><img src="' + src + '" alt="BASSA gallery" loading="lazy" /></div>').join('');
+        }
+        // Carrusel infinito BASSA: rellenar una sola vez (6 imágenes, clones incluidos)
+        if(isBassa && bassaCarousel && !bassaCarousel.dataset.filled){
+          bassaCarousel.dataset.filled = '1';
+          const bassaSlides = [
+            'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.39.24.png?updatedAt=1767981064557',
+            'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.38.40.png?updatedAt=1767981064488',
+            'https://ik.imagekit.io/5dtde8xj3/IMG_4022.PNG?updatedAt=1793541302600',
+            'https://ik.imagekit.io/5dtde8xj3/IMG_4025.PNG?updatedAt=1793541302610',
+            'https://ik.imagekit.io/5dtde8xj3/IMG_4021%202.PNG?updatedAt=1793541302527',
+            'https://ik.imagekit.io/5dtde8xj3/IMG_4031.PNG?updatedAt=1793541302519'
+          ];
+          const bassaTrack = document.getElementById('bassa-track');
+          buildInfiniteSlides(bassaTrack, bassaSlides, 'BASSA carousel');
+          initInfiniteCarousel(bassaCarousel, bassaTrack, bassaSlides.length);
         }
         if(project !== 'branding-1'){
           if(secondaryWrapB){ secondaryWrapB.style.display = 'none'; }
@@ -2154,34 +2320,15 @@
   });
 
   /* ---------- KineKick infinite carousel (branding-4) ---------- */
-  (function initKinekickCarousel(){
-    const track = document.getElementById('kinekick-track');
-    const prevBtn = document.getElementById('kinekick-prev');
-    const nextBtn = document.getElementById('kinekick-next');
-    if(!track || !prevBtn || !nextBtn) return;
+  /* ---------- Carrusel infinito reutilizable (KineKick + BASSA) ---------- */
+  function initInfiniteCarousel(carouselEl, track, slideCount){
+    if(!carouselEl || !track || track.dataset.carouselInit) return;
+    track.dataset.carouselInit = '1';
+    const prevBtn = carouselEl.querySelector('.kinekick-carousel-btn:first-of-type');
+    const nextBtn = carouselEl.querySelector('.kinekick-carousel-btn:last-of-type');
+    if(!prevBtn || !nextBtn) return;
 
-    const slides = [
-      'https://ik.imagekit.io/5dtde8xj3/Captura%20de%20pantalla%202026-11-03%20a%20las%2013.50.57.png',
-      'https://ik.imagekit.io/5dtde8xj3/Captura%20de%20pantalla%202026-11-03%20a%20las%2013.51.12.png'
-    ];
-
-    // Build: [cloneOfLast] [real slides] [cloneOfFirst] → infinite loop with smooth slide
-    track.innerHTML = '';
-    const mkSlide = (src) => {
-      const d = document.createElement('div');
-      d.className = 'kinekick-slide';
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = 'KineKick carousel';
-      img.loading = 'lazy';
-      d.appendChild(img);
-      return d;
-    };
-    track.appendChild(mkSlide(slides[slides.length - 1])); // clone last (before slide 1)
-    slides.forEach(s => track.appendChild(mkSlide(s)));    // real slides
-    track.appendChild(mkSlide(slides[0]));                 // clone first (after last)
-
-    let index = 1; // start on the first real slide
+    let index = 1; // empieza en el primer slide real (0 es el clon de la última)
     let animating = false;
 
     const setTransform = (animate) => {
@@ -2197,12 +2344,11 @@
       setTransform(true);
       track.addEventListener('transitionend', function onEnd(){
         track.removeEventListener('transitionend', onEnd);
-        // If we slid onto a clone, silently jump to the matching real slide
         if(index === 0){
-          index = slides.length;
+          index = slideCount;       // saltar al último real
           setTransform(false);
-        } else if(index === slides.length + 1){
-          index = 1;
+        } else if(index === slideCount + 1){
+          index = 1;                // saltar al primero real
           setTransform(false);
         }
         animating = false;
@@ -2212,15 +2358,12 @@
     nextBtn.addEventListener('click', () => goTo(index + 1));
     prevBtn.addEventListener('click', () => goTo(index - 1));
 
-    // Keyboard support while the carousel is focused/hovered
     [prevBtn, nextBtn].forEach(btn => {
       btn.addEventListener('keydown', (e) => {
         if(e.key === 'ArrowLeft') prevBtn.click();
         if(e.key === 'ArrowRight') nextBtn.click();
       });
     });
-
-    // Basic touch/swipe support
     let touchStartX = null;
     track.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
     track.addEventListener('touchend', (e) => {
@@ -2229,6 +2372,35 @@
       if(Math.abs(dx) > 40){ (dx < 0 ? nextBtn : prevBtn).click(); }
       touchStartX = null;
     }, { passive: true });
+  }
+
+  function buildInfiniteSlides(track, slides, altBase){
+    track.innerHTML = '';
+    const mkSlide = (src) => {
+      const d = document.createElement('div');
+      d.className = 'kinekick-slide';
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = altBase;
+      img.loading = 'lazy';
+      d.appendChild(img);
+      return d;
+    };
+    track.appendChild(mkSlide(slides[slides.length - 1])); // clone last
+    slides.forEach(s => track.appendChild(mkSlide(s)));    // reales
+    track.appendChild(mkSlide(slides[0]));                 // clone first
+  }
+
+  (function initKinekickCarousel(){
+    const track = document.getElementById('kinekick-track');
+    const viewport = document.getElementById('kinekick-track')?.closest('.kinekick-carousel');
+    if(!track || !viewport) return;
+    const slides = [
+      'https://ik.imagekit.io/5dtde8xj3/Captura%20de%20pantalla%202026-11-03%20a%20las%2013.50.57.png',
+      'https://ik.imagekit.io/5dtde8xj3/Captura%20de%20pantalla%202026-11-03%20a%20las%2013.51.12.png'
+    ];
+    buildInfiniteSlides(track, slides, 'KineKick carousel');
+    initInfiniteCarousel(viewport, track, slides.length);
   })();
   </script>
   
