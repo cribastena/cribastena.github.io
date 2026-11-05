@@ -487,6 +487,35 @@
       padding: 0;
       margin: 0;
     }
+    /* IMG_4918 a la izquierda del texto, más pequeña y centrada */
+    .kinekick-col-img-left .zampo-col-img-wrap {
+      max-width: 78%;
+      margin: 0 auto;
+    }
+    /* La segunda foto del par solo existe en móvil (vence a .zampo-col-img-wrap img) */
+    .zampo-col-img-wrap img.kinekick-mobile-extra {
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .kinekick-col-img-left .zampo-col-img-wrap {
+        max-width: 100%;
+        display: flex;
+        gap: 0.4rem;
+        align-items: flex-start;
+      }
+      .kinekick-col-img-left .zampo-col-img-wrap img {
+        width: calc(50% - 0.2rem);
+        height: auto;
+      }
+      .zampo-col-img-wrap img.kinekick-mobile-extra {
+        display: block;
+      }
+      /* En móvil la foto repetida de arriba (split derecho) se oculta:
+         ya está emparejada abajo junto a IMG_4918 */
+      .kinekick-split .kinekick-image-wrap:last-child {
+        display: none;
+      }
+    }
     /* Centered text under Dicrea column images */
     .dicrea-voice {
       max-width: 880px;
@@ -548,10 +577,16 @@
       .dicrea-masonry .masonry-col { flex: 1 1 45%; gap: 0.6rem; }
     }
     @media (max-width: 480px) {
-      .dicrea-masonry { gap: 0.5rem; padding: 0 0.75rem; }
+      .dicrea-masonry { gap: 0.4rem; padding: 0 0.6rem; }
       /* 2 columnas compactas: las fotos encajan mejor y ocupan menos altura */
-      .dicrea-masonry .masonry-col { flex: 1 1 48%; gap: 0.5rem; }
+      .dicrea-masonry .masonry-col { flex: 1 1 48.5%; gap: 0.4rem; }
       .dicrea-masonry .masonry-slot { border-radius: 4px; }
+      /* Las 2 fotos altas del grid se ven más pequeñas en móvil */
+      .dicrea-masonry .masonry-slot img[src*="IMG_4541"],
+      .dicrea-masonry .masonry-slot img[src*="IMG_4534"] {
+        width: 82%;
+        margin: 0 auto;
+      }
       .dicrea-voice { margin: 3rem auto 2.5rem auto; }
     }
     .zampo-secondary-images {
@@ -695,16 +730,21 @@
     .kinekick-split {
       display: none;
       width: 100%;
-      max-width: 1150px;
+      max-width: none;
       margin: 0 auto 4.5rem auto;
-      padding: 0 1.5rem;
+      padding: 0 0.5rem;
       box-sizing: border-box;
       grid-template-columns: 1fr 1fr;
-      gap: clamp(2rem, 4vw, 3.5rem);
+      gap: clamp(0.5rem, 1.2vw, 1rem);
       align-items: center;
     }
     .kinekick-split.kinekick-split-on {
+      /* Full-bleed: de lado a lado de la pantalla, sin márgenes laterales */
       display: grid;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      grid-template-columns: 1.15fr 1fr 1.15fr;  /* imagen izq / texto centro / imagen der */
+      align-items: center;
     }
     .kinekick-split .kinekick-image-wrap {
       width: 100%;
@@ -850,23 +890,29 @@
       display: block;
       border-radius: 8px;
     }
-    /* ---- BASSA: masonry editorial ---- */
+    /* ---- BASSA: masonry editorial (columnas explícitas como Dicrea) ---- */
     .bassa-masonry {
       display: none;
-      column-count: 3;
-      column-gap: 1.25rem;
+      flex-wrap: nowrap;
+      gap: 1.25rem;
+      align-items: flex-start;
       max-width: 1000px;
       margin: 0 auto 5rem auto;
       padding: 0 1rem;
       box-sizing: border-box;
     }
-    .bassa-masonry.bassa-on { display: block; }
+    .bassa-masonry.bassa-on { display: flex; }
+    .bassa-masonry .masonry-col {
+      flex: 1 1 0;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
     .bassa-masonry .masonry-slot {
-      display: inline-block;
+      display: block;
       width: 100%;
-      margin: 0 0 1.25rem;
-      break-inside: avoid;
-      -webkit-column-break-inside: avoid;
+      margin: 0;
       border-radius: 6px;
       overflow: hidden;
       background: #f6f6f6;
@@ -879,11 +925,13 @@
       cursor: pointer;
     }
     @media (max-width: 800px) {
-      .bassa-masonry { column-count: 2; column-gap: 0.6rem; }
+      .bassa-masonry { gap: 0.6rem; }
+      .bassa-masonry .masonry-col { gap: 0.6rem; }
     }
     @media (max-width: 480px) {
-      .bassa-masonry { column-count: 2; column-gap: 0.5rem; padding: 0 0.75rem; }
-      .bassa-masonry .masonry-slot { margin-bottom: 0.5rem; border-radius: 4px; }
+      .bassa-masonry { gap: 0.5rem; padding: 0 0.75rem; }
+      .bassa-masonry .masonry-col { gap: 0.5rem; }
+      .bassa-masonry .masonry-slot { border-radius: 4px; }
       .bassa-voice, .bassa-text { margin: 3rem auto 2.5rem auto; }
     }
     /* ---- BASSA: carrusel infinito (reutiliza botones/viewport de KineKick) ---- */
@@ -918,7 +966,6 @@
       width: 100%;
       max-width: 1050px;
       margin: 0 auto;
-      cursor: pointer;
       transition: transform 0.3s ease;
     }
     .kinekick-visual-img-wrap:hover {
@@ -1000,9 +1047,13 @@
       background: transparent;
     }
     @media (max-width: 768px) {
-      .kinekick-visual { margin-bottom: 3.5rem; padding: 0 1.75rem; }
+      .kinekick-visual { margin-bottom: 3.5rem; padding: 0 0.75rem; }
       .kinekick-voice { margin: 3rem auto 2.5rem auto; }
       .kinekick-voice p { font-size: 0.95rem; line-height: 1.55; }
+      /* Carrusel más grande en móvil: menos gap y botones compactos al borde */
+      .kinekick-carousel { gap: 0.5rem; padding: 0 0.25rem; }
+      .kinekick-carousel-btn { width: 38px; height: 38px; }
+      .kinekick-carousel-btn svg { width: 18px; height: 18px; }
     }
     @media (max-width: 768px) {
       .kinekick-split.kinekick-split-on {
@@ -1078,11 +1129,13 @@
         <img src="https://ik.imagekit.io/5dtde8xj3/Captura%20de%20pantalla%202026-11-03%20a%20las%2011.03.58%201.png" alt="KineKick Detail 1" />
       </div>
       <div class="kinekick-specs">
-        <p data-i18n="project.kinekick.flavours"><strong>Flavours:</strong> Cocoa, Mixed Berries or peanut.</p>
         <p data-i18n="project.kinekick.target"><strong>Target:</strong> Active adults aged 18–45,  health-conscious consumers.</p>
         <p data-i18n="project.kinekick.positioning"><strong>Positioning:</strong> Breakfast alternative for an active lifestyle.</p>
         <p data-i18n="project.kinekick.values"><strong>Values:</strong> Energy, wellness, sustainability and creativity.</p>
         <p data-i18n="project.kinekick.personality"><strong>Personality:</strong> Dynamic, bold, playful and full of character.</p>
+      </div>
+      <div class="kinekick-image-wrap" title="Clic para ampliar">
+        <img src="https://ik.imagekit.io/5dtde8xj3/Captura%20de%20pantalla%202026-11-03%20a%20las%2013.23.59%201.png" alt="KineKick Detail 2" />
       </div>
     </div>
     <div class="zampo-image-wrap zampo-hero-image" title="Clic para ampliar">
@@ -1370,7 +1423,9 @@
       // Only shares the generic page shell (title/intro/showcase containers),
       // but ALL content here is branding-specific. Edit ONLY this block
       // to change branding info; the ux-ui block above is untouched.
+      // Re-ejecutable en cada cambio de idioma (window.__renderBrandingContent).
       // ============================================
+      window.__renderBrandingContent = function(){
       const titleEl = document.getElementById('project-title');
       // branding-1 mirrors the ZAMPO (ux-ui-1) sub-project completely:
       // same logo title, same intro, same hero/secondary images, same texts.
@@ -1395,8 +1450,7 @@
             heroImgZ.alt = 'ZAMPO Overview';
           }
           // Same secondary images as ux-ui-1 (defaults — no override needed)
-          const conclusionPZ = showcaseElZ.querySelector('.zampo-conclusion-text p');
-          if(conclusionPZ){ conclusionPZ.removeAttribute('data-i18n'); }
+          // OJO: NO remover data-i18n — la conclusión debe traducirse con el idioma
           const mediaElZ = showcaseElZ.querySelector('.zampo-conclusion-media');
           if(mediaElZ){ mediaElZ.style.display = ''; }
         }
@@ -1504,15 +1558,23 @@
         if(isBassa && bassaMasonry && !bassaMasonry.dataset.filled){
           bassaMasonry.dataset.filled = '1';
           bassaMasonry.innerHTML = [
-            'https://ik.imagekit.io/7zyxg26dj/Soda%20Can%20With%20Different%20Label%203D%20Animated%20Mockup.GIF?updatedAt=1767701033871',
-            'https://ik.imagekit.io/7zyxg26dj/IMG_4172.jpg?updatedAt=1767868980669',
-            'https://ik.imagekit.io/7zyxg26dj/IMG_4109.PNG?updatedAt=1767872515128',
-            'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.37.11.png?updatedAt=1767981059252',
-            'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.36.53.png?updatedAt=1767981061849',
-            'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.58.35.png?updatedAt=1767981554378',
-            'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2019.28.50.png?updatedAt=1767983836581',
-            'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.38.40.png?updatedAt=1767981064488'
-          ].map(src => '<div class="masonry-slot"><img src="' + src + '" alt="BASSA gallery" loading="lazy" /></div>').join('');
+            [ // Columna 1 (izquierda) — 18.38.40 va segunda para que no quede abajo
+              'https://ik.imagekit.io/7zyxg26dj/Soda%20Can%20With%20Different%20Label%203D%20Animated%20Mockup.GIF?updatedAt=1767701033871',
+              'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.38.40.png?updatedAt=1767981064488',
+              'https://ik.imagekit.io/7zyxg26dj/IMG_4172.jpg?updatedAt=1767868980669'
+            ],
+            [ // Columna 2 (centro)
+              'https://ik.imagekit.io/7zyxg26dj/IMG_4109.PNG?updatedAt=1767872515128',
+              'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.37.11.png?updatedAt=1767981059252',
+              'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2019.28.50.png?updatedAt=1767983836581'
+            ],
+            [ // Columna 3 (derecha)
+              'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.36.53.png?updatedAt=1767981061849',
+              'https://ik.imagekit.io/7zyxg26dj/Captura%20de%20pantalla%202026-01-09%20a%20las%2018.58.35.png?updatedAt=1767981554378'
+            ]
+          ].map(colImgs => '<div class="masonry-col">' +
+            colImgs.map(src => '<div class="masonry-slot"><img src="' + src + '" alt="BASSA gallery" loading="lazy" /></div>').join('') +
+          '</div>').join('');
         }
         // Carrusel infinito BASSA: rellenar una sola vez (6 imágenes, clones incluidos)
         if(isBassa && bassaCarousel && !bassaCarousel.dataset.filled){
@@ -1591,13 +1653,14 @@
             '</div>',
           // Branding 4 (KineKick): Naming & tagline a la izquierda, imagen a la derecha (mitad/mitad)
           'branding-4':
+            '<div class="zampo-col kinekick-col-img kinekick-col-img-left">' +
+              '<div class="zampo-col-img-wrap" title="Clic para ampliar"><img src="https://ik.imagekit.io/7zyxg26dj/IMG_4918.PNG" alt="KineKick Naming" loading="lazy" />' +
+              '<img class="kinekick-mobile-extra" src="https://ik.imagekit.io/5dtde8xj3/Captura%20de%20pantalla%202026-11-03%20a%20las%2013.23.59%201.png" alt="KineKick Detail" loading="lazy" /></div>' +
+            '</div>' +
             '<div class="zampo-col">' +
               '<h3 class="zampo-col-title">Naming & tagline</h3>' +
               '<p>Naming – KineKick: A combination of Kinetic and Quick, inspired by movement, dynamism and an active lifestyle.</p>' +
               '<p>Tagline – “Feel the Kick”: A short, energetic statement that communicates the brand’s purpose: bringing an extra boost to everyday routines.</p>' +
-            '</div>' +
-            '<div class="zampo-col kinekick-col-img">' +
-              '<div class="zampo-col-img-wrap" title="Clic para ampliar"><img src="https://ik.imagekit.io/5dtde8xj3/Captura%20de%20pantalla%202026-11-03%20a%20las%2013.23.59%201.png" alt="KineKick Naming" loading="lazy" /></div>' +
             '</div>',
           // Branding 3 (BASSA): dos columnas (concepto + identidad visual)
           'branding-3':
@@ -1681,7 +1744,7 @@
         const dicreaVoiceEn = 'The brand voice is inspirational, modern and approachable, combining youthful energy with professional credibility. Dicrea communicates with confidence and enthusiasm, encouraging students to explore new perspectives and challenge their creative limits.';
         const dicreaVoiceText = i18n('project.dicrea.voice', dicreaVoiceEs);
         if(dicreaVoiceEl){
-          dicreaVoiceEl.innerHTML = '<p>' + dicreaVoiceText + '</p>';
+          dicreaVoiceEl.innerHTML = '<p data-i18n="project.dicrea.voice">' + dicreaVoiceText + '</p>';
         }
         // Ordered to balance visual weight: landscape (wide) images predominate,
         // portraits are interleaved so the grid reads wider than tall.
@@ -1734,6 +1797,9 @@
         }
       }
       } // end else (non-branding-1 branding sub-projects)
+      }; // end window.__renderBrandingContent
+      // Primera ejecución
+      window.__renderBrandingContent();
     } else {
       // Show '&' instead of '-' in titles like "videos & animations" / "posters & covers".
       // Bind each word to its following '&' with a non-breaking space so that on
@@ -1761,6 +1827,20 @@
     }
     document.addEventListener('languagechange', applyTranslatedTitle);
     document.addEventListener('DOMContentLoaded', applyTranslatedTitle);
+
+    // Re-render del contenido dinámico de branding cuando cambia el idioma
+    let _lastRenderedLang = null;
+    function reRenderBrandingContent(){
+      const lang = (typeof getCurrentLanguage === 'function') ? getCurrentLanguage() : 'es';
+      if(_lastRenderedLang === lang) return;
+      _lastRenderedLang = lang;
+      if(project.startsWith('branding-') && project !== 'branding-1'){
+        if(typeof window.__renderBrandingContent === 'function'){
+          window.__renderBrandingContent();
+        }
+      }
+    }
+    document.addEventListener('languagechange', reRenderBrandingContent);
 
     // If inside a sub-project, Back button returns to the respective options screen
     if(project.startsWith('ux-ui-')){
@@ -2319,7 +2399,9 @@
   });
 
   // Enable click-to-enlarge modal for KineKick visual identity image
+  // (excepto Group 10.png, que debe permanecer sin ampliación)
   document.querySelectorAll('.kinekick-visual-img-wrap img').forEach((kImg) => {
+    if(kImg.src.includes('Group%2010.png') || kImg.src.includes('Group 10.png')) return;
     kImg.tabIndex = 0;
     kImg.addEventListener('click', () => openImageModal(kImg));
     kImg.addEventListener('keydown', (e) => {
@@ -2351,6 +2433,7 @@
     function goTo(nextIndex){
       if(animating) return;
       animating = true;
+      track.__carouselAnimating = true;   // usado por el click-to-enlarge de las slides
       index = nextIndex;
       setTransform(true);
       track.addEventListener('transitionend', function onEnd(){
@@ -2363,6 +2446,7 @@
           setTransform(false);
         }
         animating = false;
+        track.__carouselAnimating = false;
       });
     }
 
@@ -2394,6 +2478,19 @@
       img.src = src;
       img.alt = altBase;
       img.loading = 'lazy';
+      // Click-to-enlarge: abre la foto en el modal (se salta el frame clonado en movimiento)
+      img.tabIndex = 0;
+      img.addEventListener('click', () => {
+        // Ignora el clic si el carrusel se está deslizando (era un swipe/drag)
+        if(track.__carouselAnimating) return;
+        openImageModal(img);
+      });
+      img.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          if(!track.__carouselAnimating) openImageModal(img);
+        }
+      });
       d.appendChild(img);
       return d;
     };
