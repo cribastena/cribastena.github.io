@@ -68,8 +68,9 @@
   /* start from the beginning of the first word so it's legible */
   padding-left: 0;
   white-space: nowrap;
-  /* speed up the horizontal scroll a bit (was calc(100vw / 2)); make it a little faster than /3 */
-  animation: scrollLeft calc(100vw / 3.5) linear infinite;
+  /* El desplazamiento continuo lo maneja main.js (rAF), que hace un bucle
+     infinito sin saltos. La animación CSS original (scrollLeft al -100%)
+     provocaba un salto al reiniciarse y se elimina. */
 }
 
 .hero-logo {
@@ -98,15 +99,6 @@
 
 .hero-logo-container .hero-logo:nth-child(2) {
   margin-left: 0rem; /* pequeño espacio entre repeticiones */
-}
-
-@keyframes scrollLeft {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
 }
 
 

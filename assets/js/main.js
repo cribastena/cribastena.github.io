@@ -414,16 +414,26 @@ window.cleanupScrollObservers = () => {
 
 const container = document.querySelector('.hero-logo-container');
 if (container) {
+  let setWidth = 0;          // ancho de un set completo de logos originales
   let logos = Array.from(container.children);
-  let totalWidth = logos.reduce((acc, logo) => acc + logo.offsetWidth, 0);
 
-  // Duplicar logos hasta cubrir el doble del viewport
-  while (totalWidth < window.innerWidth * 2) {
-    const newClones = logos.map(logo => logo.cloneNode(true));
-    newClones.forEach(clone => container.appendChild(clone));
-    totalWidth += newClones.reduce((acc, logo) => acc + logo.offsetWidth, 0);
-    logos = [...logos, ...newClones];
+  // Medir el ancho de UN set (los logos originales, antes de clonar)
+  function measureSet(){
+    logos.forEach(l => { l.style.transform = ''; });
+    setWidth = logos.reduce((acc, logo) => acc + logo.offsetWidth, 0);
   }
+  measureSet();
+
+  // Duplicar sets hasta cubrir holgadamente el doble del viewport:
+  // el rAF recorre hasta -setWidth y salta a 0, así que hacen falta
+  // al menos 2 sets visibles para que nunca se vea el final.
+  function ensureClones(){
+    while (setWidth * container.children.length / logos.length < window.innerWidth * 2.5) {
+      const clones = Array.from(container.children).slice(0, logos.length).map(l => l.cloneNode(true));
+      clones.forEach(c => container.appendChild(c));
+    }
+  }
+  ensureClones();
 
   let pos = 0;
   let lastTime = null;
@@ -439,7 +449,9 @@ if (container) {
     const speed = container.matches(':hover') ? hoverSpeed : baseSpeed;
     pos -= speed * (delta / 16);
 
-    if (pos <= -totalWidth / 2) pos += totalWidth / 2;
+    // Bucle infinito perfecto: al recorrer un set entero, vuelve a 0.
+    // Como todos los logos son idénticos, el salto es invisible.
+    if (pos <= -setWidth) pos += setWidth;
 
     container.style.transform = `translateX(${pos}px)`;
     requestAnimationFrame(animate);
@@ -447,9 +459,10 @@ if (container) {
 
   requestAnimationFrame(animate);
 
-  // Recalcular ancho al redimensionar ventana
+  // Recalcular ancho al redimensionar ventana (y clonar más si hace falta)
   window.addEventListener('resize', () => {
-    totalWidth = Array.from(container.children).reduce((acc, logo) => acc + logo.offsetWidth, 0);
+    measureSet();
+    ensureClones();
   });
 }
 
